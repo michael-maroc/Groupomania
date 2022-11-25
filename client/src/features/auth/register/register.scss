@@ -1,0 +1,56 @@
+.register {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .register-container {
+
+    form{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 500px;
+      border: solid 1px black;
+      padding: 50px;
+
+      h1{
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+      }
+      label{
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        font-size: 1.5rem;
+        padding: 1rem 0 0.5rem 0;
+      }
+      input{
+        text-align: center;
+        width: 100%;
+        padding: 0.6rem;
+        border-radius: 30px;
+        font-size: 1.2rem;
+      }
+      p{
+        margin-top: 10px;
+        font-size: 1.2rem;
+      }
+      button{
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-top: 2rem;
+        padding: 0.8rem;
+        width: 100%;
+        border: none;
+        border-radius: 30px;
+      }
+      span {
+        font-size: 1.2rem;
+        margin-top: 40px;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.home-nav{
+  height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgb(74, 156, 215);
+  box-shadow: 1px 1px 4px 2px gray;
+  h1{
+    color: white;
+    font-size: 1.4rem;
+    margin-left: 50px;
+  }
+  ul{
+    display: flex;
+    a{
+      color: white;
+      font-size: 1.4rem;
+      display: flex;
+      text-decoration: none;
+      margin-right: 40px;
+    }
+  }
+}
