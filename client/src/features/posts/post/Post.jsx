@@ -26,7 +26,7 @@ const Post = () => {
                   <img src={img1} alt="profile" />
                   <div>
                     <h1>{post.author}</h1>
-                    <span>{post.createdAt}</span>
+                    <span>Published the: {post.createdAt}</span>
                   </div>
                 </div>
                 <div className="description">

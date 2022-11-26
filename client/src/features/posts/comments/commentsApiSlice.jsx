@@ -4,6 +4,7 @@ const commentsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPostComments: builder.query({
       query: (PostId) => `/comments/${PostId}`,
+      providesTags: ["Comments"],
     }),
     addComment: builder.mutation({
       query: ({ PostId, comment }) => ({
@@ -11,6 +12,7 @@ const commentsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { PostId, comment },
       }),
+      invalidatesTags: ["Comments"],
     }),
   }),
 });

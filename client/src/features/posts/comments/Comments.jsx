@@ -9,7 +9,7 @@ const Comments = ({ post }) => {
   const { data: comments, isLoading, isSuccess, isError, error } = useGetPostCommentsQuery(post.id);
 
   const schema = yup.object({
-    comment: yup.string().required("You must input a comment to be able to validate"),
+    comment: yup.string().required("You must input a comment"),
   });
 
   const {
@@ -41,7 +41,7 @@ const Comments = ({ post }) => {
             <div className="comments-container" key={comment.id}>
               <img src={img1} alt="profile-pic" />
               <div>
-                <p className="author">By @xxx</p>
+                <p className="author">{post.author}</p>
                 <p className="comment">{comment.comment}</p>
               </div>
             </div>
