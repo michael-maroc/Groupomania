@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
-import Home from "./features/posts/home/Home";
 import Login from "./features/auth/login/Login";
 import Register from "./features/auth/register/Register";
 import RequireAuth from "./features/auth/RequireAuth";
 import AddPostForm from "./features/posts/addPostForm/AddPostForm";
+import PostsList from "./features/posts/postsList.jsx/PostsList";
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
         <Route index element={<Login />} />
         <Route path="register" element={<Register />} />
 
-        <Route path="home" element={<Home />} />
+        <Route path="home" element={<PostsList />} />
         <Route path="add-post" element={<AddPostForm />} />
 
         {/* Protected Routes */}

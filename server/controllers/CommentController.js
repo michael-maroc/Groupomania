@@ -16,8 +16,9 @@ exports.getPostComments = asyncHandler(async (req, res) => {
 
 // Create A Comment
 exports.createComment = asyncHandler(async (req, res) => {
-  const { comment, PostId, userId } = req.body;
+  const { username, comment, PostId, userId } = req.body;
   const newComment = await Comments.create({
+    author: username,
     comment,
     PostId,
     UserId: userId,
