@@ -14,12 +14,13 @@ const App = () => {
         <Route index element={<Login />} />
         <Route path="register" element={<Register />} />
 
-        <Route path="home" element={<PostsList />} />
-        <Route path="add-post" element={<AddPostForm />} />
-
         {/* Protected Routes */}
-        <Route element={<RequireAuth />}></Route>
+        <Route element={<RequireAuth />}>
+          <Route path="home" element={<PostsList />} />
+          <Route path="add-post" element={<AddPostForm />} />
+        </Route>
       </Route>
+      {/* End of protected Routes */}
     </Routes>
   );
 };

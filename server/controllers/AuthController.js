@@ -52,7 +52,7 @@ exports.login = async (req, res) => {
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
     sameSite: "None",
-    // secure: true,
+    secure: true,
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
   res.json({ accessToken, user: foundUser.username });
@@ -64,7 +64,7 @@ exports.logout = (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None",
-    // secure: true,
+    secure: true,
   });
   res.json({ message: "Cookies cleared" });
 };
