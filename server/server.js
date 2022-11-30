@@ -8,10 +8,12 @@ const app = express();
 const authMiddleware = require("./middleware/authMiddleware");
 const corsOptions = require("./config/corsOptions");
 const credentials = require("./middleware/credentials");
+const path = require("path");
 
 // Middlewares
 app.use(credentials);
 app.use(cors(corsOptions));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -22,6 +24,7 @@ const postsRoutes = require("./router/postsRoutes");
 const commentsRoutes = require("./router/commentsRoutes");
 const refreshRoute = require("./router/refreshRoute");
 
+app.use("images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", authRoutes);
 app.use("/api/refresh", refreshRoute);
 app.use(authMiddleware);
@@ -30,7 +33,7 @@ app.use("/api/posts", postsRoutes);
 app.use("/api/comments", commentsRoutes);
 
 // Server Connection
-db.sequelize.sync({ alter: true }).then(() => {
+db.sequelize.sync().then(() => {
   app.listen(3000, () => {
     console.log("Server running on port 3000");
   });

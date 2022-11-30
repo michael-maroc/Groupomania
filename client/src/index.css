@@ -11,3 +11,7 @@ html, body, #root, .App {
 .errMsg{
   color: red;
 }
+
+.none{
+display: none;
+}

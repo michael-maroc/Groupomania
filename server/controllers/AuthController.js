@@ -55,7 +55,7 @@ exports.login = async (req, res) => {
     secure: true,
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
-  res.json({ accessToken, user: foundUser.username });
+  res.json({ accessToken });
 };
 
 exports.logout = (req, res) => {
@@ -66,5 +66,5 @@ exports.logout = (req, res) => {
     sameSite: "None",
     secure: true,
   });
-  res.json({ message: "Cookies cleared" });
+  res.json({ message: "Cookies cleared and user logged out" });
 };

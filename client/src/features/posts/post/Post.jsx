@@ -1,27 +1,31 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faComment } from "@fortawesome/free-regular-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/profile.png";
-import img2 from "/pexels-maria-loznevaya-14026383.jpg";
 import CommentsList from "../commentsList/CommentList";
+import { Image } from "cloudinary-react";
 import "./post.scss";
 
 const PostList = ({ post }) => {
   return (
     <article className="post">
       <header className="post-header">
-        <div className="heading">
-          <img src={img1} alt="profile" />
-          <div>
-            <h1>{post.author}</h1>
-            <span>Published the: {post.createdAt}</span>
+        <div className="post-heading" style={{ display: "flex", justifyContent: "space-between" }}>
+          <div style={{ display: "flex" }}>
+            <img src={img1} alt="profile" />
+            <div>
+              <h1 className="post-author">{post.author}</h1>
+              <span className="post-timestamp">Published the: {post.createdAt}</span>
+            </div>
           </div>
+          <FontAwesomeIcon icon={faTrashCan} />
         </div>
-        <div className="description">
+        <div className="post-description">
           <p>{post.description}</p>
         </div>
       </header>
       <main className="post-main">
-        <img src={img2} alt="post" />
+        <Image cloudName="dzvogj6gm" publicId={post.imageUrl} />
       </main>
       <footer className="post-footer">
         <div className="actions">

@@ -31,28 +31,26 @@ const Register = () => {
     <h1>Loading...</h1>
   ) : (
     <section className="register">
-      <div className="register-container">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h1>Register</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h1>Register</h1>
 
-          <label htmlFor="username">Username: </label>
-          <input type="username" {...register("username")} />
-          <p className="errMsg">{errors.username?.message}</p>
+        <label htmlFor="username">Username: </label>
+        <input type="username" {...register("username")} />
+        <p className="errMsg">{errors.username?.message}</p>
 
-          <label htmlFor="email">Email: </label>
-          <input type="email" {...register("email")} />
-          <p className="errMsg">{errors.email?.message}</p>
+        <label htmlFor="email">Email: </label>
+        <input type="email" {...register("email")} />
+        <p className="errMsg">{errors.email?.message}</p>
 
-          <label htmlFor="password">Password: </label>
-          <input type="password" {...register("password")} />
-          <p className="errMsg">{errors.password?.message}</p>
+        <label htmlFor="password">Password: </label>
+        <input type="password" {...register("password")} />
+        <p className="errMsg">{errors.password?.message}</p>
 
-          <button type="submit">Submit</button>
-          <span>
-            Already have an account ? <Link to="/login">Login</Link>
-          </span>
-        </form>
-      </div>
+        <button type="submit">Submit</button>
+        <span>
+          Already have an account ? <Link to="/">Login</Link>
+        </span>
+      </form>
     </section>
   );
 

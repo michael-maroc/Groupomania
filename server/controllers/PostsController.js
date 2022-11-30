@@ -7,14 +7,17 @@ exports.getAllPosts = asyncHandler(async (req, res) => {
 });
 
 exports.createPost = asyncHandler(async (req, res) => {
-  const { username, description, image, userId } = req.body;
-  if (req.files) {
-    const { image } = req.files;
-  }
+  const { username, description, imageUrl, userId } = req.body;
+
+  console.log("=====>req.body");
+  console.log(req.body);
+  console.log("=====>req.file");
+  console.log(req.file);
+
   const post = await Posts.create({
     author: username,
     description,
-    image,
+    imageUrl,
     UserId: userId,
   });
   res.status(201).json(post);
