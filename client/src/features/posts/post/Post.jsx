@@ -5,8 +5,11 @@ import img1 from "/profile.png";
 import CommentsList from "../commentsList/CommentList";
 import { Image } from "cloudinary-react";
 import "./post.scss";
+import { useDeletePostMutation } from "../postsList.jsx/postApiSlice";
 
 const PostList = ({ post }) => {
+  const [deletePost] = useDeletePostMutation();
+
   return (
     <article className="post">
       <header className="post-header">
@@ -18,7 +21,9 @@ const PostList = ({ post }) => {
               <span className="post-timestamp">Published the: {post.createdAt}</span>
             </div>
           </div>
-          <FontAwesomeIcon icon={faTrashCan} />
+          <button onClick={() => deletePost({ id: post.id })}>
+            <FontAwesomeIcon icon={faTrashCan} />
+          </button>
         </div>
         <div className="post-description">
           <p>{post.description}</p>

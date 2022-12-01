@@ -20,6 +20,7 @@
   }
   svg{
     font-size: 1.4rem;
+    cursor: pointer;
   }
 }
 .post-author{
@@ -57,9 +58,9 @@
   div{
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
   }
   p{
-    cursor: pointer;
     margin-right: 10px;
   }
 }

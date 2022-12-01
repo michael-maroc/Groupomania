@@ -27,20 +27,16 @@ const AddPostForm = () => {
     if (imageUrl[0]) {
       const formData = new FormData();
       formData.append("file", imageUrl[0]);
-      formData.append("upload_preset", "hpln9zd8");
+      formData.append("upload_preset", `${import.meta.env.VITE_CLOUD_PRESETS}`);
 
-      axios.post("https://api.cloudinary.com/v1_1/dzvogj6gm/image/upload", formData).then((res) => {
-        console.log(res);
-
-        const filename = res.data.public_id;
-        console.log(filename);
-
-        const response = createPost({ description: data.description, imageUrl: filename });
-        console.log(response);
-      });
-    } else {
-      const response = createPost({ description: data.description });
+      const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, formData);
+      const filename = await res.data.public_id;
+      const response = await createPost({ description: data.description, imageUrl: filename });
+      console.log(res);
+      console.log(filename);
       console.log(response);
+    } else {
+      const response = await createPost({ description: data.description });
     }
   };
 

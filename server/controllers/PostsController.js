@@ -22,3 +22,9 @@ exports.createPost = asyncHandler(async (req, res) => {
   });
   res.status(201).json(post);
 });
+
+exports.deletePost = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  await Posts.destroy({ where: { id } });
+  res.status(200).json("Post successfuly deleted");
+});

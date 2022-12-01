@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 import "./login.scss";
 
 const Login = () => {
@@ -28,9 +27,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     await login(data).then((res) => {
       console.log(res);
-      const token = res.data.accessToken;
-      jwt_decode(token);
-      dispatch(setCredentials({ token: res.data.accessToken }));
+      dispatch(setCredentials({ token: res.data }));
       navigate("/home");
     });
   };
