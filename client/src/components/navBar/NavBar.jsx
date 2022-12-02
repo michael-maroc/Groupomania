@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCurrentToken, logout } from "../../features/auth/authSlice";
+import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
+import { getCurrentToken } from "../../features/auth/authSlice";
 import "./navBar.scss";
 
 const NavBar = () => {
-  const dispatch = useDispatch();
+  const [sendLogout] = useSendLogoutMutation();
   const token = useSelector(getCurrentToken);
-  const handleLogout = dispatch(logout);
 
   return token ? (
     <nav className="home-nav">
@@ -14,7 +14,7 @@ const NavBar = () => {
       <ul>
         <Link to="/home">Home</Link>
         <Link to="/profile">Profile</Link>
-        <Link onClick={handleLogout}>Logout</Link>
+        <Link onClick={sendLogout}>Logout</Link>
       </ul>
     </nav>
   ) : null;

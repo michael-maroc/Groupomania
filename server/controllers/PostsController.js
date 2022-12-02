@@ -8,12 +8,6 @@ exports.getAllPosts = asyncHandler(async (req, res) => {
 
 exports.createPost = asyncHandler(async (req, res) => {
   const { username, description, imageUrl, userId } = req.body;
-
-  console.log("=====>req.body");
-  console.log(req.body);
-  console.log("=====>req.file");
-  console.log(req.file);
-
   const post = await Posts.create({
     author: username,
     description,
@@ -21,6 +15,13 @@ exports.createPost = asyncHandler(async (req, res) => {
     UserId: userId,
   });
   res.status(201).json(post);
+});
+
+exports.updatePost = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { description, imageUrl } = req.body;
+  const post = await Posts.update({ description, imageUrl }, { where: { id } });
+  res.status(200).json(post);
 });
 
 exports.deletePost = asyncHandler(async (req, res) => {

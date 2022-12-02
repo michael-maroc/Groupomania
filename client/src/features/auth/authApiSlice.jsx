@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { logout } from "./authSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -16,10 +17,24 @@ export const authApiSlice = apiSlice.injectEndpoints({
         body: { ...credentials },
       }),
     }),
-    logUserOut: builder.mutation({
-      query: () => "/auth/logout",
+    sendLogout: builder.mutation({
+      query: () => ({
+        url: "/auth/logout",
+        method: "POST",
+      }),
+      // onQueryStarted avoids us to have to import useDispatch() method
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          dispatch(logout());
+          // This needs to be cleared. This method can clear out the cache
+          dispatch(apiSlice.util.resetApiState());
+        } catch (err) {
+          console.log(err);
+        }
+      },
     }),
   }),
 });
 
-export const { useLoginMutation, useSignUpMutation, useLogUserOutMutation } = authApiSlice;
+export const { useLoginMutation, useSignUpMutation, useSendLogoutMutation } = authApiSlice;

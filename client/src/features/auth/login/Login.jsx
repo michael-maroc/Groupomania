@@ -27,7 +27,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     await login(data).then((res) => {
       console.log(res);
-      dispatch(setCredentials({ token: res.data }));
+      dispatch(setCredentials({ token: res.data.accessToken }));
       navigate("/home");
     });
   };
@@ -41,11 +41,15 @@ const Login = () => {
 
         <label htmlFor="email">Email: </label>
         <input type="email" {...register("email")} />
-        <p className="errMsg">{errors.email?.message}</p>
+        <p className="errMsg" aria-label="assertive">
+          {errors.email?.message}
+        </p>
 
         <label htmlFor="password">Password: </label>
         <input type="password" {...register("password")} />
-        <p className="errMsg">{errors.password?.message}</p>
+        <p className="errMsg" aria-label="assertive">
+          {errors.password?.message}
+        </p>
 
         <button type="submit">Submit</button>
         <span>

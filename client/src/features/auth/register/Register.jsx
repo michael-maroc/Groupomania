@@ -36,15 +36,21 @@ const Register = () => {
 
         <label htmlFor="username">Username: </label>
         <input type="username" {...register("username")} />
-        <p className="errMsg">{errors.username?.message}</p>
+        <p className="errMsg" aria-label="assertive">
+          {errors.username?.message}
+        </p>
 
         <label htmlFor="email">Email: </label>
         <input type="email" {...register("email")} />
-        <p className="errMsg">{errors.email?.message}</p>
+        <p className="errMsg" aria-label="assertive">
+          {errors.email?.message}
+        </p>
 
         <label htmlFor="password">Password: </label>
         <input type="password" {...register("password")} />
-        <p className="errMsg">{errors.password?.message}</p>
+        <p className="errMsg" aria-label="assertive">
+          {errors.password?.message}
+        </p>
 
         <button type="submit">Submit</button>
         <span>

@@ -11,7 +11,7 @@ specifiers:
   multer: 1.4.5-lts.1
   mysql2: ^2.3.3
   nodemon: ^2.0.20
-  sequelize: ^6.25.7
+  sequelize: ^6.26.0
   sequelize-cli: ^6.5.2
 
 dependencies:
@@ -24,7 +24,7 @@ dependencies:
   jsonwebtoken: 8.5.1
   multer: 1.4.5-lts.1
   mysql2: 2.3.3
-  sequelize: 6.25.7_mysql2@2.3.3
+  sequelize: 6.26.0_mysql2@2.3.3
   sequelize-cli: 6.5.2
 
 devDependencies:
@@ -1386,8 +1386,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: false
 
-  /sequelize/6.25.7_mysql2@2.3.3:
-    resolution: {integrity: sha512-aH/zbsAFw8mlsmKIbd57Uo5FdRko3by53cumiiXARr0s2G79ME0LuJlS5H10I5WmRcYcvwp1MAfI9CKhCtULjw==}
+  /sequelize/6.26.0_mysql2@2.3.3:
+    resolution: {integrity: sha512-Xv82z1FdSn/qwB1IObSxIHV519cFk/vSD28vWs8Y0VucQLn7pK2x2jYjf2Qg/rBUQbCVprDdU7RPf+55rrkc0A==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       ibm_db: '*'

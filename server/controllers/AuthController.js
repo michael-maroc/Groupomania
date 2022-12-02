@@ -66,5 +66,5 @@ exports.logout = (req, res) => {
     sameSite: "None",
     secure: true,
   });
-  res.json({ message: "Cookies cleared and user logged out" });
+  res.json({ message: "Cookies cleared" });
 };

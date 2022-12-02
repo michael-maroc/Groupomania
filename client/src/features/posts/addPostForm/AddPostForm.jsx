@@ -18,10 +18,11 @@ const AddPostForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const [createPost] = useCreatePostMutation();
+  const [createPost, { isLoading }] = useCreatePostMutation();
 
   const onSubmit = async (data) => {
     if (imageUrl[0]) {
@@ -32,11 +33,10 @@ const AddPostForm = () => {
       const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, formData);
       const filename = await res.data.public_id;
       const response = await createPost({ description: data.description, imageUrl: filename });
-      console.log(res);
-      console.log(filename);
-      console.log(response);
+      reset();
     } else {
-      const response = await createPost({ description: data.description });
+      await createPost({ description: data.description });
+      reset();
     }
   };
 
@@ -53,6 +53,7 @@ const AddPostForm = () => {
           Submit
         </button>
         <p className="add-post-error errMsg">{errors?.description?.message}</p>
+        {isLoading}
       </form>
     </section>
   );

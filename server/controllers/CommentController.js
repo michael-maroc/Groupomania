@@ -9,8 +9,8 @@ exports.getAllComment = asyncHandler(async (req, res) => {
 
 // Get Comments From A Post
 exports.getPostComments = asyncHandler(async (req, res) => {
-  const { PostId } = req.params;
-  const commentsList = await Comments.findAll({ where: { PostId } });
+  const { id } = req.params;
+  const commentsList = await Comments.findAll({ where: { id } });
   res.status(201).json(commentsList);
 });
 

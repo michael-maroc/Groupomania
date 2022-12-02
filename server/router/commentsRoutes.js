@@ -8,7 +8,7 @@ const {
 const router = express.Router();
 
 router.get("/", getAllComment);
-router.get("/:PostId", getPostComments);
+router.get("/:id", getPostComments);
 router.post("/", createComment);
 router.delete("/", deleteComment);
 

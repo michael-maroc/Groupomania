@@ -4,8 +4,8 @@
   border: solid rgb(196, 196, 196) 1px;
   border-radius: 10px;
   margin: 2rem 0;
+  width: 650px;
   max-width: 650px;
-  overflow: hidden;
 }
 .post-header{
   padding: 15px;
@@ -14,11 +14,17 @@
   display: flex;
   align-items: center;
   
+  button{
+    border: none;
+    background-color: #fff;
+    margin: 0 0 0 0.4rem;
+  }
   img{
     width: 40px;
     margin-right: 10px;
   }
   svg{
+    margin-left: 5px;
     font-size: 1.4rem;
     cursor: pointer;
   }
@@ -32,9 +38,26 @@
 }
 .post-description{
   margin-top: 10px;
+
+  div{
+    width: 100%;
+    margin: 1rem 0 0 0;
+
+    textarea{
+      min-width: 30%;
+      width: 100%;
+      max-width: 98%;
+      padding: 5px;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+  }
 }
 .post-main{
-  width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
   background-color: #fff;
   
   img{
