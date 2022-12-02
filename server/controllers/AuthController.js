@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
+const asyncHandler = require("express-async-handler");
 
 function generateAccessToken(id, username) {
   return jwt.sign({ id, username }, process.env.ACCESS_TOKEN_SECRET, {
@@ -14,31 +15,27 @@ function generateRefreshToken(id, username) {
   });
 }
 
-exports.register = async (req, res) => {
-  try {
-    const { username, email, password } = req.body;
-    if (!username || !email || !password)
-      return res
-        .status(400)
-        .json({ message: "Username, email and password are required" });
-    const duplicate = await Users.findOne({ where: { email } });
-    if (duplicate) {
-      return res.status(409).json({ message: "This email already exists" });
-    } else {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      await Users.create({
-        username,
-        email,
-        password: hashedPassword,
-      });
-      res.status(201).json({ message: "Registration success" });
-    }
-  } catch (err) {
-    res.status(500).json({ err });
+exports.register = asyncHandler(async (req, res) => {
+  const { username, email, password } = req.body;
+  if (!username || !email || !password)
+    return res
+      .status(400)
+      .json({ message: "Username, email and password are required" });
+  const duplicate = await Users.findOne({ where: { email } });
+  if (duplicate) {
+    return res.status(409).json({ message: "This email already exists" });
+  } else {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await Users.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+    res.status(201).json({ message: "Registration success" });
   }
-};
+});
 
-exports.login = async (req, res) => {
+exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
     return res.status(400).json({ message: "email and password are required" });
@@ -56,9 +53,9 @@ exports.login = async (req, res) => {
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
   res.json({ accessToken });
-};
+});
 
-exports.logout = (req, res) => {
+exports.logout = asyncHandler(async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(204);
   res.clearCookie("jwt", {
@@ -67,4 +64,4 @@ exports.logout = (req, res) => {
     secure: true,
   });
   res.json({ message: "Cookies cleared" });
-};
+});
