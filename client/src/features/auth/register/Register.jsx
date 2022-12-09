@@ -10,7 +10,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const [errMsg, setErrMsg] = useState("");
-  const onInputChanged = () => setErrMsg("");
+  const resetErrMsg = () => setErrMsg("");
 
   const schema = yup.object({
     username: yup.string().min(4).max(12).required(),
@@ -28,17 +28,20 @@ const Register = () => {
   const [signUp, { isLoading }] = useSignUpMutation();
 
   const onSubmit = async (data) => {
-    await signUp(data).then((res) => {
-      if (res.error?.originalStatus === 400) return setErrMsg(res.error.data.message);
-      else if (res.error?.originalStatus === 401) return setErrMsg(res.error.data.message);
-      else if (res.error?.originalStatus === 409) return setErrMsg(res.error.data.message);
-      else if (res.error?.originalStatus === 500) return setErrMsg("Username should contain between 4 and 12 characters");
-      else {
-        // navigate("/");
-        // reset();
-        console.log("All good");
-      }
-    });
+    try {
+      await signUp(data)
+        .unwrap()
+        .then((res) => {
+          console.log(res);
+          navigate("/");
+          reset();
+        });
+    } catch (err) {
+      if (!err?.originalStatus) setErrMsg("No Server Response");
+      else if (err.originalStatus === 400) return setErrMsg("Bad credentials");
+      else if (err.originalStatus === 401) return setErrMsg("Unauthorized");
+      else setErrMsg("Login Failed");
+    }
   };
 
   const content = (
@@ -48,19 +51,19 @@ const Register = () => {
         <h1>Register</h1>
 
         <label htmlFor="username">Username: </label>
-        <input type="username" {...register("username")} onChange={onInputChanged} />
+        <input type="username" {...register("username")} onChange={resetErrMsg} />
         <p className="errMsg" aria-label="assertive">
           {errors.username?.message}
         </p>
 
         <label htmlFor="email">Email: </label>
-        <input type="email" {...register("email")} onChange={onInputChanged} />
+        <input type="email" {...register("email")} onChange={resetErrMsg} />
         <p className="errMsg" aria-label="assertive">
           {errors.email?.message}
         </p>
 
         <label htmlFor="password">Password: </label>
-        <input type="password" {...register("password")} onChange={onInputChanged} />
+        <input type="password" {...register("password")} onChange={resetErrMsg} />
         <p className="errMsg" aria-label="assertive">
           {errors.password?.message}
         </p>

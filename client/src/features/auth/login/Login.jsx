@@ -13,11 +13,11 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [errMsg, setErrMsg] = useState("");
-  const onInputChanged = () => setErrMsg("");
+  const resetErrMsg = () => setErrMsg("");
 
   const schema = yup.object({
     email: yup.string().email(),
-    password: yup.string(),
+    password: yup.string().min(4).max(12),
   });
 
   const {
@@ -30,16 +30,20 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const onSubmit = async (data) => {
-    await login(data).then((res) => {
-      if (res.error?.status === 400) return setErrMsg(res.error.data.message);
-      else if (res.error?.status === 401) return setErrMsg(res.error.data.message);
-      else if (res.error?.status === 500) return setErrMsg("Server error");
-      else {
-        dispatch(setCredentials({ token: res.data.accessToken }));
-        navigate("/home");
-        reset();
-      }
-    });
+    try {
+      await login(data)
+        .unwrap()
+        .then((res) => {
+          dispatch(setCredentials({ token: res.accessToken }));
+          navigate("/home");
+          reset();
+        });
+    } catch (err) {
+      if (!err?.originalStatus) setErrMsg("No Server Response");
+      else if (err.originalStatus === 400) return setErrMsg("Bad credentials");
+      else if (err.originalStatus === 401) return setErrMsg("Unauthorized");
+      else setErrMsg("Login Failed");
+    }
   };
 
   const content = (
@@ -49,13 +53,13 @@ const Login = () => {
         <h1>Login</h1>
 
         <label htmlFor="email">Email: </label>
-        <input type="email" {...register("email")} onChange={onInputChanged} />
+        <input type="email" {...register("email")} onChange={resetErrMsg} />
         <p className="errMsg" aria-label="assertive">
           {errors.email?.message}
         </p>
 
         <label htmlFor="password">Password: </label>
-        <input type="password" {...register("password")} onChange={onInputChanged} />
+        <input type="password" {...register("password")} onChange={resetErrMsg} />
         <p className="errMsg" aria-label="assertive">
           {errors.password?.message}
         </p>

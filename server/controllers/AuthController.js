@@ -17,13 +17,10 @@ function generateRefreshToken(id, username) {
 
 exports.register = asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
-  if (!username || !email || !password)
-    return res
-      .status(400)
-      .json({ message: "Username, email and password are required" });
+  if (!username || !email || !password) return res.sendStatus(400);
   const duplicate = await Users.findOne({ where: { email } });
   if (duplicate) {
-    return res.status(409).json({ message: "This email already exists" });
+    return res.sendStatus(409);
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
     await Users.create({
@@ -37,12 +34,12 @@ exports.register = asyncHandler(async (req, res) => {
 
 exports.login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  if (!email || !password)
-    return res.status(400).json({ message: "email and password are required" });
+  if (!email || !password) return res.sendStatus(400);
+
   const foundUser = await Users.findOne({ where: { email } });
-  if (!foundUser || !(await bcrypt.compare(password, foundUser.password))) {
-    return res.status(401).json({ message: "Bad credentials" });
-  }
+  if (!foundUser || !(await bcrypt.compare(password, foundUser.password)))
+    return res.sendStatus(401);
+
   const accessToken = generateAccessToken(foundUser.id, foundUser.username);
   const refreshToken = generateRefreshToken(foundUser.id, foundUser.username);
 
