@@ -1,8 +1,7 @@
-import { useGetPostCommentsQuery } from "../comments/commentsApiSlice";
+import { useGetPostCommentsQuery } from "../../slices/commentsApiSlice";
 import Comments from "../comments/Comments";
-
-import "./commentsList.scss";
 import AddCommentForm from "../addCommentForm/AddCommentForm";
+import "./commentsList.scss";
 
 const CommentsList = ({ post }) => {
   const { data: comments, isLoading, isSuccess, isError, isFetching, error } = useGetPostCommentsQuery(post.id);
@@ -14,7 +13,6 @@ const CommentsList = ({ post }) => {
       {error && <h2>There was an error</h2>}
       {isSuccess && (
         <section className="comments">
-          <h1>Post ID: {post.id}</h1>
           <p>There is {comments.length} comments</p>
           {comments?.map((comment) => {
             return <Comments comment={comment} key={comment.id} />;

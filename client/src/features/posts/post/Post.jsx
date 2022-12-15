@@ -4,14 +4,13 @@ import { faTrash, faEraser } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/profile.png";
 import CommentsList from "../commentsList/CommentList";
 import { Image } from "cloudinary-react";
-import { useDeletePostMutation, useUpdatePostMutation } from "../postsList.jsx/postApiSlice";
-import "./post.scss";
+import { useDeletePostMutation, useUpdatePostMutation } from "../../slices/postApiSlice";
 import { useState } from "react";
+import "./post.scss";
 
 const PostList = ({ post }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
-  const onNewDescriptionChanged = (e) => setNewDescription(e.target.value);
 
   const [deletePost] = useDeletePostMutation();
   const [updatePost] = useUpdatePostMutation();
@@ -24,22 +23,28 @@ const PostList = ({ post }) => {
     setIsEdit(false);
   };
 
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    deletePost({ id: post.id })
+    /* Need to add the deletion of the picture in the DB */
+  }
+
   return (
     <article className="post">
       <header className="post-header">
-        <div className="post-heading" style={{ display: "flex", justifyContent: "space-between" }}>
-          <div style={{ display: "flex" }}>
+        <div className="post-heading">
+          <div>
             <img src={img1} alt="profile" />
             <div>
               <h1 className="post-author">{post.author}</h1>
               <span className="post-timestamp">Published the: {post.createdAt}</span>
             </div>
           </div>
-          <div>
+          <div className="post-edit-btn">
             <button onClick={() => setIsEdit((prev) => !prev)}>
               <FontAwesomeIcon icon={faEraser} />
             </button>
-            <button onClick={() => deletePost({ id: post.id })}>
+            <button onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
           </div>
@@ -48,14 +53,19 @@ const PostList = ({ post }) => {
           <p>{post.description}</p>
           {isEdit && (
             <div>
-              <textarea type="text" placeholder="New description..." cols="30" onChange={onNewDescriptionChanged} />
+              <textarea 
+                type="text" 
+                placeholder="New description..." 
+                cols="30" 
+                onChange={(e) => setNewDescription(e.target.value)} 
+              />
               <button onClick={handleClick}>Submit</button>
             </div>
           )}
         </div>
       </header>
       <main className="post-main">
-        <Image cloudName="dzvogj6gm" publicId={post.imageUrl} />
+        <Image cloudName={import.meta.env.VITE_CLOUD_NAME} publicId={post.imageUrl} />
       </main>
       <footer className="post-footer">
         <div className="actions">

@@ -1,10 +1,10 @@
-import { useSignUpMutation } from "../authApiSlice";
+import { useSignUpMutation } from "../../slices/authApiSlice";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
-import "./register.scss";
 import { useState } from "react";
+import "./register.scss";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -13,9 +13,9 @@ const Register = () => {
   const resetErrMsg = () => setErrMsg("");
 
   const schema = yup.object({
-    username: yup.string().min(4).max(12).required(),
+    username: yup.string().required(),
     email: yup.string().email().required(),
-    password: yup.string().min(4).max(12),
+    password: yup.string().required(),
   });
 
   const {

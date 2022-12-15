@@ -13,6 +13,10 @@
 .post-heading{
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  :first-child{
+    display: flex;
+  }
   
   button{
     border: none;
@@ -35,6 +39,9 @@
 }
 .post-timestamp{
   font-size: 0.9rem;
+}
+.post-edit-btn{
+  display: flex;
 }
 .post-description{
   margin-top: 10px;

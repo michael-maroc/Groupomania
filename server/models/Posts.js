@@ -23,7 +23,12 @@ module.exports = (sequelize, DataTypes) => {
   Posts.associate = (models) => {
     Posts.hasMany(models.Comments, {
       onDelete: "cascade",
-    });
+      onUpdate: "cascade",
+    }),
+      Posts.hasMany(models.Likes, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      });
   };
 
   return Posts;

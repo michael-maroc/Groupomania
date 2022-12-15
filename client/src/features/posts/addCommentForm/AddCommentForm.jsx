@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAddCommentMutation } from "../comments/commentsApiSlice";
+import { useAddCommentMutation } from "../../slices/commentsApiSlice";
 import img1 from "/profile.png";
 import "./addCommentForm.scss";
 

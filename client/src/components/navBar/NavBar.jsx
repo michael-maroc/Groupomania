@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSendLogoutMutation } from "../../features/auth/authApiSlice";
-import { getCurrentToken } from "../../features/auth/authSlice";
+import { useSendLogoutMutation } from "../../features/slices/authApiSlice";
+import { getCurrentToken } from "../../features/slices/authSlice";
 import "./navBar.scss";
 
 const NavBar = () => {

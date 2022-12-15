@@ -1,12 +1,15 @@
-import { useLoginMutation } from "../authApiSlice";
+import { useLoginMutation } from "../../slices/authApiSlice";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../authSlice";
+import { setCredentials } from "../../slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import "./login.scss";
 import { useState } from "react";
+import "./login.scss";
+
+const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -16,8 +19,8 @@ const Login = () => {
   const resetErrMsg = () => setErrMsg("");
 
   const schema = yup.object({
-    email: yup.string().email(),
-    password: yup.string().min(4).max(12),
+    email: yup.string().email().required(),
+    password: yup.string().required(),
   });
 
   const {
