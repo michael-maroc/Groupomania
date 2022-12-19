@@ -22,15 +22,12 @@ exports.createPost = asyncHandler(async (req, res) => {
 // Update A Post
 exports.updatePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { description, imageUrl, isAdmin } = req.body;
-  const foundPost = await Posts.findone({ where: { id } });
+  const { userId, description, imageUrl, isAdmin } = req.body;
+  const foundPost = await Posts.findOne({ where: { id } });
 
   if (foundPost.UserId === userId || isAdmin) {
-    const post = await Posts.update(
-      { description, imageUrl },
-      { where: { id } }
-    );
-    res.status(200).json(post);
+    await Posts.update({ description, imageUrl }, { where: { id } });
+    res.status(200).json({ message: "Post successfuly updated" });
   } else {
     return res.json({ message: "You can only update your own posts" });
   }
@@ -45,9 +42,9 @@ exports.deletePost = asyncHandler(async (req, res) => {
   if (foundPost.UserId === userId || isAdmin) {
     return (
       await Posts.destroy({ where: { id } }),
-      res.status(200).json("Post successfuly deleted")
+      res.status(200).json({ message: "Post successfuly deleted" })
     );
   } else {
-    return res.json({ message: "You can only delete your own posts" });
+    return res.json({ message: "You can delete only your own posts" });
   }
 });

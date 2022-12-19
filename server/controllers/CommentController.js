@@ -15,20 +15,45 @@ exports.getPostComments = asyncHandler(async (req, res) => {
 });
 
 // Create A Comment
-exports.createComment = asyncHandler(async (req, res) => {
-  const { username, comment, PostId, userId } = req.body;
+exports.addComment = asyncHandler(async (req, res) => {
+  const { username, comment, userId, PostId } = req.body;
   const newComment = await Comments.create({
     author: username,
     comment,
-    PostId,
     UserId: userId,
+    PostId,
   });
   res.status(201).json(newComment);
+});
+
+// Update A Comment
+exports.updateComment = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { userId, isAdmin, comment } = req.body;
+  const foundComment = await Comments.findOne({ where: { id } });
+
+  if (foundComment.UserId === userId || isAdmin) {
+    return (
+      await foundComment.update({ comment }, { where: { id } }),
+      res.json({ message: "Comment successfuly updated" })
+    );
+  } else {
+    return res.json({ message: "You can update only your comments" });
+  }
 });
 
 // Delete A Comment
 exports.deleteComment = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const deletedComment = await Comments.destroy({ where: { id } });
-  res.status(204).json(deletedComment);
+  const { userId, isAdmin } = req.body;
+  const foundComment = await Comments.findOne({ where: { id } });
+
+  if (foundComment.UserId === userId || isAdmin) {
+    return (
+      await Comments.destroy({ where: { id } }),
+      res.status(204).json({ message: "Post successfuly deletd" })
+    );
+  } else {
+    return res.json({ message: "You can delete only your comments" });
+  }
 });
