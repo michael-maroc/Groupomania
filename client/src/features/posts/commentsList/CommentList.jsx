@@ -13,7 +13,7 @@ const CommentsList = ({ post }) => {
       {error && <h2>There was an error</h2>}
       {isSuccess && (
         <section className="comments">
-          <p>There is {comments.length} comments</p>
+          <p>There is {comments?.length} comments</p>
           {comments?.map((comment) => {
             return <Comments comment={comment} key={comment.id} />;
           })}

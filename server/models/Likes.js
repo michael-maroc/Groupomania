@@ -1,8 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
   const Likes = sequelize.define("Likes", {
-    likes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     /* Need to complete that part */
   });

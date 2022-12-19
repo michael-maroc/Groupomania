@@ -23,6 +23,7 @@ const usersRoutes = require("./router/usersRoutes");
 const postsRoutes = require("./router/postsRoutes");
 const commentsRoutes = require("./router/commentsRoutes");
 const refreshRoute = require("./router/refreshRoute");
+const likesRoutes = require("./router/likesRoutes");
 
 app.use("images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", authRoutes);
@@ -31,6 +32,7 @@ app.use(authMiddleware);
 app.use("/api/users", usersRoutes);
 app.use("/api/posts", postsRoutes);
 app.use("/api/comments", commentsRoutes);
+app.use("/api/likes", likesRoutes);
 
 // Server Connection
 db.sequelize.sync().then(() => {

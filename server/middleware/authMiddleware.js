@@ -8,7 +8,8 @@ const authMiddleware = (req, res, next) => {
     if (err) return res.sendStatus(403);
     req.body.userId = decoded.id;
     req.body.username = decoded.username;
-    // console.log(decoded);
+    req.body.isAdmin = decoded.isAdmin;
+    console.log(decoded);
     next();
   });
 };

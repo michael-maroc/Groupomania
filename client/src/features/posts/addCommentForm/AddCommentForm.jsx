@@ -21,11 +21,11 @@ const AddCommentForm = ({ post }) => {
 
   /* Need to understand that part... QUICK... */
   const onSubmit = async ({ comment }) => {
-    await addComment({ comment, PostId: post.id }).then((res) => {
-      console.log(res);
+    await addComment({ comment, PostId: post.id }).then(() => {
       reset();
     });
   };
+  
   return (
     <form className="add-comment-form" onSubmit={handleSubmit(onSubmit)}>
       <img src={img1} alt="profile-pic" />

@@ -10,6 +10,6 @@ const router = express.Router();
 router.get("/", getAllComment);
 router.get("/:id", getPostComments);
 router.post("/", createComment);
-router.delete("/", deleteComment);
+router.delete("/:id", deleteComment);
 
 module.exports = router;

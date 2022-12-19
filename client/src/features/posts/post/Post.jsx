@@ -1,33 +1,39 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faThumbsUp, faComment } from "@fortawesome/free-regular-svg-icons";
-import { faTrash, faEraser } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEraser, faThumbsUp, faHeart } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/profile.png";
 import CommentsList from "../commentsList/CommentList";
 import { Image } from "cloudinary-react";
 import { useDeletePostMutation, useUpdatePostMutation } from "../../slices/postApiSlice";
 import { useState } from "react";
 import "./post.scss";
+import { useAddLikeMutation } from "../../slices/likesApiSlice";
 
 const PostList = ({ post }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
-
   const [deletePost] = useDeletePostMutation();
   const [updatePost] = useUpdatePostMutation();
+  const [addLike] = useAddLikeMutation();
 
-  const handleClick = (e) => {
+  const handleUpdate = async (e) => {
     e.preventDefault();
     setNewDescription(e.target.value);
-    updatePost({ ...post, description: newDescription });
-    setNewDescription("");
-    setIsEdit(false);
+    await updatePost({ ...post, description: newDescription }).then(() => {
+      setNewDescription("");
+      setIsEdit(false);
+    })
   };
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    deletePost({ id: post.id })
+    await deletePost({ id: post.id }).then((res) => console.log(res.data))
     /* Need to add the deletion of the picture in the DB */
-  }
+  };
+
+  const handleLikes = async (e) => {
+    e.preventDefault();
+    await addLike({ PostId: post.id }).then((res) => console.log(res.data))
+  };
 
   return (
     <article className="post">
@@ -59,7 +65,7 @@ const PostList = ({ post }) => {
                 cols="30" 
                 onChange={(e) => setNewDescription(e.target.value)} 
               />
-              <button onClick={handleClick}>Submit</button>
+              <button onClick={handleUpdate}>Validate</button>
             </div>
           )}
         </div>
@@ -69,14 +75,8 @@ const PostList = ({ post }) => {
       </main>
       <footer className="post-footer">
         <div className="actions">
-          <div>
-            <p>Like</p>
-            <FontAwesomeIcon icon={faThumbsUp} />
-          </div>
-          <div>
-            <p>Comment</p>
-            <FontAwesomeIcon icon={faComment} />
-          </div>
+          <FontAwesomeIcon className="thumbs-up" icon={faThumbsUp} onClick={handleLikes} />
+          <FontAwesomeIcon className="heart" icon={faHeart} />
         </div>
         <CommentsList post={post} />
       </footer>

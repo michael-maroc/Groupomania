@@ -3,14 +3,14 @@ const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
 const asyncHandler = require("express-async-handler");
 
-function generateAccessToken(id, username) {
-  return jwt.sign({ id, username }, process.env.ACCESS_TOKEN_SECRET, {
+function generateAccessToken(id, username, isAdmin) {
+  return jwt.sign({ id, username, isAdmin }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
   });
 }
 
-function generateRefreshToken(id, username) {
-  return jwt.sign({ id, username }, process.env.REFRESH_TOKEN_SECRET, {
+function generateRefreshToken(id, username, isAdmin) {
+  return jwt.sign({ id, username, isAdmin }, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
   });
 }
@@ -37,16 +37,25 @@ exports.login = asyncHandler(async (req, res) => {
   if (!email || !password) return res.sendStatus(400);
 
   const foundUser = await Users.findOne({ where: { email } });
+  // console.log(foundUser.role);
   if (!foundUser || !(await bcrypt.compare(password, foundUser.password)))
     return res.sendStatus(401);
 
-  const accessToken = generateAccessToken(foundUser.id, foundUser.username);
-  const refreshToken = generateRefreshToken(foundUser.id, foundUser.username);
+  const accessToken = generateAccessToken(
+    foundUser.id,
+    foundUser.username,
+    foundUser.isAdmin
+  );
+  const refreshToken = generateRefreshToken(
+    foundUser.id,
+    foundUser.username,
+    foundUser.isAdmin
+  );
 
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    // secure: true,
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
   res.json({ accessToken });
@@ -58,7 +67,7 @@ exports.logout = asyncHandler(async (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    // secure: true,
   });
   res.json({ message: "Cookies cleared" });
 });
