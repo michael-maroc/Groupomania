@@ -7,6 +7,8 @@ import { useCreatePostMutation } from "../../slices/postApiSlice";
 import "./addPostForm.scss";
 import { useState } from "react";
 import axios from "axios";
+import { storage } from "../../../config/Firebase";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 const AddPostForm = () => {
   const [imageUrl, setImageUrl] = useState([]);
@@ -15,16 +17,14 @@ const AddPostForm = () => {
     description: yup.string().required(),
   });
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  const { register, handleSubmit, reset, formState: { errors }} = useForm({ resolver: yupResolver(schema) });
 
   const [createPost, { isLoading }] = useCreatePostMutation();
 
   const onSubmit = async (data) => {
+    /* TODO List */
+    // 1/ creation of an image that receives an url as a source from the firebase storage //
+
     if (imageUrl[0]) {
       const formData = new FormData();
       formData.append("file", imageUrl[0]);

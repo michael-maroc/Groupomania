@@ -9,8 +9,11 @@ import "./post.scss";
 import { useAddLikeMutation } from "../../slices/likesApiSlice";
 
 const PostList = ({ post }) => {
+  // Editing states
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
+
+  // Mutations
   const [deletePost] = useDeletePostMutation();
   const [updatePost] = useUpdatePostMutation();
   const [addLike] = useAddLikeMutation();
@@ -75,8 +78,15 @@ const PostList = ({ post }) => {
       </main>
       <footer className="post-footer">
         <div className="actions">
-          <FontAwesomeIcon className="thumbs-up" icon={faThumbsUp} onClick={handleLikes} />
-          <FontAwesomeIcon className="heart" icon={faHeart} />
+          <FontAwesomeIcon 
+            className="thumbs-up" 
+            icon={faThumbsUp} 
+            onClick={handleLikes} 
+          />
+          <FontAwesomeIcon 
+            className="heart" 
+            icon={faHeart} 
+          />
         </div>
         <CommentsList post={post} />
       </footer>
