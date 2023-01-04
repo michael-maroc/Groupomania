@@ -9,10 +9,11 @@ exports.getAllPosts = asyncHandler(async (req, res) => {
 
 // Create A Post
 exports.createPost = asyncHandler(async (req, res) => {
-  const { username, description, imageUrl, userId } = req.body;
+  const { username, description, imageName, imageUrl, userId } = req.body;
   const post = await Posts.create({
     author: username,
     description,
+    imageName,
     imageUrl,
     UserId: userId,
   });
@@ -29,7 +30,7 @@ exports.updatePost = asyncHandler(async (req, res) => {
     await Posts.update({ description, imageUrl }, { where: { id } });
     res.status(200).json({ message: "Post successfuly updated" });
   } else {
-    return res.json({ message: "You can only update your own posts" });
+    return res.json({ message: "You can update only your own posts" });
   }
 });
 

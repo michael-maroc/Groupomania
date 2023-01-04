@@ -13,7 +13,6 @@ specifiers:
   '@types/react-dom': ^18.0.9
   '@vitejs/plugin-react': ^2.2.0
   axios: ^1.2.1
-  cloudinary-react: ^1.8.1
   dotenv: ^16.0.3
   eslint: ^8.30.0
   eslint-config-react-app: ^7.0.1
@@ -37,7 +36,6 @@ dependencies:
   '@hookform/resolvers': 2.9.10_react-hook-form@7.41.0
   '@reduxjs/toolkit': 1.9.1_k4ae6lp43ej6mezo3ztvx6pykq
   axios: 1.2.1
-  cloudinary-react: 1.8.1_zrp62gez7omnrwllyfdlincg3a
   dotenv: 16.0.3
   firebase: 9.15.0
   react: 18.2.0
@@ -1988,7 +1986,7 @@ packages:
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.4
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
     dev: false
 
   /@grpc/proto-loader/0.6.13:
@@ -2202,8 +2200,8 @@ packages:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
     dev: false
 
-  /@types/node/18.11.17:
-    resolution: {integrity: sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==}
+  /@types/node/18.11.18:
+    resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
     dev: false
 
   /@types/parse-json/4.0.0:
@@ -2686,27 +2684,6 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
-    dev: false
-
-  /cloudinary-core/2.13.0_lodash@4.17.21:
-    resolution: {integrity: sha512-Nt0Q5I2FtenmJghtC4YZ3MZZbGg1wLm84SsxcuVwZ83OyJqG9CNIGp86CiI6iDv3QobaqBUpOT7vg+HqY5HxEA==}
-    peerDependencies:
-      lodash: '>=4.0'
-    dependencies:
-      lodash: 4.17.21
-    dev: false
-
-  /cloudinary-react/1.8.1_zrp62gez7omnrwllyfdlincg3a:
-    resolution: {integrity: sha512-90LHbUPfB8Uj5tKY08+ladN8ONyfak8zjnlAgVc39vlxKCx3b9G0/+I5C1QQGDwBRqHKzxyXterfugbWUrCQhA==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: ^16.3.3 || ^17.0.0 || ^18.0.0
-    dependencies:
-      cloudinary-core: 2.13.0_lodash@4.17.21
-      prop-types: 15.8.1
-      react: 18.2.0
-    transitivePeerDependencies:
-      - lodash
     dev: false
 
   /color-convert/1.9.3:
@@ -4154,6 +4131,7 @@ packages:
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
+    dev: true
 
   /object-inspect/1.12.2:
     resolution: {integrity: sha512-z+cPxW0QGUp0mcqcsgQyLVRDoXFQbXOwBaqyF7VIgI4TWNQsDHrBpUQslRmIfAoYWdYzs6UlKJtB2XJpTaNSpQ==}
@@ -4309,6 +4287,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
+    dev: true
 
   /property-expr/2.0.5:
     resolution: {integrity: sha512-IJUkICM5dP5znhCckHSv30Q4b5/JA5enCtkRHYaOVOAocnH/1BQEYTC5NMfT3AVl/iXKdr3aqQbQn9DxyWknwA==}
@@ -4330,7 +4309,7 @@ packages:
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
       '@types/long': 4.0.2
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
       long: 4.0.0
     dev: false
 
@@ -4349,7 +4328,7 @@ packages:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
       long: 5.2.1
     dev: false
 

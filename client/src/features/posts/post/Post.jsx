@@ -1,36 +1,50 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEraser, faThumbsUp, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEraser, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/profile.png";
 import CommentsList from "../commentsList/CommentList";
-import { Image } from "cloudinary-react";
 import { useDeletePostMutation, useUpdatePostMutation } from "../../slices/postApiSlice";
 import { useState } from "react";
 import "./post.scss";
-import { useAddLikeMutation } from "../../slices/likesApiSlice";
+import { useAddLikeMutation, useGetPostLikesQuery } from "../../slices/likesApiSlice";
+import { ref, deleteObject } from "firebase/storage";
+import { storage } from "../../../config/Firebase";
 
 const PostList = ({ post }) => {
   // Editing states
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
 
+  // Image Reference for firebase
+  const imageRef = ref(storage, `images/${post.imageName}`)
+
   // Mutations
   const [deletePost] = useDeletePostMutation();
   const [updatePost] = useUpdatePostMutation();
   const [addLike] = useAddLikeMutation();
 
+  // Query
+  const { data: likes, isLoading, isSuccess, isError, isFetching, error } = useGetPostLikesQuery(post.id);
+
+  // handle functions 
   const handleUpdate = async (e) => {
     e.preventDefault();
     setNewDescription(e.target.value);
-    await updatePost({ ...post, description: newDescription }).then(() => {
+    await updatePost({ ...post, description: newDescription })
       setNewDescription("");
       setIsEdit(false);
-    })
   };
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    await deletePost({ id: post.id }).then((res) => console.log(res.data))
-    /* Need to add the deletion of the picture in the DB */
+    if (post.imageUrl && post.imageName) {
+      await deletePost({ id: post.id }).then((res) => {
+        console.log(res.data)
+        deleteObject(imageRef)
+        console.log("Image successfuly deleted from firebase")
+      })
+    } else {
+      await deletePost({ id: post.id }).then((res) => console.log(res.data))
+    }
   };
 
   const handleLikes = async (e) => {
@@ -74,7 +88,9 @@ const PostList = ({ post }) => {
         </div>
       </header>
       <main className="post-main">
-        <Image cloudName={import.meta.env.VITE_CLOUD_NAME} publicId={post.imageUrl} />
+        {post?.imageUrl
+          ? <img src={post.imageUrl} alt="post" />
+          : null }
       </main>
       <footer className="post-footer">
         <div className="actions">
@@ -83,10 +99,9 @@ const PostList = ({ post }) => {
             icon={faThumbsUp} 
             onClick={handleLikes} 
           />
-          <FontAwesomeIcon 
-            className="heart" 
-            icon={faHeart} 
-          />
+          {likes?.length === 0 && null}
+          {likes?.length === 1 && <span>{likes.length} like</span>}
+          {likes?.length >= 2 && <span>{likes.length} likes</span>}
         </div>
         <CommentsList post={post} />
       </footer>

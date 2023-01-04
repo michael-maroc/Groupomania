@@ -6,12 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useCreatePostMutation } from "../../slices/postApiSlice";
 import "./addPostForm.scss";
 import { useState } from "react";
-import axios from "axios";
 import { storage } from "../../../config/Firebase";
-import { getStorage, ref, deleteObject } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 } from "uuid"
 
 const AddPostForm = () => {
-  const [imageUrl, setImageUrl] = useState([]);
+  const [image, setImage] = useState(null);
 
   const schema = yup.object({
     description: yup.string().required(),
@@ -22,19 +22,17 @@ const AddPostForm = () => {
   const [createPost, { isLoading }] = useCreatePostMutation();
 
   const onSubmit = async (data) => {
-    /* TODO List */
-    // 1/ creation of an image that receives an url as a source from the firebase storage //
-
-    if (imageUrl[0]) {
-      const formData = new FormData();
-      formData.append("file", imageUrl[0]);
-      formData.append("upload_preset", `${import.meta.env.VITE_CLOUD_PRESETS}`);
-
-      const res = await axios.post(`https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/image/upload`, formData);
-      const filename = await res.data.public_id;
-      await createPost({ description: data.description, imageUrl: filename });
-      reset();
-      
+    if (image) {
+      const imageRef = ref(storage, `images/${image.name + v4()}`);
+  
+      /* uploadBytes is the method from Firebase to upload things to the bucket */
+      await uploadBytes(imageRef, image).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((url) => {
+          createPost({ description: data.description, imageName: snapshot.metadata.name, imageUrl: url })
+          setImage(null)
+          reset();
+        })
+      })
     } else {
       await createPost({ description: data.description });
       reset();
@@ -58,7 +56,7 @@ const AddPostForm = () => {
         <input
           id="post-form-image"
           type="file"
-          onChange={(e) => setImageUrl(e.target.files)}
+          onChange={(e) => setImage(e.target.files[0])}
         />
         <button type="submit" className="post-btn">
           Submit
