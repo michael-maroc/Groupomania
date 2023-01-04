@@ -11,9 +11,9 @@ exports.getAllLikes = asyncHandler(async (req, res) => {
 // Like A Post
 exports.addLike = asyncHandler(async (req, res) => {
   const { username, userId, PostId } = req.body;
-  const foundLike = await Likes.findOne({ where: { PostId, userId } });
+  const foundLike = await Likes.findOne({ where: { PostId, UserId: userId } });
 
-  if (foundLike?.UserId == userId) {
+  if (foundLike?.UserId === userId) {
     foundLike.destroy();
     res.status(200).json({ message: "Like deleted" });
   } else {
@@ -30,6 +30,5 @@ exports.addLike = asyncHandler(async (req, res) => {
 exports.getLikesFromPost = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const likes = await Likes.findAll({ where: { PostId: id } });
-
   res.status(200).json(likes);
 });
