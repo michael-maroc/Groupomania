@@ -8,8 +8,18 @@ import "./post.scss";
 import { useAddLikeMutation, useGetPostLikesQuery } from "../../slices/likesApiSlice";
 import { ref, deleteObject } from "firebase/storage";
 import { storage } from "../../../config/Firebase";
+import { useSelector } from "react-redux";
+import { getCurrentToken } from "../../slices/authSlice";
+import jwt_decode from "jwt-decode";
 
 const PostList = ({ post }) => {
+  // /* trying to decoded the role to grant access to delete and update buttons */
+  const token = useSelector(getCurrentToken);
+
+  const decode = jwt_decode(token);
+  // console.log("=====>decode");
+  // console.log(decode);
+
   // Editing states
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
@@ -52,6 +62,16 @@ const PostList = ({ post }) => {
     await addLike({ PostId: post.id }).then((res) => console.log(res.data))
   };
 
+  const buttons = (
+    <div>
+      <button onClick={() => setIsEdit((prev) => !prev)}>
+        <FontAwesomeIcon icon={faEraser} />
+      </button>
+      <button onClick={handleDelete}>
+        <FontAwesomeIcon icon={faTrash} />
+      </button>
+    </div>)
+
   return (
     <article className="post">
       <header className="post-header">
@@ -64,12 +84,16 @@ const PostList = ({ post }) => {
             </div>
           </div>
           <div className="post-edit-btn">
-            <button onClick={() => setIsEdit((prev) => !prev)}>
+            {decode?.id === post.UserId || decode?.admin 
+              ? buttons
+              : null
+            }
+            {/* <button onClick={() => setIsEdit((prev) => !prev)}>
               <FontAwesomeIcon icon={faEraser} />
             </button>
             <button onClick={handleDelete}>
               <FontAwesomeIcon icon={faTrash} />
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="post-description">
