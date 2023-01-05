@@ -3,7 +3,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useCreatePostMutation } from "../../slices/postApiSlice";
+import { useCreatePostMutation } from "../post/postApiSlice";
 import "./addPostForm.scss";
 import { useState } from "react";
 import { storage } from "../../../config/Firebase";

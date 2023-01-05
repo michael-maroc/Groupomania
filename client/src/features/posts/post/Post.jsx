@@ -1,51 +1,50 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEraser, faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import img1 from "/profile.png";
-import CommentsList from "../commentsList/CommentList";
-import { useDeletePostMutation, useUpdatePostMutation } from "../../slices/postApiSlice";
+import { useDeletePostMutation, useUpdatePostMutation } from "./postApiSlice";
 import { useState } from "react";
 import "./post.scss";
-import { useAddLikeMutation, useGetPostLikesQuery } from "../../slices/likesApiSlice";
+import { useAddLikeMutation, useGetPostLikesQuery } from "./postApiSlice";
 import { ref, deleteObject } from "firebase/storage";
 import { storage } from "../../../config/Firebase";
 import { useSelector } from "react-redux";
-import { getCurrentToken } from "../../slices/authSlice";
+import { getCurrentToken } from "../../auth/authSlice";
 import jwt_decode from "jwt-decode";
+import { useAddCommentMutation, useGetPostCommentsQuery } from "./postApiSlice";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 const PostList = ({ post }) => {
-  // /* trying to decoded the role to grant access to delete and update buttons */
   const token = useSelector(getCurrentToken);
-
-  const decode = jwt_decode(token);
-  // console.log("=====>decode");
-  // console.log(decode);
+  const decoded = jwt_decode(token);
 
   // Editing states
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
 
+  // Queries
+  const { data: likes } = useGetPostLikesQuery(post.id);
+  const { data: comments, isLoading, isSuccess, error } = useGetPostCommentsQuery(post.id);
+
+  // Mutations
+  const [updatePost] = useUpdatePostMutation();
+  const [deletePost] = useDeletePostMutation();
+  const [addLike] = useAddLikeMutation();
+  const [addComment] = useAddCommentMutation();
+
   // Image Reference for firebase
   const imageRef = ref(storage, `images/${post.imageName}`)
 
-  // Mutations
-  const [deletePost] = useDeletePostMutation();
-  const [updatePost] = useUpdatePostMutation();
-  const [addLike] = useAddLikeMutation();
-
-  // Query
-  const { data: likes, isLoading, isSuccess, isError, isFetching, error } = useGetPostLikesQuery(post.id);
-
   // handle functions 
   const handleUpdate = async (e) => {
-    e.preventDefault();
     setNewDescription(e.target.value);
     await updatePost({ ...post, description: newDescription })
-      setNewDescription("");
-      setIsEdit(false);
+    setNewDescription("");
+    setIsEdit(false);
   };
 
-  const handleDelete = async (e) => {
-    e.preventDefault();
+  const handleDelete = async () => {
     if (post.imageUrl && post.imageName) {
       await deletePost({ id: post.id }).then((res) => {
         console.log(res.data)
@@ -57,12 +56,12 @@ const PostList = ({ post }) => {
     }
   };
 
-  const handleLikes = async (e) => {
-    e.preventDefault();
+  const handleLikes = async () => {
     await addLike({ PostId: post.id }).then((res) => console.log(res.data))
   };
+  // End of functions
 
-  const buttons = (
+  const postHeaderButtons = (
     <div>
       <button onClick={() => setIsEdit((prev) => !prev)}>
         <FontAwesomeIcon icon={faEraser} />
@@ -70,7 +69,21 @@ const PostList = ({ post }) => {
       <button onClick={handleDelete}>
         <FontAwesomeIcon icon={faTrash} />
       </button>
-    </div>)
+    </div>
+  )
+
+  // Comments validation
+  const schema = yup.object({
+    comment: yup.string().required(),
+  });
+  const { register, handleSubmit, formState: { errors }, reset} = useForm({ resolver: yupResolver(schema) });
+
+  // Comment Submit Function
+  const onSubmit = async (data) => {
+    await addComment({ comment: data.comment, PostId: post.id }).then(() => {
+      reset();
+    });
+  };
 
   return (
     <article className="post">
@@ -84,16 +97,7 @@ const PostList = ({ post }) => {
             </div>
           </div>
           <div className="post-edit-btn">
-            {decode?.id === post.UserId || decode?.admin 
-              ? buttons
-              : null
-            }
-            {/* <button onClick={() => setIsEdit((prev) => !prev)}>
-              <FontAwesomeIcon icon={faEraser} />
-            </button>
-            <button onClick={handleDelete}>
-              <FontAwesomeIcon icon={faTrash} />
-            </button> */}
+            {decoded?.id === post.UserId || decoded?.isAdmin ? postHeaderButtons : null}
           </div>
         </div>
         <div className="post-description">
@@ -127,7 +131,32 @@ const PostList = ({ post }) => {
           {likes?.length === 1 && <span>{likes.length} like</span>}
           {likes?.length >= 2 && <span>{likes.length} likes</span>}
         </div>
-        <CommentsList post={post} />
+        <section>
+          {isLoading && <h1>Loading...</h1>}
+          {error && <h2>There was an error</h2>}
+          {isSuccess && (
+            <section className="comments">
+              <p>There is {comments?.length} comments</p>
+              {comments?.map((comment) => {
+                return (
+                  <div className="comments-container" key={comment.id}>
+                    <img src={img1} alt="profile-pic" />
+                    <div>
+                      <p className="author">{comment.author}</p>
+                      <p className="comment">{comment.comment}</p>
+                    </div>
+                  </div>
+                )
+              })}
+              <form className="add-comment-form" onSubmit={handleSubmit(onSubmit)}>
+                <img src={img1} alt="profile-pic" />
+                <input type="text" placeholder="Add your comment..." {...register("comment")} />
+                <button type="submit">Submit</button>
+                <p className="add-comment-error errMsg">{errors?.comment?.message}</p>
+              </form>
+            </section>
+          )}
+        </section>
       </footer>
     </article>
   );

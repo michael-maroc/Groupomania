@@ -1,3 +1,4 @@
+// Post part
 .post{
   background-color: #fff;
   height: auto;
@@ -113,3 +114,72 @@
   background-color: rgb(244, 139, 155);
   padding: 0.3rem;
 }
+// End of post Part
+
+// Comments part
+.comments{
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.comments-container{
+  display: flex;
+  background-color: #fff;
+
+  img{
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+  div{
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 20px;
+  }
+  .author{
+    color: black;
+    font-weight: bold;
+  }
+  .comment{
+    color: black;
+  }
+}
+
+.add-comment-form{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+    
+  img{
+    height: 35px;
+    width: 35px;
+    margin-right: 10px;
+  }
+  input{
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    width: 65%;
+    margin-right: 10px;
+  }
+  button{
+    width: 20%;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+.add-comment-error{
+  text-align: center;
+  margin: 10px auto 0 auto;
+}
+// End of comments part

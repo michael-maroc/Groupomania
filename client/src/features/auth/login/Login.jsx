@@ -1,9 +1,9 @@
-import { useLoginMutation } from "../../slices/authApiSlice";
+import { useLoginMutation } from "../authApiSlice";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../../slices/authSlice";
+import { setCredentials } from "../authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./login.scss";
