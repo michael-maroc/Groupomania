@@ -23,11 +23,11 @@ exports.createPost = asyncHandler(async (req, res) => {
 // Update A Post
 exports.updatePost = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const { userId, description, imageUrl, isAdmin } = req.body;
+  const { userId, description, imageName, imageUrl, isAdmin } = req.body;
   const foundPost = await Posts.findOne({ where: { id } });
 
   if (foundPost.UserId === userId || isAdmin) {
-    await Posts.update({ description, imageUrl }, { where: { id } });
+    await Posts.update({ description, imageName, imageUrl }, { where: { id } });
     res.status(200).json({ message: "Post successfuly updated" });
   } else {
     return res.json({ message: "You can update only your own posts" });

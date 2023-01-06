@@ -5,7 +5,7 @@ import { useDeletePostMutation, useUpdatePostMutation } from "./postApiSlice";
 import { useState } from "react";
 import "./post.scss";
 import { useAddLikeMutation, useGetPostLikesQuery } from "./postApiSlice";
-import { ref, deleteObject } from "firebase/storage";
+import { ref, deleteObject, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../../config/Firebase";
 import { useSelector } from "react-redux";
 import { getCurrentToken } from "../../auth/authSlice";
@@ -14,14 +14,13 @@ import { useAddCommentMutation, useGetPostCommentsQuery } from "./postApiSlice";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import { v4 } from "uuid";
 
 const PostList = ({ post }) => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
 
-  // Defining posts date variables for date and time creation
-  const date = new Date(post.createdAt).toLocaleDateString();
-  const time = new Date(post.createdAt).toLocaleTimeString();
+  const [image, setImage] = useState(null);
 
   // Editing states
   const [isEdit, setIsEdit] = useState(false);
@@ -31,21 +30,43 @@ const PostList = ({ post }) => {
   const { data: likes } = useGetPostLikesQuery(post.id);
   const { data: comments, isLoading, isSuccess, error } = useGetPostCommentsQuery(post.id);
 
+  // Defining posts date variables for date and time creation
+  const date = new Date(post.createdAt).toLocaleDateString();
+  const time = new Date(post.createdAt).toLocaleTimeString();
+
   // Mutations
   const [updatePost] = useUpdatePostMutation();
   const [deletePost] = useDeletePostMutation();
   const [addLike] = useAddLikeMutation();
   const [addComment] = useAddCommentMutation();
 
-  // Image Reference for firebase
+  // Image References for firebase
   const imageRef = ref(storage, `images/${post.imageName}`)
-
-  // handle functions 
+  
+  // Handle functions 
   const handleUpdate = async (e) => {
-    setNewDescription(e.target.value);
-    await updatePost({ ...post, description: newDescription })
-    setNewDescription("");
-    setIsEdit(false);
+    if (image) {
+      const newImageRef = ref(storage, `images/${image.name + v4()}`)
+      return (
+        await deleteObject(imageRef),
+          uploadBytes(newImageRef, image).then((snapshot) => {
+          getDownloadURL(snapshot.ref).then((url) => {
+            updatePost({ ...post, description: newDescription, imageName: snapshot.metadata.name, imageUrl: url }).then(() => {
+              setImage(null)
+              setNewDescription("")
+              setIsEdit(false)
+              reset();
+            })
+          })
+        })
+      )
+    } else {
+      return (
+        await updatePost({ ...post, description: newDescription }),
+        setNewDescription(""),
+        setIsEdit(false)
+      )
+    }
   };
 
   const handleDelete = async () => {
@@ -113,6 +134,10 @@ const PostList = ({ post }) => {
                 placeholder="New description..." 
                 cols="30" 
                 onChange={(e) => setNewDescription(e.target.value)} 
+              />
+              <input 
+                type="file" 
+                onChange={(e) => setImage(e.target.files[0])} 
               />
               <button onClick={handleUpdate}>Validate</button>
             </div>
