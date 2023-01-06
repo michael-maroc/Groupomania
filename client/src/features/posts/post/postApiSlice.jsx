@@ -5,7 +5,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllPosts: builder.query({
       query: () => "/posts",
-      transformResponse: (res) => res.sort((a, b) => b.id - a.id),
+      transformResponse: (res) => res.sort((a, b) => b.createdAt - a.createdAt),
       providesTags: ["Posts"],
     }),
     createPost: builder.mutation({
