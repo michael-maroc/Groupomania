@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 
 // Get All Posts
 exports.getAllPosts = asyncHandler(async (req, res) => {
-  const posts = await Posts.findAll();
+  const posts = await Posts.findAll({ order: [["createdAt", "desc"]] });
   res.json(posts);
 });
 

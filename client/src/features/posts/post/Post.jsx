@@ -19,6 +19,10 @@ const PostList = ({ post }) => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
 
+  // Defining posts date variables for date and time creation
+  const date = new Date(post.createdAt).toLocaleDateString();
+  const time = new Date(post.createdAt).toLocaleTimeString();
+
   // Editing states
   const [isEdit, setIsEdit] = useState(false);
   const [newDescription, setNewDescription] = useState("");
@@ -59,7 +63,7 @@ const PostList = ({ post }) => {
   const handleLikes = async () => {
     await addLike({ PostId: post.id }).then((res) => console.log(res.data))
   };
-  // End of functions
+  // End of handle functions
 
   const postHeaderButtons = (
     <div>
@@ -93,7 +97,7 @@ const PostList = ({ post }) => {
             <img src={img1} alt="profile" />
             <div>
               <h1 className="post-author">{post.author}</h1>
-              <span className="post-timestamp">Published the: {post.createdAt}</span>
+              <span className="post-timestamp">Published the: {date} at: {time}</span>
             </div>
           </div>
           <div className="post-edit-btn">

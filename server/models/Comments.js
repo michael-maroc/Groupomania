@@ -8,22 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    createdAt: {
-      type: DataTypes.DATEONLY,
-      get: function () {
-        return this.getDataValue("createdAt").toLocaleString("fr-FR", {
-          timeZone: "UTC",
-        });
-      },
-    },
-    updatedAt: {
-      type: DataTypes.DATEONLY,
-      get: function () {
-        return this.getDataValue("updatedAt").toLocaleString("fr-FR", {
-          timeZone: "UTC",
-        });
-      },
-    },
   });
 
   return Comments;

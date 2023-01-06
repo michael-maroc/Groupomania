@@ -16,12 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
-    createdAt: {
-      type: DataTypes.DATEONLY,
-    },
-    updatedAt: {
-      type: DataTypes.DATEONLY,
-    },
   });
 
   Posts.associate = (models) => {
