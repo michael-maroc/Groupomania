@@ -44,45 +44,48 @@ const PostList = ({ post }) => {
   const imageRef = ref(storage, `images/${post.imageName}`)
   
   // Handle functions 
-  const handleUpdate = async (e) => {
-    if (image) {
-      const newImageRef = ref(storage, `images/${image.name + v4()}`)
-      return (
-        await deleteObject(imageRef),
-          uploadBytes(newImageRef, image).then((snapshot) => {
-          getDownloadURL(snapshot.ref).then((url) => {
-            updatePost({ ...post, description: newDescription, imageName: snapshot.metadata.name, imageUrl: url }).then(() => {
-              setImage(null)
-              setNewDescription("")
-              setIsEdit(false)
-              reset();
-            })
-          })
-        })
-      )
-    } else {
-      return (
-        await updatePost({ ...post, description: newDescription }),
-        setNewDescription(""),
+  const handleUpdate = async () => {
+    try {
+      if (image) {
+        await deleteObject(imageRef)
+        const newImageRef = ref(storage, `images/${image.name + v4()}`)
+        const snapshot = await uploadBytes(newImageRef, image)
+        const url = await getDownloadURL(snapshot.ref)
+        await updatePost({ ...post, description: newDescription, imageName: snapshot.metadata.name, imageUrl: url })
+        setImage(null)
+        setNewDescription("")
         setIsEdit(false)
-      )
+      } else {
+        return (
+          await updatePost({ ...post, description: newDescription }),
+          setNewDescription(""),
+          setIsEdit(false)
+        )
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const handleDelete = async () => {
-    if (post.imageUrl && post.imageName) {
-      await deletePost({ id: post.id }).then((res) => {
-        console.log(res.data)
-        deleteObject(imageRef)
-        console.log("Image successfuly deleted from firebase")
-      })
-    } else {
-      await deletePost({ id: post.id }).then((res) => console.log(res.data))
+    try {
+      if (post.imageUrl && post.imageName) {
+        const result = await deletePost({ id: post.id })
+          console.log(result.data)
+          deleteObject(imageRef)
+          console.log("Image successfuly deleted from firebase")
+      } else {
+        const result = await deletePost({ id: post.id })
+        console.log(result.data)
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
   const handleLikes = async () => {
-    await addLike({ PostId: post.id }).then((res) => console.log(res.data))
+    const result = await addLike({ PostId: post.id })
+    console.log(result.data)
   };
   // End of handle functions
 
@@ -99,15 +102,14 @@ const PostList = ({ post }) => {
 
   // Comments validation
   const schema = yup.object({
-    comment: yup.string().required(),
+    comment: yup.string().required().min(2),
   });
   const { register, handleSubmit, formState: { errors }, reset} = useForm({ resolver: yupResolver(schema) });
 
   // Comment Submit Function
   const onSubmit = async (data) => {
-    await addComment({ comment: data.comment, PostId: post.id }).then(() => {
-      reset();
-    });
+    await addComment({ comment: data.comment, PostId: post.id })
+    reset();
   };
 
   return (

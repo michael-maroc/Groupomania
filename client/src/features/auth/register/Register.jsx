@@ -29,13 +29,10 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      await signUp(data)
-        .unwrap()
-        .then((res) => {
-          console.log(res);
-          navigate("/");
-          reset();
-        });
+      const result = await signUp(data).unwrap()
+        console.log(result);
+        navigate("/");
+        reset();
     } catch (err) {
       if (!err?.originalStatus) setErrMsg("No Server Response");
       else if (err.originalStatus === 400) return setErrMsg("Bad credentials");

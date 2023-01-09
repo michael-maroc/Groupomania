@@ -34,13 +34,10 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     try {
-      await login(data)
-        .unwrap()
-        .then((res) => {
-          dispatch(setCredentials({ token: res.accessToken }));
-          navigate("/home");
-          reset();
-        });
+      const result = await login(data).unwrap()
+        dispatch(setCredentials({ token: result.accessToken }));
+        navigate("/home");
+        reset();
     } catch (err) {
       if (!err?.originalStatus) setErrMsg("No Server Response");
       else if (err.originalStatus === 400) return setErrMsg("Bad credentials");
