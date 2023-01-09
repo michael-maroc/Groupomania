@@ -4,8 +4,8 @@
   height: auto;
   border: solid rgb(196, 196, 196) 1px;
   border-radius: 10px;
-  margin: 2rem 0;
-  width: 650px;
+  margin: 1rem 0 2rem 0;
+  width: 65%;
   max-width: 650px;
 }
 .post-header{
@@ -123,7 +123,6 @@
   flex-direction: column;
   gap: 1rem;
 }
-
 .comments-container{
   display: flex;
   background-color: #fff;
@@ -146,12 +145,10 @@
     color: black;
   }
 }
-
 .add-comment-form{
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
     
   img{
     height: 35px;
@@ -183,3 +180,9 @@
   margin: 10px auto 0 auto;
 }
 // End of comments part
+
+@media screen and (max-width: 992px){
+  .post{
+    width: 90%;
+  }
+}

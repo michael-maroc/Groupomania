@@ -8,19 +8,17 @@ const PostsList = () => {
 
   return (
     <section className="post-list">
-      <div className="post-list-container">
-        {isLoading && <h1>Loading...</h1>}
-        {error && <h2>There was an error</h2>}
-        {isSuccess && (
-          <section>
-            <AddPostForm />
-            {posts.length 
-              ? posts.map((post) => <Post post={post} key={post.id} />) 
-              : <h1>No posts to display !</h1>
-            }
-          </section>
-        )}
-      </div>
+      {isLoading && <h1>Loading...</h1>}
+      {error && <h2>There was an error</h2>}
+      {isSuccess && (
+        <>
+          <AddPostForm />
+          {posts.length 
+            ? posts.map((post) => <Post post={post} key={post.id} />) 
+            : <h1>No posts to display !</h1>
+          }
+        </>
+      )}
     </section>
   );
 };

@@ -183,8 +183,8 @@ const PostList = ({ post }) => {
                 <img src={img1} alt="profile-pic" />
                 <input type="text" placeholder="Add your comment..." {...register("comment")} />
                 <button type="submit">Submit</button>
-                <p className="add-comment-error errMsg">{errors?.comment?.message}</p>
               </form>
+                <p className="add-comment-error errMsg">{errors?.comment?.message}</p>
             </section>
           )}
         </section>

@@ -43,27 +43,28 @@ const AddPostForm = () => {
   return (
     <section className="add-post">
       <form className="add-post-form" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="post-form-description">Description:</label>
-        <textarea
-          id="post-form-description"
-          className="post-form-description"
-          cols="30"
-          placeholder="Express yourself..."
-          {...register("description")}
-        ></textarea>
-        <label htmlFor="post-form-image">
-          Add an image <FontAwesomeIcon icon={faImage} />
-        </label>
-        <input
-          id="post-form-image"
-          type="file"
-          onChange={(e) => setImage(e.target.files[0])}
-        />
-        <button type="submit" className="post-btn">
-          Submit
-        </button>
-        <p className="add-post-error errMsg">{errors?.description?.message}</p>
-        {isLoading}
+        <div>
+          <label htmlFor="post-form-description">Description:</label>
+          <textarea
+            id="post-form-description"
+            className="post-form-description"
+            placeholder="Express yourself..."
+            {...register("description")}
+          ></textarea>
+          <label htmlFor="post-form-image">
+            Add an image <FontAwesomeIcon icon={faImage} />
+          </label>
+          <input
+            id="post-form-image"
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+          <button type="submit" className="post-btn">
+            Submit
+          </button>
+          <p className="add-post-error errMsg">{errors?.description?.message}</p>
+          {isLoading}
+        </div>
       </form>
     </section>
   );

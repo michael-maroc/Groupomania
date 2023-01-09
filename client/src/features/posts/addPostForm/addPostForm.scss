@@ -1,15 +1,19 @@
 .add-post{
-  width: 650px;
+  width: 65%;
+  max-width: 650px;
 }
 .add-post-form{
-  display: flex;
-  flex-direction: column;
   background-color: #fff;
   height: auto;
-  margin: 2rem 0;
+  margin: 2rem 0 1rem 0;
   border: solid rgb(196, 196, 196) 1px;
   border-radius: 10px;
-  padding: 0 15px;
+
+  div{
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+  }
 
   label{
     margin: 1rem 0 0.5rem 0;
@@ -51,4 +55,10 @@
 .add-post-error{
   text-align: center;
   margin: 0 auto 1rem auto;
+}
+
+@media screen and (max-width: 992px){
+  .add-post{
+    width: 90%;
+  }
 }
