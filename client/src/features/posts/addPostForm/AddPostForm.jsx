@@ -14,7 +14,7 @@ const AddPostForm = () => {
   const [image, setImage] = useState(null);
 
   const schema = yup.object({
-    description: yup.string().required(),
+    description: yup.string().required().min(1).max(500),
   });
 
   const { register, handleSubmit, reset, formState: { errors }} = useForm({ resolver: yupResolver(schema) });

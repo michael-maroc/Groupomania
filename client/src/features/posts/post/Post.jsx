@@ -102,7 +102,7 @@ const PostList = ({ post }) => {
 
   // Comments validation
   const schema = yup.object({
-    comment: yup.string().required().min(2),
+    comment: yup.string().required().min(2).max(500),
   });
   const { register, handleSubmit, formState: { errors }, reset} = useForm({ resolver: yupResolver(schema) });
 
