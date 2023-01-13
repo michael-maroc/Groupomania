@@ -15,7 +15,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { v4 } from "uuid";
-
+import { formatDistanceToNow} from 'date-fns';
+import { utcToZonedTime } from 'date-fns-tz';
+ 
 const PostList = ({ post }) => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
@@ -30,9 +32,11 @@ const PostList = ({ post }) => {
   const { data: likes } = useGetPostLikesQuery(post.id);
   const { data: comments, isLoading, isSuccess, error } = useGetPostCommentsQuery(post.id);
 
-  // Defining posts date variables for date and time creation
-  const date = new Date(post.createdAt).toLocaleDateString();
-  const time = new Date(post.createdAt).toLocaleTimeString();
+  // // Defining posts date variables for date and time creation
+  const date = new Date(post.createdAt).toISOString();
+  const timeZone = 'Europe/Paris';
+  const formatedDate = utcToZonedTime(date, timeZone);
+  const timePeriod = formatDistanceToNow(formatedDate);
 
   // Mutations
   const [updatePost] = useUpdatePostMutation();
@@ -120,7 +124,7 @@ const PostList = ({ post }) => {
             <img src={img1} alt="profile" />
             <div>
               <h1 className="post-author">{post.author}</h1>
-              <span className="post-timestamp">Published the: {date} at: {time}</span>
+              <span className="post-timestamp">Published {timePeriod} ago</span>
             </div>
           </div>
           <div className="post-edit-btn">

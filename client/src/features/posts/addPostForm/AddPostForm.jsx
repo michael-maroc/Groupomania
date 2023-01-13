@@ -26,9 +26,9 @@ const AddPostForm = () => {
       if (image) {
         const imageRef = ref(storage, `images/${image.name + v4()}`);
         /* uploadBytes is the method from Firebase to upload things to the bucket */
-        const snapshot = await uploadBytes(imageRef, image)
-        const url = getDownloadURL(snapshot.ref)
-        await createPost({ description: data.description, imageName: snapshot.metadata.name, imageUrl: url })
+        const snapshot = await uploadBytes(imageRef, image);
+        const url = await getDownloadURL(snapshot.ref);
+        await createPost({ description: data.description, imageName: snapshot.metadata.name, imageUrl: url });
         setImage(null)
         reset();
       } else {
