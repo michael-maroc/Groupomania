@@ -3,18 +3,19 @@ const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
 const { tryCatch } = require("../utils/tryCatch");
 
+// Token generation functions
 function generateAccessToken(id, username, isAdmin) {
   return jwt.sign({ id, username, isAdmin }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
   });
 }
-
 function generateRefreshToken(id, username, isAdmin) {
   return jwt.sign({ id, username, isAdmin }, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
   });
 }
 
+// Register controller
 exports.register = tryCatch(async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) return res.sendStatus(400);
@@ -32,8 +33,19 @@ exports.register = tryCatch(async (req, res) => {
   }
 });
 
+// Login controller
 exports.login = tryCatch(async (req, res) => {
   const { email, password } = req.body;
+  const cookies = req.cookies;
+  if (cookies?.jwt)
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      sameSite: true,
+      maxAge: 1,
+    }),
+      console.log("Old Refresh Token Cleared", cookies);
+  else console.log("No cookies found");
+
   if (!email || !password) return res.sendStatus(400);
 
   const foundUser = await Users.findOne({ where: { email } });

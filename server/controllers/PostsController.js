@@ -26,7 +26,7 @@ exports.updatePost = tryCatch(async (req, res) => {
   const { userId, description, imageName, imageUrl, isAdmin } = req.body;
   const foundPost = await Posts.findOne({ where: { id } });
 
-  if (foundPost.UserId === userId || isAdmin) {
+  if (foundPost?.UserId === userId || isAdmin) {
     await Posts.update({ description, imageName, imageUrl }, { where: { id } });
     res.status(200).json({ message: "Post successfuly updated" });
   } else {
@@ -40,7 +40,7 @@ exports.deletePost = tryCatch(async (req, res) => {
   const { userId, isAdmin } = req.body;
   const foundPost = await Posts.findOne({ where: { id } });
 
-  if (foundPost.UserId === userId || isAdmin) {
+  if (foundPost?.UserId === userId || isAdmin) {
     return (
       await Posts.destroy({ where: { id } }),
       res.status(200).json({ message: "Post successfuly deleted" })
