@@ -1,14 +1,14 @@
 const { Posts } = require("../models");
-const asyncHandler = require("express-async-handler");
+const { tryCatch } = require("../utils/tryCatch");
 
 // Get All Posts
-exports.getAllPosts = asyncHandler(async (req, res) => {
+exports.getAllPosts = tryCatch(async (req, res) => {
   const posts = await Posts.findAll({ order: [["createdAt", "desc"]] });
-  res.json(posts);
+  posts.length ? res.json(posts) : res.sendStatus(204);
 });
 
 // Create A Post
-exports.createPost = asyncHandler(async (req, res) => {
+exports.createPost = tryCatch(async (req, res) => {
   const { username, description, imageName, imageUrl, userId } = req.body;
   const post = await Posts.create({
     author: username,
@@ -21,7 +21,7 @@ exports.createPost = asyncHandler(async (req, res) => {
 });
 
 // Update A Post
-exports.updatePost = asyncHandler(async (req, res) => {
+exports.updatePost = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, description, imageName, imageUrl, isAdmin } = req.body;
   const foundPost = await Posts.findOne({ where: { id } });
@@ -35,7 +35,7 @@ exports.updatePost = asyncHandler(async (req, res) => {
 });
 
 // Delete A Post
-exports.deletePost = asyncHandler(async (req, res) => {
+exports.deletePost = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, isAdmin } = req.body;
   const foundPost = await Posts.findOne({ where: { id } });
@@ -46,6 +46,8 @@ exports.deletePost = asyncHandler(async (req, res) => {
       res.status(200).json({ message: "Post successfuly deleted" })
     );
   } else {
-    return res.json({ message: "You can delete only your own posts" });
+    return res
+      .status(401)
+      .json({ message: "You can delete only your own posts" });
   }
 });

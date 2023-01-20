@@ -1,15 +1,14 @@
 const { Likes } = require("../models");
-const asyncHandler = require("express-async-handler");
+const { tryCatch } = require("../utils/tryCatch");
 
 // Get All Likes
-exports.getAllLikes = asyncHandler(async (req, res) => {
+exports.getAllLikes = tryCatch(async (req, res) => {
   const likes = await Likes.findAll();
-  if (!likes.length) return res.json("No Likes found");
-  res.status(200).json(likes);
+  likes.length ? res.status(200).json(likes) : res.sendStatus(204);
 });
 
 // Like A Post
-exports.addLike = asyncHandler(async (req, res) => {
+exports.addLike = tryCatch(async (req, res) => {
   const { username, userId, PostId } = req.body;
   const foundLike = await Likes.findOne({ where: { PostId, UserId: userId } });
 
@@ -27,8 +26,8 @@ exports.addLike = asyncHandler(async (req, res) => {
 });
 
 // Get All Likes From A Single Post
-exports.getLikesFromPost = asyncHandler(async (req, res) => {
+exports.getLikesFromPost = tryCatch(async (req, res) => {
   const { id } = req.params;
   const likes = await Likes.findAll({ where: { PostId: id } });
-  res.status(200).json(likes);
+  likes.length ? res.status(200).json(likes) : res.sendStatus(204);
 });

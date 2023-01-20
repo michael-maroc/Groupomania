@@ -1,5 +1,6 @@
 const { Users } = require("../models");
 const jwt = require("jsonwebtoken");
+const { tryCatch } = require("../utils/tryCatch");
 
 function generateAccessToken(id, username, admin) {
   return jwt.sign({ id, username, admin }, process.env.ACCESS_TOKEN_SECRET, {
@@ -7,7 +8,7 @@ function generateAccessToken(id, username, admin) {
   });
 }
 
-exports.refreshToken = async (req, res) => {
+exports.refreshToken = tryCatch(async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(204);
   const refreshToken = cookies.jwt;
@@ -30,4 +31,4 @@ exports.refreshToken = async (req, res) => {
       res.json({ accessToken });
     }
   );
-};
+});

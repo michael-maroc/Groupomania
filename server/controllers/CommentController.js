@@ -1,21 +1,21 @@
 const { Comments } = require("../models");
-const asyncHandler = require("express-async-handler");
+const { tryCatch } = require("../utils/tryCatch");
 
 // Get All Comments
-exports.getAllComment = asyncHandler(async (req, res) => {
+exports.getAllComment = tryCatch(async (req, res) => {
   const commentsList = await Comments.findAll();
   res.status(200).json(commentsList);
 });
 
 // Get Comments From A Post
-exports.getPostComments = asyncHandler(async (req, res) => {
+exports.getPostComments = tryCatch(async (req, res) => {
   const { id } = req.params;
   const commentsList = await Comments.findAll({ where: { PostId: id } });
   res.status(200).json(commentsList);
 });
 
 // Create A Comment
-exports.addComment = asyncHandler(async (req, res) => {
+exports.addComment = tryCatch(async (req, res) => {
   const { username, comment, userId, PostId } = req.body;
   const newComment = await Comments.create({
     author: username,
@@ -27,7 +27,7 @@ exports.addComment = asyncHandler(async (req, res) => {
 });
 
 // Update A Comment
-exports.updateComment = asyncHandler(async (req, res) => {
+exports.updateComment = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, isAdmin, comment } = req.body;
   const foundComment = await Comments.findOne({ where: { id } });
@@ -43,7 +43,7 @@ exports.updateComment = asyncHandler(async (req, res) => {
 });
 
 // Delete A Comment
-exports.deleteComment = asyncHandler(async (req, res) => {
+exports.deleteComment = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, isAdmin } = req.body;
   const foundComment = await Comments.findOne({ where: { id } });
