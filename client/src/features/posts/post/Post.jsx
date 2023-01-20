@@ -45,20 +45,20 @@ const PostList = ({ post }) => {
   const [addComment] = useAddCommentMutation();
 
   // Image References for firebase
-  const imageRef = ref(storage, `images/${post.imageName}`)
+  const imageRef = ref(storage, `images/${post.imageName}`);
   
   // Handle functions 
   const handleUpdate = async () => {
     try {
       if (image) {
-        await deleteObject(imageRef)
-        const newImageRef = ref(storage, `images/${image.name + v4()}`)
-        const snapshot = await uploadBytes(newImageRef, image)
-        const url = await getDownloadURL(snapshot.ref)
-        await updatePost({ ...post, description: newDescription, imageName: snapshot.metadata.name, imageUrl: url })
-        setImage(null)
-        setNewDescription("")
-        setIsEdit(false)
+        await deleteObject(imageRef);
+        const newImageRef = ref(storage, `images/${image.name + v4()}`);
+        const snapshot = await uploadBytes(newImageRef, image);
+        const url = await getDownloadURL(snapshot.ref);
+        await updatePost({ ...post, description: newDescription, imageName: snapshot.metadata.name, imageUrl: url });
+        setImage(null);
+        setNewDescription("");
+        setIsEdit(false);
       } else {
         return (
           await updatePost({ ...post, description: newDescription }),
@@ -74,13 +74,13 @@ const PostList = ({ post }) => {
   const handleDelete = async () => {
     try {
       if (post.imageUrl && post.imageName) {
-        const result = await deletePost({ id: post.id })
-          console.log(result.data)
-          deleteObject(imageRef)
-          console.log("Image successfuly deleted from firebase")
+        const result = await deletePost({ id: post.id });
+          console.log(result.data.message);
+          deleteObject(imageRef);
+          console.log("Image successfuly deleted from firebase");
       } else {
-        const result = await deletePost({ id: post.id })
-        console.log(result.data)
+        const result = await deletePost({ id: post.id });
+        console.log(result.data.message);
       }
     } catch (error) {
       console.log(error);
@@ -88,8 +88,8 @@ const PostList = ({ post }) => {
   };
 
   const handleLikes = async () => {
-    const result = await addLike({ PostId: post.id })
-    console.log(result.data)
+    const result = await addLike({ PostId: post.id });
+    console.log(result.data.message);
   };
   // End of handle functions
 

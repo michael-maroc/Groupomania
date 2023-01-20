@@ -9,11 +9,11 @@ const PostsList = () => {
   return (
     <section className="post-list">
       {isLoading && <h1>Loading...</h1>}
-      {error && <h2>There was an error</h2>}
+      {error && <h1>There was an error</h1>}
       {isSuccess && (
         <>
           <AddPostForm />
-          {posts.length 
+          {posts?.length 
             ? posts.map((post) => <Post post={post} key={post.id} />) 
             : <h1>No posts to display !</h1>
           }

@@ -10,8 +10,10 @@ exports.getAllComment = tryCatch(async (req, res) => {
 // Get Comments From A Post
 exports.getPostComments = tryCatch(async (req, res) => {
   const { id } = req.params;
-  const commentsList = await Comments.findAll({ where: { PostId: id } });
-  res.status(200).json(commentsList);
+  const postCommentsList = await Comments.findAll({ where: { PostId: id } });
+  postCommentsList.length
+    ? res.status(200).json(postCommentsList)
+    : res.sendStatus(204);
 });
 
 // Create A Comment
@@ -35,10 +37,12 @@ exports.updateComment = tryCatch(async (req, res) => {
   if (foundComment.UserId === userId || isAdmin) {
     return (
       await foundComment.update({ comment }, { where: { id } }),
-      res.json({ message: "Comment successfuly updated" })
+      res.status(200).json({ message: "Comment successfuly updated" })
     );
   } else {
-    return res.json({ message: "You can update only your comments" });
+    return res
+      .status(401)
+      .json({ message: "You can update only your comments" });
   }
 });
 
@@ -54,6 +58,8 @@ exports.deleteComment = tryCatch(async (req, res) => {
       res.status(204).json({ message: "Post successfuly deletd" })
     );
   } else {
-    return res.json({ message: "You can delete only your comments" });
+    return res
+      .status(401)
+      .json({ message: "You can delete only your comments" });
   }
 });
