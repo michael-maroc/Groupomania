@@ -37,21 +37,20 @@ exports.register = tryCatch(async (req, res) => {
 exports.login = tryCatch(async (req, res) => {
   const { email, password } = req.body;
   const cookies = req.cookies;
-  if (cookies?.jwt)
+  if (cookies?.jwt) {
     res.clearCookie("jwt", {
       httpOnly: true,
       sameSite: true,
       maxAge: 1,
-    }),
-      console.log("Old Refresh Token Cleared", cookies);
-  else console.log("No cookies found");
-
+    });
+    console.log("=====> Old Refresh Token Cleared", cookies);
+  }
   if (!email || !password) return res.sendStatus(400);
-
   const foundUser = await Users.findOne({ where: { email } });
   // console.log(foundUser.role);
-  if (!foundUser || !(await bcrypt.compare(password, foundUser.password)))
+  if (!foundUser || !(await bcrypt.compare(password, foundUser.password))) {
     return res.sendStatus(401);
+  }
 
   const accessToken = generateAccessToken(
     foundUser.id,
@@ -67,10 +66,10 @@ exports.login = tryCatch(async (req, res) => {
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    // secure: true,
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
-  res.json({ accessToken });
+  res.json({ accessToken, loggedIn: true });
 });
 
 exports.logout = tryCatch(async (req, res) => {
@@ -79,7 +78,8 @@ exports.logout = tryCatch(async (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None",
-    secure: true,
+    // secure: true,
+    maxAge: 1,
   });
   res.json({ message: "Cookies cleared" });
 });

@@ -18,7 +18,9 @@ import { v4 } from "uuid";
 import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
  
-const PostList = ({ post }) => {
+const comment_REGEX = new RegExp('^[A-zÀ-ÿ-_.()!$%@?&=+\' ]{1,}$');
+
+const Post = ({ post }) => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
 
@@ -106,7 +108,7 @@ const PostList = ({ post }) => {
 
   // Comments validation
   const schema = yup.object({
-    comment: yup.string().required().min(2).max(500),
+    comment: yup.string().required().min(1).matches(comment_REGEX),
   });
   const { register, handleSubmit, formState: { errors }, reset} = useForm({ resolver: yupResolver(schema) });
 
@@ -121,7 +123,7 @@ const PostList = ({ post }) => {
       <header className="post-header">
         <div className="post-heading">
           <div>
-            <img src={img1} alt="profile" />
+            <img src={post.imageProfile ? console.log("no image") : img1} alt="profile" />
             <div>
               <h1 className="post-author">{post.author}</h1>
               <span className="post-timestamp">Published {timePeriod} ago</span>
@@ -197,4 +199,4 @@ const PostList = ({ post }) => {
   );
 };
 
-export default PostList;
+export default Post;

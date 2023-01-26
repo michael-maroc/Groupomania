@@ -1,10 +1,9 @@
 import { useSignUpMutation } from "../authApiSlice";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./register.scss";
+import { usernameCheck, emailCheck, passwordCheck } from "../../../common/utils/Regex"; 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -12,31 +11,18 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const resetErrMsg = () => setErrMsg("");
 
-  const schema = yup.object({
-    username: yup.string().required(),
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const [signUp, { isLoading }] = useSignUpMutation();
+  const { register, handleSubmit, reset,formState: { errors }} = useForm();
+  const [signUp] = useSignUpMutation();
 
   const onSubmit = async (data) => {
     try {
-      const result = await signUp(data).unwrap()
-        console.log(result);
-        navigate("/");
-        reset();
+      await signUp(data).unwrap();
+      reset();
+      navigate("/");
     } catch (err) {
       if (!err?.originalStatus) setErrMsg("No Server Response");
-      else if (err.originalStatus === 400) return setErrMsg("Bad credentials");
-      else if (err.originalStatus === 401) return setErrMsg("Unauthorized");
+      else if (err.originalStatus === 400) setErrMsg("All fields are required");
+      else if (err.originalStatus === 409) setErrMsg("You can't use this email");
       else setErrMsg("Login Failed");
     }
   };
@@ -47,23 +33,50 @@ const Register = () => {
         {errMsg && <p className="errMsg form-error">{errMsg}</p>}
         <h1>Register</h1>
 
-        <label htmlFor="username">Username: </label>
-        <input type="username" {...register("username")} onChange={resetErrMsg} />
-        <p className="errMsg" aria-label="assertive">
-          {errors.username?.message}
-        </p>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input 
+            type="username" { ...register("username", { 
+              required: 'username is required', 
+              pattern: { value: usernameCheck, message: "please enter a valid username" }
+            })}
+            onChange={resetErrMsg}
+            autoComplete="off"
+          />
+          {errors.username?.message && 
+            <p className="errMsg" aria-label="assertive">{errors.username?.message}</p>
+          }
+        </div>
 
-        <label htmlFor="email">Email: </label>
-        <input type="email" {...register("email")} onChange={resetErrMsg} />
-        <p className="errMsg" aria-label="assertive">
-          {errors.email?.message}
-        </p>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input 
+            type="email" { ...register("email", { 
+              required: 'email is required', 
+              pattern: { value: emailCheck, message: "please enter a valid email" }
+            })}
+            onChange={resetErrMsg}
+            autoComplete="off"
+          />
+          {errors.email?.message && 
+            <p className="errMsg" aria-label="assertive">{errors.email?.message}</p>
+          }
+        </div>
 
-        <label htmlFor="password">Password: </label>
-        <input type="password" {...register("password")} onChange={resetErrMsg} />
-        <p className="errMsg" aria-label="assertive">
-          {errors.password?.message}
-        </p>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" { ...register("password", { 
+              required: 'password is required', 
+              pattern: { value: passwordCheck, message: "please enter a valid password" } 
+            })}
+            onChange={resetErrMsg}
+            autoComplete="off"
+          />
+          {errors.password?.message && 
+            <p className="errMsg" aria-label="assertive">{errors.password?.message}</p>
+          }
+        </div>
 
         <button type="submit">Submit</button>
         <span>

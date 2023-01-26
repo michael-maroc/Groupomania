@@ -1,15 +1,12 @@
+
 import { useLoginMutation } from "../authApiSlice";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "./login.scss";
-
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+import { emailCheck, passwordCheck } from "../../../common/utils/Regex"; 
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -18,29 +15,18 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const resetErrMsg = () => setErrMsg("");
 
-  const schema = yup.object({
-    email: yup.string().email().required(),
-    password: yup.string().required(),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const [login, { isLoading }] = useLoginMutation();
+  const { register, handleSubmit, reset, formState: { errors }} = useForm();
+  const [login] = useLoginMutation();
 
   const onSubmit = async (data) => {
     try {
-      const result = await login(data).unwrap()
+      const result = await login(data).unwrap();
         dispatch(setCredentials({ token: result.accessToken }));
-        navigate("/home");
         reset();
+        navigate("/home");
     } catch (err) {
       if (!err?.originalStatus) setErrMsg("No Server Response");
-      else if (err.originalStatus === 400) return setErrMsg("Bad credentials");
+      else if (err.originalStatus === 400) return setErrMsg("All fields are required");
       else if (err.originalStatus === 401) return setErrMsg("Unauthorized");
       else setErrMsg("Login Failed");
     }
@@ -52,22 +38,38 @@ const Login = () => {
         {errMsg && <p className="errMsg form-error">{errMsg}</p>}
         <h1>Login</h1>
 
-        <label htmlFor="email">Email: </label>
-        <input type="email" {...register("email")} onChange={resetErrMsg} />
-        <p className="errMsg" aria-label="assertive">
-          {errors.email?.message}
-        </p>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input 
+            type="email" { ...register("email", { 
+              required: 'email is required', 
+              pattern: { value: emailCheck, message: "please enter a valid email" }
+            })}
+            onChange={resetErrMsg}
+            autoComplete="off"
+          />
+          {errors.email?.message && 
+            <p className="errMsg" aria-label="assertive">{errors.email?.message}</p>
+          }
+        </div>
 
-        <label htmlFor="password">Password: </label>
-        <input type="password" {...register("password")} onChange={resetErrMsg} />
-        <p className="errMsg" aria-label="assertive">
-          {errors.password?.message}
-        </p>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input 
+            type="password" { ...register("password", { 
+              required: 'password is required', 
+              pattern: { value: passwordCheck, message: "please enter a valid password" }
+            })}
+            onChange={resetErrMsg}
+            autoComplete="off"
+          />
+          {errors.password?.message &&
+            <p className="errMsg" aria-label="assertive">{errors.password?.message}</p>
+          }
+        </div>
 
         <button type="submit">Submit</button>
-        <span>
-          Need an account ? <Link to="/register">Sign Up</Link>
-        </span>
+        <span>Need an account ? <Link to="/register">Sign Up</Link></span>
       </form>
     </section>
   );
