@@ -1,0 +1,64 @@
+.post-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: gray;
+}
+
+// Comments part
+.comments{
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.comments-container{
+  display: flex;
+  background-color: #fff;
+
+  img{
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+  }
+  div{
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 20px;
+  }
+  .author{
+    color: black;
+    font-weight: bold;
+  }
+  .comment{
+    color: black;
+  }
+}
+.comment-form{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+    
+  img{
+    height: 35px;
+    width: 35px;
+  }
+  input{
+    padding: 10px;
+    background-color: #eaeaea;
+    border-radius: 20px;
+    border: none;
+    font-size: 1rem;
+    width: 68%;
+  }
+  button{
+    width: 20%;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}

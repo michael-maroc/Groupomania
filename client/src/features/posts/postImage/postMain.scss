@@ -1,0 +1,14 @@
+.actions{
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid gray;
+}
+.thumbs-up{
+  font-size: 0.7rem;
+  margin: 0 10px 0 15px;
+  color: white;
+  border-radius: 30px;
+  background-color: rgb(99, 183, 235);
+  padding: 0.3rem;
+  cursor: pointer;
+}

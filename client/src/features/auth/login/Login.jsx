@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "../authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.scss";
-import { emailCheck, passwordCheck } from "../../../common/utils/Regex"; 
+import { EMAIL_REGEX, PASSWORD_REGEX } from "../../../common/utils/Regex"; 
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -34,12 +34,14 @@ const Login = () => {
           <input 
             type="email" { ...register("email", { 
               required: 'email is required', 
-              pattern: { value: emailCheck, message: "please enter a valid email" }
+              pattern: { 
+                value: EMAIL_REGEX, 
+                message: "please enter a valid email" }
             })}
             autoComplete="off"
           />
           {errors.email?.message && 
-            <p className="errMsg" aria-label="assertive">{errors.email?.message}</p>
+            <p className="danger" aria-label="assertive">{errors.email?.message}</p>
           }
         </div>
 
@@ -48,12 +50,14 @@ const Login = () => {
           <input 
             type="password" { ...register("password", { 
               required: 'password is required', 
-              pattern: { value: passwordCheck, message: "please enter a valid password" }
+              pattern: { 
+                value: PASSWORD_REGEX, 
+                message: "please enter a valid password" }
             })}
             autoComplete="off"
           />
           {errors.password?.message && 
-            <p className="errMsg" aria-label="assertive">{errors.password?.message}</p>
+            <p className="danger" aria-label="assertive">{errors.password?.message}</p>
           }
         </div>
 

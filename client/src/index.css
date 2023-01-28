@@ -9,8 +9,10 @@ html, body, #root, .App {
   width: 100vw;
 }
 
-.errMsg{
+.danger{
   color: red;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
 .none{

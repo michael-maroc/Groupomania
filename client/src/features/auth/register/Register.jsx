@@ -2,7 +2,7 @@ import { useSignUpMutation } from "../authApiSlice";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
-import { usernameCheck, emailCheck, passwordCheck } from "../../../common/utils/Regex"; 
+import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from "../../../common/utils/Regex"; 
 
 const Register = () => {
   const navigate = useNavigate();
@@ -29,12 +29,15 @@ const Register = () => {
           <input 
             type="username" { ...register("username", { 
               required: 'username is required', 
-              pattern: { value: usernameCheck, message: "please enter a valid username" }
+              pattern: { 
+                value: USERNAME_REGEX, 
+                message: "please enter a valid username" 
+              }
             })}
             autoComplete="off"
           />
           {errors.username?.message && 
-            <p className="errMsg" aria-label="assertive">{errors.username?.message}</p>
+            <p className="danger" aria-label="assertive">{errors.username?.message}</p>
           }
         </div>
 
@@ -43,12 +46,15 @@ const Register = () => {
           <input 
             type="email" { ...register("email", { 
               required: 'email is required', 
-              pattern: { value: emailCheck, message: "please enter a valid email" }
+              pattern: { 
+                value: EMAIL_REGEX, 
+                message: "please enter a valid email" 
+              }
             })}
             autoComplete="off"
           />
           {errors.email?.message && 
-            <p className="errMsg" aria-label="assertive">{errors.email?.message}</p>
+            <p className="danger" aria-label="assertive">{errors.email?.message}</p>
           }
         </div>
 
@@ -57,12 +63,15 @@ const Register = () => {
           <input 
             type="password" { ...register("password", { 
               required: 'password is required', 
-              pattern: { value: passwordCheck, message: "please enter a valid password" } 
+              pattern: { 
+                value: PASSWORD_REGEX, 
+                message: "please enter a valid password" 
+              } 
             })}
             autoComplete="off"
           />
           {errors.password?.message && 
-            <p className="errMsg" aria-label="assertive">{errors.password?.message}</p>
+            <p className="danger" aria-label="assertive">{errors.password?.message}</p>
           }
         </div>
 
