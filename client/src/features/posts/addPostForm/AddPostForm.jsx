@@ -2,12 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
 import { useCreatePostMutation } from "../post/postApiSlice";
-import "./addPostForm.scss";
 import { useState } from "react";
 import { storage } from "../../../config/Firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { DESCRIPTION_REGEX } from "../../../common/utils/Regex";
+import "./addPostForm.scss";
 
 const AddPostForm = () => {
   const [image, setImage] = useState(null);
@@ -23,7 +23,11 @@ const AddPostForm = () => {
         /* uploadBytes is the method from Firebase to upload things to the bucket */
         const snapshot = await uploadBytes(imageRef, image);
         const url = await getDownloadURL(snapshot.ref);
-        await createPost({ description: data.description, imageName: snapshot.metadata.name, imageUrl: url });
+        await createPost({ 
+          description: data.description, 
+          imageName: snapshot.metadata.name, 
+          imageUrl: url 
+        });
         setImage(null);
         reset();
       } else {
@@ -35,6 +39,8 @@ const AddPostForm = () => {
     }
   };
 
+
+
   const content = (
     <section className="add-post">
       <form className="add-post-form" onSubmit={handleSubmit(onSubmit)}>
@@ -45,13 +51,11 @@ const AddPostForm = () => {
             className="post-form-description"
             placeholder="Express yourself..."
             {...register("description", {
-              required: true,
-              pattern: {
-                value: DESCRIPTION_REGEX,
-                message: "test message"
-              }
+              required: "The description is required",
+              pattern: { value: DESCRIPTION_REGEX, message: "test message" }
             })}
           ></textarea>
+          <span className="danger">{errors.description?.message}</span>
           <label htmlFor="post-form-image">
             Add an image <FontAwesomeIcon icon={faImage} />
           </label>
@@ -63,7 +67,6 @@ const AddPostForm = () => {
           <button type="submit" className="post-btn">
             Submit
           </button>
-          <p className="add-post-error danger">{errors?.description?.message}</p>
         </div>
       </form>
     </section>

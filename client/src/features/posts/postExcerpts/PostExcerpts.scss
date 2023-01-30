@@ -1,5 +1,6 @@
 .post-excerpts{
   padding: 15px;
+  background-color: #fff;
 }
 .post-heading{
   display: flex;
@@ -14,10 +15,12 @@
     background-color: #fff;
     margin: 0 0 0 0.4rem;
   }
+  
   img{
     width: 40px;
     margin-right: 10px;
   }
+  
   svg{
     margin-left: 5px;
     font-size: 1.4rem;
@@ -52,6 +55,7 @@
       border-radius: 10px;
       font-size: 1rem;
     }
+
     button{
       width: 30%;
       font-size: 1rem;

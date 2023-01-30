@@ -1,4 +1,3 @@
-
 import { useLoginMutation } from "../authApiSlice";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -52,12 +51,13 @@ const Login = () => {
               required: 'password is required', 
               pattern: { 
                 value: PASSWORD_REGEX, 
-                message: "please enter a valid password" }
+                message: "please enter a valid password" 
+              }
             })}
             autoComplete="off"
           />
           {errors.password?.message && 
-            <p className="danger" aria-label="assertive">{errors.password?.message}</p>
+            <span className="danger" aria-label="assertive">{errors.password?.message}</span>
           }
         </div>
 

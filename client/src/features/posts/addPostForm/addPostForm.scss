@@ -14,7 +14,6 @@
     flex-direction: column;
     padding: 0 15px;
   }
-
   label{
     margin: 1rem 0 0.5rem 0;
     color: black;
@@ -45,16 +44,12 @@
   padding: 0.5rem;
   border-radius: 20px;
   border: none;
-  margin: 1rem auto 0;
+  margin: 1rem auto 1.5rem auto;
   font-size: 1rem;
   font-weight: bold;
   &:hover{
     cursor: pointer;
   }
-}
-.add-post-error{
-  text-align: center;
-  margin: 0 auto 1rem auto;
 }
 
 @media screen and (max-width: 992px){

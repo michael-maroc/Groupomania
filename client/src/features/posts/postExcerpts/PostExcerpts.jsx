@@ -11,7 +11,8 @@ import { storage } from "../../../config/Firebase";
 import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import img1 from "/profile.png";
-import './PostExcerpts.scss';
+import './postExcerpts.scss';
+import { useGetAvatarQuery } from "../../profile/profileApiSlice";
 
 const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);
@@ -20,6 +21,8 @@ const PostExcerpts = ({ post }) => {
   const [image, setImage] = useState(null);
   const [updatePost] = useUpdatePostMutation();
   const [deletePost] = useDeletePostMutation();
+
+  const { data: avatar } = useGetAvatarQuery(post.UserId)
 
   // Editing states
   const [isEdit, setIsEdit] = useState(false);
@@ -42,7 +45,11 @@ const PostExcerpts = ({ post }) => {
         const newImageRef = ref(storage, `images/${image.name + v4()}`);
         const snapshot = await uploadBytes(newImageRef, image);
         const url = await getDownloadURL(snapshot.ref);
-        await updatePost({ ...post, description: newDescription, imageName: snapshot.metadata.name, imageUrl: url });
+        await updatePost({ ...post, 
+          description: newDescription, 
+          imageName: snapshot.metadata.name, 
+          imageUrl: url 
+        });
         setImage(null);
         setNewDescription("");
         setIsEdit(false);
@@ -75,21 +82,23 @@ const PostExcerpts = ({ post }) => {
   };
 
   const PostExcerptsButtons = (
-  <div>
-    <button onClick={() => setIsEdit((prev) => !prev)}>
-      <FontAwesomeIcon icon={faEraser} />
-    </button>
-    <button onClick={handleDelete}>
-      <FontAwesomeIcon icon={faTrash} />
-    </button>
-  </div>
-  )
+    <div>
+      <button onClick={() => setIsEdit((prev) => !prev)}>
+        <FontAwesomeIcon icon={faEraser} />
+      </button>
+      <button onClick={handleDelete}>
+        <FontAwesomeIcon icon={faTrash} />
+      </button>
+    </div>
+  );
 
   const content = (
     <header className="post-excerpts">
       <div className="post-heading">
         <div>
-          <img src={post.imageProfile ? console.log("no image") : img1} alt="profile" />
+          <img 
+            src={avatar?.UserId === post?.UserId ? avatar.avatarUrl : img1} 
+            alt="profile" />
           <div>
             <h1 className="post-author">{post.author}</h1>
             <span className="post-timestamp">Published {timePeriod} ago</span>
@@ -119,7 +128,7 @@ const PostExcerpts = ({ post }) => {
         )}
       </div>
     </header>
-  )
+  );
 
   return content;
 };

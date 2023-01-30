@@ -17,6 +17,8 @@ const postsRoutes = require("./router/postsRoutes");
 const commentsRoutes = require("./router/commentsRoutes");
 const refreshRoute = require("./router/refreshRoute");
 const likesRoutes = require("./router/likesRoutes");
+const avatarsRoutes = require("./router/avatarsRoutes");
+
 const { errorHandler } = require("./middleware/errorHandler");
 
 // Middlewares
@@ -33,6 +35,7 @@ app.use("/api/users", usersRoutes);
 app.use("/api/posts", postsRoutes);
 app.use("/api/comments", commentsRoutes);
 app.use("/api/likes", likesRoutes);
+app.use("/api/avatars", avatarsRoutes);
 app.use(errorHandler);
 
 // Server Connection
