@@ -1,11 +1,14 @@
 .post-excerpts{
+  display: flex;
   padding: 15px;
   background-color: #fff;
 }
 .post-heading{
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  
   :first-child{
     display: flex;
   }
@@ -17,8 +20,10 @@
   }
   
   img{
-    width: 40px;
+    width: 45px;
+    height: 45px;
     margin-right: 10px;
+    border-radius: 80px;
   }
   
   svg{

@@ -16,7 +16,7 @@ const Profile = () => {
         const url = await getDownloadURL(snapshot.ref);
         await addAvatar({
           avatarName: snapshot.metadata.name, avatarUrl: url
-        })
+        });
         console.log("image uploaded");
       } else {
        console.log("no image found");
