@@ -33,6 +33,10 @@ export const postApiSlice = apiSlice.injectEndpoints({
     }),
 
   // Comments part
+    getAllComments: builder.query({
+      query: () => `/comments`,
+      providesTags: ["Comments"],
+    }),
     getPostComments: builder.query({
       query: (PostId) => `/comments/${PostId}`,
       providesTags: ["Comments"],
@@ -63,6 +67,7 @@ export const postApiSlice = apiSlice.injectEndpoints({
 });
 
 export const { 
+  useGetAllCommentsQuery,
   useGetAllPostsQuery, 
   useCreatePostMutation, 
   useDeletePostMutation, 

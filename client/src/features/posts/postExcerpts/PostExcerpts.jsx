@@ -12,7 +12,7 @@ import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import img1 from "/profile.png";
 import './postExcerpts.scss';
-import { useGetAvatarQuery } from "../../profile/profileApiSlice";
+import { useGetOneAvatarQuery } from "../../profile/profileApiSlice";
 
 const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);
@@ -22,7 +22,7 @@ const PostExcerpts = ({ post }) => {
   const [updatePost] = useUpdatePostMutation();
   const [deletePost] = useDeletePostMutation();
 
-  const { data: avatar } = useGetAvatarQuery(post.UserId)
+  const { data: avatar } = useGetOneAvatarQuery(post.UserId);
 
   // Editing states
   const [isEdit, setIsEdit] = useState(false);

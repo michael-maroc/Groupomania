@@ -6,8 +6,8 @@ const {
 } = require("../controllers/AvatarsController");
 const router = express.Router();
 
-// router.get("/", getAllAvatars);
-router.post("/", createAvatar);
+router.get("/", getAllAvatars);
 router.get("/:id", getOneAvatar);
+router.post("/", createAvatar);
 
 module.exports = router;

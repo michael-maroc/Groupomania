@@ -3,9 +3,19 @@ import img1 from "/profile.png";
 import { useForm } from "react-hook-form";
 import { COMMENT_REGEX } from "../../../common/utils/Regex";
 import './comments.scss';
+import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "../../profile/profileApiSlice";
+import jwt_decode from "jwt-decode";
+import { useSelector } from "react-redux";
+import { getCurrentToken } from "../../auth/authSlice";
 
 const Comments = ({ post }) => {
+  const token = useSelector(getCurrentToken);
+  const decoded = jwt_decode(token);
+
   const { data: comments } = useGetPostCommentsQuery(post.id);
+  const { data: avatar } = useGetOneAvatarQuery(decoded.id);
+  const { data: commentAvatar } = useGetOneAvatarQuery(post.UserId);
+  const { data: commentAvatar2 } = useGetAllAvatarsQuery();
 
   const [addComment] = useAddCommentMutation();
 
@@ -23,7 +33,14 @@ const Comments = ({ post }) => {
         {comments?.map((comment) => {
           return (
             <div className="comments-container" key={comment.id}>
-              <img src={img1} alt="profile-pic" />
+              {commentAvatar2?.map((el) => {
+                return (
+                  <img 
+                    src={el?.UserId === comment?.UserId ? el.avatarUrl : null} 
+                    alt="profile-pic" 
+                  />
+                )
+              })}
               <div>
                 <p className="author">{comment.author}</p>
                 <p className="comment">{comment.comment}</p>
@@ -32,7 +49,10 @@ const Comments = ({ post }) => {
           )
         })}
         <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>
-          <img src={img1} alt="profile-pic" />
+          <img 
+            src={avatar?.UserId === decoded?.id ? avatar?.avatarUrl : img1} 
+            alt="profile-pic" 
+          />
           <input 
             type="text" 
             placeholder="Add your comment..." 

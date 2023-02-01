@@ -2,8 +2,12 @@ import { apiSlice } from "../../app/api/apiSlice";
 
 export const profileApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAvatar: builder.query({
-      query: (UserId) => `/avatars/${UserId}`,
+    getAllAvatars: builder.query({
+      query: () => `/avatars`,
+      providesTags: ["ProfilePic"]
+    }),
+    getOneAvatar: builder.query({
+      query: (id) => `/avatars/${id}`,
       providesTags: ["ProfilePic"]
     }),
     addAvatar: builder.mutation({
@@ -17,4 +21,4 @@ export const profileApiSlice = apiSlice.injectEndpoints({
   })
 })
 
-export const { useAddAvatarMutation, useGetAvatarQuery } = profileApiSlice;
+export const { useGetAllAvatarsQuery, useAddAvatarMutation, useGetOneAvatarQuery } = profileApiSlice;
