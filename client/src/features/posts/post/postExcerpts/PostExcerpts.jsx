@@ -3,16 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faEraser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
-import { getCurrentToken } from "../../auth/authSlice";
+import { getCurrentToken } from "../../../auth/authSlice";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useDeletePostMutation, useUpdatePostMutation } from "../post/postApiSlice";
+import { useDeletePostMutation, useUpdatePostMutation } from "../postApiSlice";
 import { v4 } from "uuid";
-import { storage } from "../../../config/Firebase";
+import { storage } from "../../../../config/Firebase";
 import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
-import img1 from "/profile.png";
 import './postExcerpts.scss';
-import { useGetOneAvatarQuery } from "../../profile/profileApiSlice";
+import { useGetOneAvatarQuery } from "../../../profile/profileApiSlice";
 
 const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);
@@ -97,7 +96,7 @@ const PostExcerpts = ({ post }) => {
       <div className="post-heading">
         <div>
           <img 
-            src={avatar?.UserId === post?.UserId ? avatar.avatarUrl : img1} 
+            src={avatar?.avatarUrl} 
             alt="profile" />
           <div>
             <h1 className="post-author">{post.author}</h1>

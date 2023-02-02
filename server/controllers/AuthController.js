@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { Users } = require("../models");
+const { Avatars } = require("../models");
 const { tryCatch } = require("../utils/tryCatch");
 
 // Token generation functions
@@ -24,11 +25,12 @@ exports.register = tryCatch(async (req, res) => {
     return res.sendStatus(409);
   } else {
     const hashedPassword = await bcrypt.hash(password, 10);
-    await Users.create({
+    const user = await Users.create({
       username,
       email,
       password: hashedPassword,
     });
+    await Avatars.create({ UserId: user.id });
     res.status(201).json({ message: "Registration success" });
   }
 });

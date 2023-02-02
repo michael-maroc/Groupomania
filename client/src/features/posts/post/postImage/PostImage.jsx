@@ -1,4 +1,4 @@
-import { useAddLikeMutation, useGetPostLikesQuery } from "../post/postApiSlice";
+import { useAddLikeMutation, useGetPostLikesQuery } from "../postApiSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import './postMain.scss';

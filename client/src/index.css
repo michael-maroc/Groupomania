@@ -9,6 +9,12 @@ html, body, #root, .App {
   width: 100vw;
 }
 
+:root{
+  --COLORPRIMARY: #FD2D01;
+  --COLOR_SECONDARY: #FFD7D7;
+  --COLOR_TERTIARY: #4E5166;
+}
+
 .danger{
   color: red;
   text-align: center;

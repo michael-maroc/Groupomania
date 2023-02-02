@@ -1,7 +1,7 @@
 import Comments from "../comments/Comments";
-import PostExcerpts from "../postExcerpts/PostExcerpts";
+import PostExcerpts from "./postExcerpts/PostExcerpts";
 import { useGetAllPostsQuery } from "../post/postApiSlice";
-import PostMain from "../postImage/PostImage";
+import PostMain from "./postImage/PostImage";
 import "./post.scss";
 
 const Post = () => {

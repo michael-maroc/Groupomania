@@ -1,5 +1,4 @@
 import { useAddCommentMutation, useGetPostCommentsQuery } from "../post/postApiSlice";
-import img1 from "/profile.png";
 import { useForm } from "react-hook-form";
 import { COMMENT_REGEX } from "../../../common/utils/Regex";
 import './comments.scss';
@@ -14,8 +13,7 @@ const Comments = ({ post }) => {
 
   const { data: comments } = useGetPostCommentsQuery(post.id);
   const { data: avatar } = useGetOneAvatarQuery(decoded.id);
-  const { data: commentAvatar } = useGetOneAvatarQuery(post.UserId);
-  const { data: commentAvatar2 } = useGetAllAvatarsQuery();
+  const { data: avatarsList } = useGetAllAvatarsQuery();
 
   const [addComment] = useAddCommentMutation();
 
@@ -33,14 +31,10 @@ const Comments = ({ post }) => {
         {comments?.map((comment) => {
           return (
             <div className="comments-container" key={comment.id}>
-              {commentAvatar2?.map((el) => {
-                return (
-                  <img 
-                    src={el?.UserId === comment?.UserId ? el.avatarUrl : null} 
-                    alt="profile-pic" 
-                  />
-                )
-              })}
+              {avatarsList?.map((avatar) => avatar?.UserId === comment?.UserId && (
+                <img key={avatar.id} src={avatar.avatarUrl} alt="profile" />
+              )
+              )}
               <div>
                 <p className="author">{comment.author}</p>
                 <p className="comment">{comment.comment}</p>
@@ -50,7 +44,7 @@ const Comments = ({ post }) => {
         })}
         <form className="comment-form" onSubmit={handleSubmit(onSubmit)}>
           <img 
-            src={avatar?.UserId === decoded?.id ? avatar?.avatarUrl : img1} 
+            src={avatar?.avatarUrl} 
             alt="profile-pic" 
           />
           <input 

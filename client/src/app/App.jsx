@@ -4,7 +4,7 @@ import Layout from "../common/components/layout/Layout";
 import Login from "../features/auth/login/Login";
 import Register from "../features/auth/register/Register";
 import RequireAuth from "../common/hooks/RequireAuth";
-import PostsList from "../features/posts/postsList.jsx/PostsList";
+import PostsList from "../features/posts/post/postsList.jsx/PostsList";
 import Navbar from "../common/components/navBar/NavBar";
 import "./App.css";
 import Profile from "../features/profile/Profile";

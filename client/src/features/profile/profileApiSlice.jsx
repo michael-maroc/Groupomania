@@ -17,8 +17,16 @@ export const profileApiSlice = apiSlice.injectEndpoints({
         body: { ...avatarData },
       }),
       invalidatesTags: ["ProfilePic"]
+    }),
+    updateAvatar: builder.mutation({
+      query: (avatarData) => ({
+        url: "/avatars",
+        method: "PATCH",
+        body: { ...avatarData },
+      }),
+      invalidatesTags: ["ProfilePic"]
     })
   })
 })
 
-export const { useGetAllAvatarsQuery, useAddAvatarMutation, useGetOneAvatarQuery } = profileApiSlice;
+export const { useGetAllAvatarsQuery, useAddAvatarMutation, useGetOneAvatarQuery, useUpdateAvatarMutation } = profileApiSlice;

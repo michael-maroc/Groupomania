@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "cascade",
         onUpdate: "cascade",
       }),
-      Users.hasMany(models.Avatars, {
+      Users.hasOne(models.Avatars, {
         onDelete: "cascade",
         onUpdate: "cascade",
       });

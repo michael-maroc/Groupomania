@@ -1,5 +1,5 @@
-import Post from "../post/Post";
-import AddPostForm from "../addPostForm/AddPostForm";
+import Post from "../Post";
+import AddPostForm from "../../addPostForm/AddPostForm";
 import "./postsList.scss";
 
 const PostsList = () => {
