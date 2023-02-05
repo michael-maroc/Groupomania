@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faHome, faFileImage, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faFileImage, faArrowRightFromBracket, faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useSendLogoutMutation } from "../../../features/auth/authApiSlice";
@@ -25,7 +25,7 @@ const NavBar = () => {
         </li>
         <li className="nav-small-size">
           <p>Profile</p>
-          <Link to="/profile"><FontAwesomeIcon icon={faFileImage} /></Link>
+          <Link to="/profile"><FontAwesomeIcon icon={faUserPen} /></Link>
         </li>
         <li className="nav-small-size">
           <p>Logout</p>

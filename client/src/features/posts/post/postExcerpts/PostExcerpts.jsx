@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEraser } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faEraser, faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 import { getCurrentToken } from "../../../auth/authSlice";
@@ -83,7 +83,7 @@ const PostExcerpts = ({ post }) => {
   const PostExcerptsButtons = (
     <div>
       <button onClick={() => setIsEdit((prev) => !prev)}>
-        <FontAwesomeIcon icon={faEraser} />
+        <FontAwesomeIcon icon={faFilePen} />
       </button>
       <button onClick={handleDelete}>
         <FontAwesomeIcon icon={faTrash} />

@@ -37,7 +37,7 @@ const Register = () => {
             autoComplete="off"
           />
           {errors.username?.message && 
-            <span className="danger" aria-label="assertive">{errors.username?.message}</span>
+            <p className="danger" aria-label="assertive">{errors.username?.message}</p>
           }
         </div>
 

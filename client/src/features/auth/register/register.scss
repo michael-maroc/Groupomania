@@ -10,19 +10,11 @@
     align-items: center;
     flex-direction: column;
     width: 450px;
-    border: solid 1px black;
+    border: solid 1px var(--BLACK);
     padding: 50px;
-    background-color: #03224c;
+    background-color: var(--COLOR_TERTIARY);
     gap: 1.5rem;
 
-    .form-error{
-      background-color: pink;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 20px;
-    }
     h1{
       font-size: 3.5rem;
       margin-bottom: 20px;

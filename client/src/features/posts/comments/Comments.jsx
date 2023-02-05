@@ -64,7 +64,7 @@ const Comments = ({ post }) => {
           />
           <button type="submit">Submit</button>
         </form>
-        <span className="danger">{errors?.comment?.message}</span>
+        <p className="danger">{errors?.comment?.message}</p>
       </section>
     </footer>
   )

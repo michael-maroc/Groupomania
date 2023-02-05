@@ -5,6 +5,7 @@ import { setCredentials } from "../authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.scss";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "../../../common/utils/Regex"; 
+// import Banner from "/images/icon-left-font-monochrome-black.svg";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const Login = () => {
             autoComplete="off"
           />
           {errors.password?.message && 
-            <span className="danger" aria-label="assertive">{errors.password?.message}</span>
+            <p className="danger" aria-label="assertive">{errors.password?.message}</p>
           }
         </div>
 
