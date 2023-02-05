@@ -1,25 +1,104 @@
-.home-nav{
+.nav{
   height: 70px;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: rgb(74, 156, 215);
   box-shadow: 1px 1px 4px 2px gray;
   
-  h1{
-    color: white;
-    font-size: 1.4rem;
-    margin-left: 50px;
+  img{
+    width: 200px;
+    margin-left: 40px;
   }
   ul{
     display: flex;
-    a{
-      color: white;
-      font-size: 1.4rem;
+
+    .nav-small-size{
+      display: none;
+    }
+    li{
+      list-style-type: none;
+      margin: 0 20px 0 20px;
+
+      a{
+        color: white;
+        font-size: 1.4rem;
+        display: flex;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px){
+  .nav{
+    justify-content: space-between;
+
+    .nav-logo{
+      display: block;
+    }
+    ul{
       display: flex;
-      text-decoration: none;
+      justify-content: flex-end;
       margin-right: 40px;
+
+      .nav-full-size{
+        display: none;
+      }
+      .nav-small-size{
+        display: flex;
+        color: #fff;
+
+        p{
+          display: none;
+        }
+        svg{
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 572px){
+  .nav{
+    justify-content: center;
+
+    .nav-logo{
+      display: none;
+    }
+    ul{
+      margin: 0;
+
+      .nav-small-size{
+        p{
+          display: block;
+          margin-right: 10px;
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .nav{
+    justify-content: center;
+    ul{
+      width: 100%;
+      justify-content: space-around;
+    }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .nav{
+    ul{
+      .nav-small-size{
+        p{
+          display: none;
+        }
+      }
     }
   }
 }

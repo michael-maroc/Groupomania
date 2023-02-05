@@ -1,6 +1,7 @@
 .add-post{
   width: 65%;
   max-width: 650px;
+  margin: 0 auto;
 }
 .add-post-form{
   background-color: #fff;
@@ -55,5 +56,11 @@
 @media screen and (max-width: 992px){
   .add-post{
     width: 90%;
+  }
+}
+
+@media screen and (max-width: 572px){
+  .add-post{
+    width: 100%;
   }
 }

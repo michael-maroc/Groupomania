@@ -6,7 +6,7 @@
 
 html, body, #root, .App {
   min-height: 100vh;
-  width: 100vw;
+  max-width: 100vw;
 }
 
 :root{
@@ -22,5 +22,5 @@ html, body, #root, .App {
 }
 
 .none{
-display: none;
+  display: none;
 }
