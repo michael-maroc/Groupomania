@@ -6,9 +6,17 @@
   background-color: var(--COLOR_TERTIARY);
   box-shadow: 1px 1px 4px 2px var(--COLOR_TERTIARY);
   
-  img{
+  // img{
+  //   width: 300px;
+  //   margin-left: 40px;
+  // }
+  .logo-container{
     width: 300px;
-    margin-left: 40px;
+    margin-left: 20px;
+    svg{
+      width: 100%;
+      fill: var(--WHITE);
+    }
   }
   ul{
     display: flex;
@@ -35,7 +43,7 @@
   .nav{
     justify-content: space-between;
 
-    .nav-logo{
+    .logo-container{
       display: block;
     }
     ul{
@@ -65,7 +73,7 @@
   .nav{
     justify-content: center;
 
-    .nav-logo{
+    .logo-container{
       display: none;
     }
     ul{

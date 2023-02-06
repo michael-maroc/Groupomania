@@ -5,13 +5,13 @@ import { useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { storage } from "../../config/Firebase";
 import { getCurrentToken } from "../auth/authSlice";
-import { useAddAvatarMutation, useGetOneAvatarQuery, useUpdateAvatarMutation } from "./profileApiSlice";
+import { useGetOneAvatarQuery, useUpdateAvatarMutation } from "./profileApiSlice";
+import './profile.scss';
 
 const Profile = () => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
 
-  const [addAvatar] = useAddAvatarMutation();
   const [updateAvatar] = useUpdateAvatarMutation();
 
   const { data: oldAvatar } = useGetOneAvatarQuery(decoded.id)
@@ -35,7 +35,9 @@ const Profile = () => {
           avatarName: snapshot.metadata.name, avatarUrl: url
         });
         console.log("image uploaded");
+        reset();
       } else {
+        reset();
         console.log("No image found");
       }
     } catch (error) {
@@ -43,22 +45,21 @@ const Profile = () => {
     }
   }
 
-
   return (
-    <section className="profile-page">
-      <h1>Profile Page</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input type="text" { ...register('username')}/>
-        </div>
+    <section className="profile">
+      <h1>{decoded.username}</h1>
 
-        <div>
-          <label htmlFor="avatar">Add your avatar </label>
+      <div className="avatar-container">
+          <img src={oldAvatar.avatarUrl} alt="profile" />
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="form-group">
+          <label htmlFor="avatar">Add your avatar:</label>
           <input type="file" { ...register('avatar')}/>
         </div>
 
-        <input type="submit" value="Submit" />
+        <button type="submit">Submit</button>
       </form>
     </section>
   );

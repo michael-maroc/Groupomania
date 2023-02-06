@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faFileImage, faArrowRightFromBracket, faUserPen } from "@fortawesome/free-solid-svg-icons";
+import { faHome, faArrowRightFromBracket, faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useSendLogoutMutation } from "../../../features/auth/authApiSlice";
 import { getCurrentToken } from "../../../features/auth/authSlice";
-import Logo from "/images/icon-left-font-monochrome-white.svg";
 import "./navBar.scss";
+import NavLogo from "../NavLogo";
 
 const NavBar = () => {
   const [sendLogout] = useSendLogoutMutation();
@@ -13,7 +13,9 @@ const NavBar = () => {
 
   return token ? (
     <nav className="nav">
-      <img className="nav-logo" src={Logo} alt="Logo" />
+      <div className="logo-container">
+        <NavLogo className="nav-logo" />
+      </div>
       <ul>
         <li className="nav-full-size"><Link to="/home">Home</Link></li>
         <li className="nav-full-size"><Link to="/profile">Profile</Link></li>
