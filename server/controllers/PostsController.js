@@ -24,7 +24,7 @@ exports.createPost = tryCatch(async (req, res) => {
 exports.updatePost = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, description, imageName, imageUrl, isAdmin } = req.body;
-  const foundPost = await Posts.findOne({ where: { id } });
+  const foundPost = await Posts.findByPk(id);
 
   if (foundPost?.UserId === userId || isAdmin) {
     await Posts.update({ description, imageName, imageUrl }, { where: { id } });
@@ -38,7 +38,7 @@ exports.updatePost = tryCatch(async (req, res) => {
 exports.deletePost = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, isAdmin } = req.body;
-  const foundPost = await Posts.findOne({ where: { id } });
+  const foundPost = await Posts.findByPk(id);
 
   if (foundPost?.UserId === userId || isAdmin) {
     return (

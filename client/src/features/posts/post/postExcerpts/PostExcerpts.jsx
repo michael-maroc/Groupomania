@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faEraser, faFilePen } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
 import { getCurrentToken } from "../../../auth/authSlice";

@@ -68,7 +68,7 @@ exports.login = tryCatch(async (req, res) => {
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
     sameSite: "None",
-    // secure: true,
+    secure: true,
     maxAge: 1 * 24 * 60 * 60 * 1000,
   });
   res.json({ accessToken, loggedIn: true });
@@ -80,7 +80,7 @@ exports.logout = tryCatch(async (req, res) => {
   res.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None",
-    // secure: true,
+    secure: true,
     maxAge: 1,
   });
   res.json({ message: "Cookies cleared" });

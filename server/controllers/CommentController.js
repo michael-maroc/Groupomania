@@ -32,7 +32,7 @@ exports.addComment = tryCatch(async (req, res) => {
 exports.updateComment = tryCatch(async (req, res) => {
   const { id } = req.params;
   const { userId, isAdmin, comment } = req.body;
-  const foundComment = await Comments.findOne({ where: { id } });
+  const foundComment = await Comments.findByPk(id);
 
   if (foundComment.UserId === userId || isAdmin) {
     return (

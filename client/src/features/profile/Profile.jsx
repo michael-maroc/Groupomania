@@ -7,6 +7,7 @@ import { storage } from "../../config/Firebase";
 import { getCurrentToken } from "../auth/authSlice";
 import { useGetOneAvatarQuery, useUpdateAvatarMutation } from "./profileApiSlice";
 import './profile.scss';
+import { useGetOneUserQuery } from "../users/usersApiSlice";
 
 const Profile = () => {
   const token = useSelector(getCurrentToken);
@@ -14,7 +15,13 @@ const Profile = () => {
 
   const [updateAvatar] = useUpdateAvatarMutation();
 
-  const { data: oldAvatar } = useGetOneAvatarQuery(decoded.id)
+  const { data: oldAvatar } = useGetOneAvatarQuery(decoded.id);
+  const { data: currentUser } = useGetOneUserQuery(decoded.id);
+
+  console.log(currentUser);
+
+  const date = new Date(currentUser?.createdAt);
+  const convertedDate = date.toLocaleDateString();
   
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
@@ -47,7 +54,8 @@ const Profile = () => {
 
   return (
     <section className="profile">
-      <h1>{decoded.username}</h1>
+      <h1>Username: {decoded?.username}</h1>
+      <h2>Registered since {convertedDate}</h2>
 
       <div className="avatar-container">
           <img src={oldAvatar.avatarUrl} alt="profile" />
