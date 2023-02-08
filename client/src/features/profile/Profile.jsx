@@ -18,8 +18,6 @@ const Profile = () => {
   const { data: oldAvatar } = useGetOneAvatarQuery(decoded.id);
   const { data: currentUser } = useGetOneUserQuery(decoded.id);
 
-  console.log(currentUser);
-
   const date = new Date(currentUser?.createdAt);
   const convertedDate = date.toLocaleDateString();
   
@@ -55,7 +53,7 @@ const Profile = () => {
   return (
     <section className="profile">
       <h1>Username: {decoded?.username}</h1>
-      <h2>Registered since {convertedDate}</h2>
+      <h2>Registered since: {convertedDate}</h2>
 
       <div className="avatar-container">
           <img src={oldAvatar.avatarUrl} alt="profile" />

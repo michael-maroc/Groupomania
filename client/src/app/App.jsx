@@ -4,7 +4,7 @@ import Layout from "../common/components/layout/Layout";
 import Login from "../features/auth/login/Login";
 import Register from "../features/auth/register/Register";
 import RequireAuth from "../common/hooks/RequireAuth";
-import PostsList from "../features/posts/post/postsList.jsx/PostsList";
+import Posts from "../features/posts/Posts";
 import Navbar from "../common/components/navBar/NavBar";
 import "./App.css";
 import Profile from "../features/profile/Profile";
@@ -21,7 +21,7 @@ const App = () => {
 
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
-            <Route path="home" element={<PostsList />} />
+            <Route path="home" element={<Posts />} />
             <Route path="profile" element={<Profile />} />
           </Route>
         </Route>

@@ -1,11 +1,11 @@
-import { useAddCommentMutation, useGetPostCommentsQuery } from "../post/postApiSlice";
+import { useAddCommentMutation, useGetPostCommentsQuery } from "../postApiSlice";
 import { useForm } from "react-hook-form";
-import { COMMENT_REGEX } from "../../../common/utils/Regex";
+import { COMMENT_REGEX } from "../../../../common/utils/Regex";
 import './comments.scss';
-import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "../../profile/profileApiSlice";
+import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "../../../profile/profileApiSlice";
 import jwt_decode from "jwt-decode";
 import { useSelector } from "react-redux";
-import { getCurrentToken } from "../../auth/authSlice";
+import { getCurrentToken } from "../../../auth/authSlice";
 
 const Comments = ({ post }) => {
   const token = useSelector(getCurrentToken);

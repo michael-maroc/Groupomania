@@ -8,4 +8,4 @@ export const usersApiSlice = apiSlice.injectEndpoints({
   })
 });
 
-export const { useGetOneUserQuery } = usersApiSlice
+export const { useGetOneUserQuery } = usersApiSlice;
