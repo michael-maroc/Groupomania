@@ -21,6 +21,7 @@ const NavBar = () => {
         <li className="nav-full-size"><Link to="/profile">Profile</Link></li>
         <li className="nav-full-size"><Link onClick={sendLogout}>Logout</Link></li>
 
+        {/* Responsive part */}
         <li className="nav-small-size">
           <p>Home</p>
           <Link to="/home"><FontAwesomeIcon icon={faHome} /></Link>

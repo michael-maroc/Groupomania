@@ -39,8 +39,6 @@ const AddPostForm = () => {
     }
   };
 
-
-
   const content = (
     <section className="add-post">
       <form className="add-post-form" onSubmit={handleSubmit(onSubmit)}>

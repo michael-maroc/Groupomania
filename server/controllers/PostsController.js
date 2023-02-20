@@ -30,7 +30,9 @@ exports.updatePost = tryCatch(async (req, res) => {
     await Posts.update({ description, imageName, imageUrl }, { where: { id } });
     res.status(200).json({ message: "Post successfuly updated" });
   } else {
-    return res.json({ message: "You can update only your own posts" });
+    return res
+      .status(403)
+      .json({ message: "You can update only your own posts" });
   }
 });
 

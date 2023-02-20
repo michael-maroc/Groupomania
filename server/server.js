@@ -1,41 +1,42 @@
 // Imports
 require("dotenv").config();
-const express = require("express");
+const authMiddleware = require("./middleware/authMiddleware");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const db = require("./models");
-const app = express();
-const authMiddleware = require("./middleware/authMiddleware");
 const corsOptions = require("./config/corsOptions");
 const credentials = require("./middleware/credentials");
-const path = require("path");
+const db = require("./models");
+const express = require("express");
+const helmet = require("helmet");
+// const path = require("path");
+const app = express();
 
 // Routes
 const authRoutes = require("./router/authRoutes");
-const usersRoutes = require("./router/usersRoutes");
-const postsRoutes = require("./router/postsRoutes");
-const commentsRoutes = require("./router/commentsRoutes");
-const refreshRoute = require("./router/refreshRoute");
-const likesRoutes = require("./router/likesRoutes");
 const avatarsRoutes = require("./router/avatarsRoutes");
-
+const commentsRoutes = require("./router/commentsRoutes");
 const { errorHandler } = require("./middleware/errorHandler");
+const likesRoutes = require("./router/likesRoutes");
+const postsRoutes = require("./router/postsRoutes");
+const refreshRoute = require("./router/refreshRoute");
+const usersRoutes = require("./router/usersRoutes");
 
 // Middlewares
+app.use(helmet());
 app.use(credentials);
 app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use("images", express.static(path.join(__dirname, "images")));
+// app.use("images", express.static(path.join(__dirname, "images")));
 app.use("/api/auth", authRoutes);
 app.use("/api/refresh", refreshRoute);
 app.use(authMiddleware);
-app.use("/api/users", usersRoutes);
-app.use("/api/posts", postsRoutes);
+app.use("/api/avatars", avatarsRoutes);
 app.use("/api/comments", commentsRoutes);
 app.use("/api/likes", likesRoutes);
-app.use("/api/avatars", avatarsRoutes);
+app.use("/api/posts", postsRoutes);
+app.use("/api/users", usersRoutes);
 app.use(errorHandler);
 
 // Server Connection

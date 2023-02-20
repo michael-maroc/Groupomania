@@ -6,8 +6,10 @@ import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from "../../../common/uti
 
 const Register = () => {
   const navigate = useNavigate();
+
   const [signUp] = useSignUpMutation();
-  const { register, handleSubmit, reset,formState: { errors }} = useForm();
+
+  const { register, handleSubmit, reset, formState: { errors }} = useForm();
 
   const onSubmit = async (data) => {
     try {
@@ -76,9 +78,7 @@ const Register = () => {
         </div>
 
         <button type="submit">Submit</button>
-        <span>
-          Already have an account ? <Link to="/">Login</Link>
-        </span>
+        <span>Already have an account ? <Link to="/">Login</Link></span>
       </form>
     </section>
   );

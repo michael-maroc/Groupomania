@@ -4,11 +4,11 @@ export const profileApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllAvatars: builder.query({
       query: () => `/avatars`,
-      providesTags: ["ProfilePic"]
+      providesTags: ["Avatars"]
     }),
     getOneAvatar: builder.query({
       query: (id) => `/avatars/${id}`,
-      providesTags: ["ProfilePic"]
+      providesTags: ["Avatars"]
     }),
     addAvatar: builder.mutation({
       query: (avatarData) => ({
@@ -16,7 +16,7 @@ export const profileApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: { ...avatarData },
       }),
-      invalidatesTags: ["ProfilePic"]
+      invalidatesTags: ["Avatars"]
     }),
     updateAvatar: builder.mutation({
       query: (avatarData) => ({
@@ -24,7 +24,7 @@ export const profileApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: { ...avatarData },
       }),
-      invalidatesTags: ["ProfilePic"]
+      invalidatesTags: ["Avatars"]
     })
   })
 })

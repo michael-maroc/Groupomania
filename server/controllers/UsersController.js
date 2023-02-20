@@ -1,6 +1,7 @@
 const { Users } = require("../models");
 const { tryCatch } = require("../utils/tryCatch");
 
+// Get All Users
 exports.getAllUsers = tryCatch(async (req, res) => {
   const { isAdmin } = req.body;
   if (isAdmin) {
@@ -12,6 +13,7 @@ exports.getAllUsers = tryCatch(async (req, res) => {
   }
 });
 
+// Get A Single User
 exports.getOneUser = tryCatch(async (req, res) => {
   const { id } = req.params;
   const foundUser = await Users.findByPk(id, {

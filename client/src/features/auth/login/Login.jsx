@@ -10,7 +10,9 @@ import { EMAIL_REGEX, PASSWORD_REGEX } from "../../../common/utils/Regex";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [login] = useLoginMutation();
+  
   const { register, handleSubmit, reset, formState: { errors }} = useForm();
 
   const onSubmit = async (data) => {

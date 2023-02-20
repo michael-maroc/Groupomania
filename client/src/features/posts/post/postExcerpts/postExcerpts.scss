@@ -35,7 +35,7 @@
 }
 .post-author{
   color: blue;
-  font-size: large;
+  font-size: 1.4em;
 }
 .post-timestamp{
   font-size: 0.9rem;
@@ -72,5 +72,12 @@
       padding: 10px;
       cursor: pointer;
     }
+  }
+}
+
+@media screen and (max-width: 572px){
+  .post-excerpts{
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }

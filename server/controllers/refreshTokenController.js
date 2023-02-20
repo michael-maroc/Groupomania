@@ -2,8 +2,8 @@ const { Users } = require("../models");
 const jwt = require("jsonwebtoken");
 const { tryCatch } = require("../utils/tryCatch");
 
-function generateAccessToken(id, username, admin) {
-  return jwt.sign({ id, username, admin }, process.env.ACCESS_TOKEN_SECRET, {
+function generateAccessToken(id, username, isAdmin) {
+  return jwt.sign({ id, username, isAdmin }, process.env.ACCESS_TOKEN_SECRET, {
     expiresIn: process.env.ACCESS_TOKEN_EXPIRY,
   });
 }

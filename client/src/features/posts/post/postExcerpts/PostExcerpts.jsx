@@ -17,54 +17,72 @@ const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
 
+  // Image References for firebase
+  const imageRef = ref(storage, `images/${post.imageName}`);
+
+  // States
   const [image, setImage] = useState(null);
+  const [isEdit, setIsEdit] = useState(false);
+  const [newDescription, setNewDescription] = useState(null);
+
+  // Mutations
   const [updatePost] = useUpdatePostMutation();
   const [deletePost] = useDeletePostMutation();
 
   const { data: avatar } = useGetOneAvatarQuery(post.UserId);
 
-  // Editing states
-  const [isEdit, setIsEdit] = useState(false);
-  const [newDescription, setNewDescription] = useState("");
-
-  // Image References for firebase
-  const imageRef = ref(storage, `images/${post.imageName}`);
-
-  // Defining posts date variables for date and time creation
+  // Defining posts date variables for date and creation time
   const date = new Date(post.createdAt).toISOString();
   const timeZone = 'Europe/Paris';
   const formatedDate = utcToZonedTime(date, timeZone);
   const timePeriod = formatDistanceToNow(formatedDate);
 
-  // Handle functions 
-  const handleUpdate = async () => {
+  // Reset states function
+  function resetFields(){
+    setImage(null);
+    setNewDescription(null);
+    setIsEdit(false);
+  }
+
+  // Update function
+  const handleUpdate = async() => {
     try {
-      if (image) {
-        await deleteObject(imageRef);
-        const newImageRef = ref(storage, `images/${image.name + v4()}`);
-        const snapshot = await uploadBytes(newImageRef, image);
-        const url = await getDownloadURL(snapshot.ref);
-        await updatePost({ ...post, 
-          description: newDescription, 
-          imageName: snapshot.metadata.name, 
-          imageUrl: url 
-        });
-        setImage(null);
-        setNewDescription("");
-        setIsEdit(false);
+      if (image && post.imageUrl && post.imageName){
+        if (newDescription){
+          await deleteObject(imageRef);
+          const newImageRef = ref(storage, `images/${image.name + v4()}`);
+          const snapshot = await uploadBytes(newImageRef, image);
+          const url = await getDownloadURL(snapshot.ref);
+          await updatePost({ ...post, 
+            description: newDescription, 
+            imageName: snapshot.metadata.name, 
+            imageUrl: url 
+          });
+          resetFields();
+        } else {
+          await deleteObject(imageRef);
+          const newImageRef = ref(storage, `images/${image.name + v4()}`);
+          const snapshot = await uploadBytes(newImageRef, image);
+          const url = await getDownloadURL(snapshot.ref);
+          await updatePost({ ...post, 
+            imageName: snapshot.metadata.name, 
+            imageUrl: url 
+          });
+          resetFields();
+        }
       } else {
-        return (
-          await updatePost({ ...post, description: newDescription }),
-          setNewDescription(""),
-          setIsEdit(false)
-        )
+        await updatePost({ ...post, 
+          description: newDescription
+        });
+        resetFields();
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleDelete = async () => {
+  // Delete function
+  const handleDelete = async() => {
     try {
       if (post.imageUrl && post.imageName) {
         const result = await deletePost({ id: post.id });

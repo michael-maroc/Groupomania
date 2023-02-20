@@ -1,4 +1,4 @@
-import { useAddCommentMutation, useGetPostCommentsQuery } from "../postApiSlice";
+import { useAddCommentMutation, useAddLikeMutation, useGetPostCommentsQuery, useGetPostLikesQuery } from "../postApiSlice";
 import { useForm } from "react-hook-form";
 import { COMMENT_REGEX } from "../../../../common/utils/Regex";
 import './comments.scss';
@@ -6,6 +6,8 @@ import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "../../../profile/pr
 import jwt_decode from "jwt-decode";
 import { useSelector } from "react-redux";
 import { getCurrentToken } from "../../../auth/authSlice";
+import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Comments = ({ post }) => {
   const token = useSelector(getCurrentToken);
@@ -14,10 +16,17 @@ const Comments = ({ post }) => {
   const { data: comments } = useGetPostCommentsQuery(post.id);
   const { data: avatar } = useGetOneAvatarQuery(decoded.id);
   const { data: avatarsList } = useGetAllAvatarsQuery();
+  const { data: likes } = useGetPostLikesQuery(post.id);
 
+  const [addLike] = useAddLikeMutation();
   const [addComment] = useAddCommentMutation();
 
   const { register, handleSubmit, formState: { errors }, reset} = useForm();
+
+  const handleLikes = async () => {
+    const result = await addLike({ PostId: post.id });
+    console.log(result.data.message);
+  };
 
   const onSubmit = async (data) => {
     await addComment({ comment: data.comment, PostId: post.id })
@@ -27,7 +36,21 @@ const Comments = ({ post }) => {
   const content = (
     <footer className="post-footer">
       <section className="comments">
-        <p>There is {comments?.length} comments</p>
+        <div className="actions">
+          <div>
+            <FontAwesomeIcon 
+              className="thumbs-up" 
+              icon={faThumbsUp} 
+              onClick={handleLikes} 
+            />
+            {!likes?.length && <span>0</span>}
+            {likes?.length === 1 && <span>{likes.length} like</span>}
+            {likes?.length >= 2 && <span>{likes.length} likes</span>}
+          </div>
+          {!comments?.length && null}
+          {comments?.length === 1 && <p>{comments.length} comment</p>}
+          {comments?.length >= 2 && <p>{comments.length} comments</p>}
+        </div>
         {comments?.map((comment) => {
           return (
             <div className="comments-container" key={comment.id}>
@@ -51,14 +74,14 @@ const Comments = ({ post }) => {
             type="text" 
             placeholder="Add your comment..." 
             {...register("comment", {
-              required: "Please add a comment before validation",
+              required: "You must input a comment",
               minLength: {
                 value: 2,
                 message: "The comment should have at least 2 characters"
               },
               pattern: {
                 value: COMMENT_REGEX,
-                message: "Please enter valid characters"
+                message: "You must input valid characters"
               }
             })} 
           />

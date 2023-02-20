@@ -11,8 +11,18 @@
 /* || GENERAL STYLES */
 body {
   min-height: 100vh;
-  font-size: 1em;
+  /* font-size: 1em; */
 }
+h1{
+  font-size: 1.4rem;
+}
+h2{
+  font-size: 1.2rem;
+}
+p{
+  font-size: 1.2rem;
+}
+
 
 :root{
   --COLOR_PRIMARY: #FD2D01;

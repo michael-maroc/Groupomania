@@ -74,6 +74,7 @@ exports.login = tryCatch(async (req, res) => {
   res.json({ accessToken, loggedIn: true });
 });
 
+// Logout controller
 exports.logout = tryCatch(async (req, res) => {
   const cookies = req.cookies;
   if (!cookies?.jwt) return res.sendStatus(204);

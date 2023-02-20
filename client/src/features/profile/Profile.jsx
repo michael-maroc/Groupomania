@@ -53,7 +53,7 @@ const Profile = () => {
   return (
     <section className="profile">
       <h1>Username: {decoded?.username}</h1>
-      <h2>Registered since: {convertedDate}</h2>
+      <h2>Member since: {convertedDate}</h2>
 
       <div className="avatar-container">
           <img src={oldAvatar.avatarUrl} alt="profile" />
@@ -64,9 +64,9 @@ const Profile = () => {
           <label htmlFor="avatar">Add your avatar:</label>
           <input type="file" { ...register('avatar')}/>
         </div>
-
         <button type="submit">Submit</button>
       </form>
+
     </section>
   );
 };
