@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
-import { useCreatePostMutation } from "../post/postApiSlice";
+import { useCreatePostMutation } from "features/posts/post/postApiSlice";
 import { useState } from "react";
-import { storage } from "../../../config/Firebase";
+import { storage } from "config/Firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
-import { DESCRIPTION_REGEX } from "../../../common/utils/Regex";
+import { DESCRIPTION_REGEX } from "common/utils/Regex";
 import "./addPostForm.scss";
 
 const AddPostForm = () => {

@@ -2,8 +2,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faArrowRightFromBracket, faUserPen } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useSendLogoutMutation } from "../../../features/auth/authApiSlice";
-import { getCurrentToken } from "../../../features/auth/authSlice";
+import { useSendLogoutMutation } from "features/auth/authApiSlice";
+import { getCurrentToken } from "features/auth/authSlice";
 import "./navBar.scss";
 import NavLogo from "../NavLogo";
 

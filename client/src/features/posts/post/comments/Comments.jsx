@@ -1,11 +1,11 @@
-import { useAddCommentMutation, useAddLikeMutation, useGetPostCommentsQuery, useGetPostLikesQuery } from "../postApiSlice";
+import { useAddCommentMutation, useAddLikeMutation, useGetPostCommentsQuery, useGetPostLikesQuery } from "features/posts/post/postApiSlice";
 import { useForm } from "react-hook-form";
-import { COMMENT_REGEX } from "../../../../common/utils/Regex";
+import { COMMENT_REGEX } from "common/utils/Regex";
 import './comments.scss';
-import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "../../../profile/profileApiSlice";
+import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "features/profile/profileApiSlice";
 import jwt_decode from "jwt-decode";
 import { useSelector } from "react-redux";
-import { getCurrentToken } from "../../../auth/authSlice";
+import { getCurrentToken } from "features/auth/authSlice";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

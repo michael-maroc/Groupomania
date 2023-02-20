@@ -1,8 +1,8 @@
-import { useSignUpMutation } from "../authApiSlice";
+import { useSignUpMutation } from "features/auth/authApiSlice";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
-import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from "../../../common/utils/Regex"; 
+import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from "common/utils/Regex"; 
 
 const Register = () => {
   const navigate = useNavigate();

@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faFilePen } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 import jwt_decode from "jwt-decode";
-import { getCurrentToken } from "../../../auth/authSlice";
+import { getCurrentToken } from "features/auth/authSlice";
 import { deleteObject, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { useDeletePostMutation, useUpdatePostMutation } from "../postApiSlice";
+import { useDeletePostMutation, useUpdatePostMutation } from "features/posts/post/postApiSlice";
 import { v4 } from "uuid";
-import { storage } from "../../../../config/Firebase";
+import { storage } from "config/Firebase";
 import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import './postExcerpts.scss';
-import { useGetOneAvatarQuery } from "../../../profile/profileApiSlice";
+import { useGetOneAvatarQuery } from "features/profile/profileApiSlice";
 
 const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);

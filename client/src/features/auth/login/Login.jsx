@@ -1,10 +1,10 @@
-import { useLoginMutation } from "../authApiSlice";
+import { useLoginMutation } from "features/auth/authApiSlice";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { setCredentials } from "../authSlice";
+import { setCredentials } from "features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "./login.scss";
-import { EMAIL_REGEX, PASSWORD_REGEX } from "../../../common/utils/Regex"; 
+import { EMAIL_REGEX, PASSWORD_REGEX } from "common/utils/Regex"; 
 // import Banner from "/images/icon-left-font-monochrome-black.svg";
 
 const Login = () => {
