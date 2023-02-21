@@ -44,48 +44,36 @@ const PostExcerpts = ({ post }) => {
     setIsEdit(false);
   }
 
+  // Post update validation function
+  async function postUpdate(){
+    const newImageRef = ref(storage, `images/${image.name + v4()}`);
+    const snapshot = await uploadBytes(newImageRef, image);
+    const url = await getDownloadURL(snapshot.ref);
+    if (newDescription) {
+      return (
+        await updatePost({ ...post, 
+          description: newDescription,
+          imageName: snapshot.metadata.name, 
+          imageUrl: url 
+        }),
+        resetFields()
+      )
+    }
+    await updatePost({ ...post, 
+      imageName: snapshot.metadata.name, 
+      imageUrl: url 
+    });
+    resetFields();
+  }
+
   // Update function
-  const handleUpdate = async() => {
+  const handleUpdate = async () => {
     try {
       if (image && !post.imageUrl && !post.imageName){
-        const newImageRef = ref(storage, `images/${image.name + v4()}`);
-        const snapshot = await uploadBytes(newImageRef, image);
-        const url = await getDownloadURL(snapshot.ref);
-        if (newDescription) {
-          return (
-            await updatePost({ ...post, 
-              description: newDescription,
-              imageName: snapshot.metadata.name, 
-              imageUrl: url 
-            }),
-            resetFields()
-          )
-        }
-        await updatePost({ ...post, 
-          imageName: snapshot.metadata.name, 
-          imageUrl: url 
-        });
-        resetFields();
+        postUpdate();
       } else if (image && post.imageUrl && post.imageName) {
         await deleteObject(imageRef)
-        const newImageRef = ref(storage, `images/${image.name + v4()}`);
-        const snapshot = await uploadBytes(newImageRef, image);
-        const url = await getDownloadURL(snapshot.ref);
-        if (newDescription) {
-          return (
-            await updatePost({ ...post, 
-              description: newDescription,
-              imageName: snapshot.metadata.name, 
-              imageUrl: url 
-            }),
-            resetFields()
-          )
-        }
-        await updatePost({ ...post, 
-          imageName: snapshot.metadata.name, 
-          imageUrl: url 
-        });
-        resetFields()
+        postUpdate();
       } else {
         await updatePost({ ...post, 
           description: newDescription
@@ -98,7 +86,7 @@ const PostExcerpts = ({ post }) => {
   };
 
   // Delete function
-  const handleDelete = async() => {
+  const handleDelete = async () => {
     try {
       if (post.imageUrl && post.imageName) {
         const result = await deletePost({ id: post.id });
