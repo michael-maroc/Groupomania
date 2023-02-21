@@ -11,7 +11,7 @@ import Profile from "features/profile/Profile";
 
 const App = () => {
   return (
-    <>
+    <main className="App">
       <Navbar />
       <Routes>
         {/* Public Routes */}
@@ -27,7 +27,7 @@ const App = () => {
         </Route>
         
       </Routes>
-    </>
+    </main>
   );
 };
 

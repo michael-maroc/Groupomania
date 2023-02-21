@@ -47,34 +47,50 @@ const PostExcerpts = ({ post }) => {
   // Update function
   const handleUpdate = async() => {
     try {
-      if (image && post.imageUrl && post.imageName){
-        if (newDescription){
-          await deleteObject(imageRef);
-          const newImageRef = ref(storage, `images/${image.name + v4()}`);
-          const snapshot = await uploadBytes(newImageRef, image);
-          const url = await getDownloadURL(snapshot.ref);
-          await updatePost({ ...post, 
-            description: newDescription, 
-            imageName: snapshot.metadata.name, 
-            imageUrl: url 
-          });
-          resetFields();
-        } else {
-          await deleteObject(imageRef);
-          const newImageRef = ref(storage, `images/${image.name + v4()}`);
-          const snapshot = await uploadBytes(newImageRef, image);
-          const url = await getDownloadURL(snapshot.ref);
-          await updatePost({ ...post, 
-            imageName: snapshot.metadata.name, 
-            imageUrl: url 
-          });
-          resetFields();
+      if (image && !post.imageUrl && !post.imageName){
+        const newImageRef = ref(storage, `images/${image.name + v4()}`);
+        const snapshot = await uploadBytes(newImageRef, image);
+        const url = await getDownloadURL(snapshot.ref);
+        if (newDescription) {
+          return (
+            await updatePost({ ...post, 
+              description: newDescription,
+              imageName: snapshot.metadata.name, 
+              imageUrl: url 
+            }),
+            resetFields()
+          )
         }
+        await updatePost({ ...post, 
+          imageName: snapshot.metadata.name, 
+          imageUrl: url 
+        });
+        resetFields();
+      } else if (image && post.imageUrl && post.imageName) {
+        await deleteObject(imageRef)
+        const newImageRef = ref(storage, `images/${image.name + v4()}`);
+        const snapshot = await uploadBytes(newImageRef, image);
+        const url = await getDownloadURL(snapshot.ref);
+        if (newDescription) {
+          return (
+            await updatePost({ ...post, 
+              description: newDescription,
+              imageName: snapshot.metadata.name, 
+              imageUrl: url 
+            }),
+            resetFields()
+          )
+        }
+        await updatePost({ ...post, 
+          imageName: snapshot.metadata.name, 
+          imageUrl: url 
+        });
+        resetFields()
       } else {
         await updatePost({ ...post, 
           description: newDescription
         });
-        resetFields();
+        resetFields()
       }
     } catch (error) {
       console.log(error);
