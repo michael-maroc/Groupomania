@@ -30,16 +30,15 @@ const Register = () => {
           <label htmlFor="username">Username</label>
           <input 
             type="username" { ...register("username", { 
-              required: 'username is required', 
-              pattern: { 
-                value: USERNAME_REGEX, 
-                message: "please enter a valid username" 
-              }
+              required: true,
+              minLength: 4,
+              maxLength: 12,
+              pattern: USERNAME_REGEX
             })}
             autoComplete="off"
           />
-          {errors.username?.message && 
-            <p className="danger" aria-label="assertive">{errors.username?.message}</p>
+          {errors.username && 
+            <span className="danger" aria-label="assertive">Username should contain between 4 to 12 characters</span>
           }
         </div>
 
@@ -47,16 +46,13 @@ const Register = () => {
           <label htmlFor="email">Email</label>
           <input 
             type="email" { ...register("email", { 
-              required: 'email is required', 
-              pattern: { 
-                value: EMAIL_REGEX, 
-                message: "please enter a valid email" 
-              }
+              required: true, 
+              pattern: EMAIL_REGEX
             })}
             autoComplete="off"
           />
-          {errors.email?.message && 
-            <p className="danger" aria-label="assertive">{errors.email?.message}</p>
+          {errors.email && 
+            <span className="danger" aria-label="assertive">Please input a valid email address</span>
           }
         </div>
 
@@ -65,20 +61,19 @@ const Register = () => {
           <input 
             type="password" { ...register("password", { 
               required: 'password is required', 
-              pattern: { 
-                value: PASSWORD_REGEX, 
-                message: "please enter a valid password" 
-              } 
+              minLength: 4,
+              maxLength: 15,
+              pattern: PASSWORD_REGEX
             })}
             autoComplete="off"
           />
-          {errors.password?.message && 
-            <p className="danger" aria-label="assertive">{errors.password?.message}</p>
+          {errors.password && 
+            <span className="danger" aria-label="assertive">Password should contain between 4 to 15 characters</span>
           }
         </div>
 
         <button type="submit">Submit</button>
-        <span>Already have an account ? <Link to="/">Login</Link></span>
+        <p className="login-link">Already have an account ? <Link to="/">Login</Link></p>
       </form>
     </section>
   );

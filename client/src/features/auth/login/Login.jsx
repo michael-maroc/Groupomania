@@ -35,15 +35,13 @@ const Login = () => {
           <label htmlFor="email">Email</label>
           <input 
             type="email" { ...register("email", { 
-              required: 'email is required', 
-              pattern: { 
-                value: EMAIL_REGEX, 
-                message: "please enter a valid email" }
+              required: true, 
+              pattern: EMAIL_REGEX
             })}
             autoComplete="off"
           />
-          {errors.email?.message && 
-            <p className="danger" aria-label="assertive">{errors.email?.message}</p>
+          {errors.email && 
+            <span className="danger" aria-label="assertive">Please input a valid email address</span>
           }
         </div>
 
@@ -52,20 +50,19 @@ const Login = () => {
           <input 
             type="password" { ...register("password", { 
               required: 'password is required', 
-              pattern: { 
-                value: PASSWORD_REGEX, 
-                message: "please enter a valid password" 
-              }
+              minLength: 4,
+              maxLength: 15,
+              pattern: PASSWORD_REGEX
             })}
             autoComplete="off"
           />
-          {errors.password?.message && 
-            <p className="danger" aria-label="assertive">{errors.password?.message}</p>
+          {errors.password && 
+            <span className="danger" aria-label="assertive">Password should contain between 4 to 15 characters</span>
           }
         </div>
 
         <button type="submit" value="Submit">Submit</button>
-        <span>Need an account ? <Link to="/register">Sign Up</Link></span>
+        <p className="register-link">Need an account ? <Link to="/register">Sign Up</Link></p>
       </form>
     </section>
   );

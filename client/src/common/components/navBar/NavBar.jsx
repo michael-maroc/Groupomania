@@ -17,6 +17,7 @@ const NavBar = () => {
         <NavLogo className="nav-logo" />
       </div>
       <ul>
+        {/* Pc screen part */}
         <li className="nav-full-size"><Link to="/home">Home</Link></li>
         <li className="nav-full-size"><Link to="/profile">Profile</Link></li>
         <li className="nav-full-size"><Link onClick={sendLogout}>Logout</Link></li>
@@ -26,10 +27,12 @@ const NavBar = () => {
           <p>Home</p>
           <Link to="/home"><FontAwesomeIcon icon={faHome} /></Link>
         </li>
+
         <li className="nav-small-size">
           <p>Profile</p>
           <Link to="/profile"><FontAwesomeIcon icon={faUserPen} /></Link>
         </li>
+        
         <li className="nav-small-size">
           <p>Logout</p>
           <Link onClick={sendLogout}><FontAwesomeIcon icon={faArrowRightFromBracket} /></Link>
