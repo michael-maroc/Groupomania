@@ -3,16 +3,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 
   form{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 450px;
-    border: solid 1px black;
-    padding: 50px;
+    width: 50%;
+    max-width: 1000px;
+    border: solid 1px var(--BLACK);
+    padding: 20px 50px;
     background-color: var(--COLOR_TERTIARY);
     gap: 1.5rem;
 
@@ -55,5 +55,34 @@
     a{
       color: #fff;
     }
+  }
+}
+
+@media screen and (min-width: 1440px){
+  .login form{
+    gap: 2rem;
+    padding: 40px;
+  }
+}
+
+@media screen and (max-width: 992px){
+  .login form{
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .login form{
+    width: 90%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media screen and (max-width: 572px){
+  .login form{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
