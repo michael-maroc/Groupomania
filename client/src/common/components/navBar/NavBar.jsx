@@ -18,24 +18,24 @@ const NavBar = () => {
       </div>
       <ul>
         {/* Pc screen part */}
-        <li className="nav-full-size"><Link to="/home">Home</Link></li>
-        <li className="nav-full-size"><Link to="/profile">Profile</Link></li>
-        <li className="nav-full-size"><Link onClick={sendLogout}>Logout</Link></li>
+        <li className="nav-full-size"><Link to="/home" aria-label="link to the home page">Home</Link></li>
+        <li className="nav-full-size"><Link to="/profile" aria-label="link to the profile page">Profile</Link></li>
+        <li className="nav-full-size"><Link onClick={sendLogout} aria-label="disconnect button">Logout</Link></li>
 
         {/* Responsive part */}
         <li className="nav-small-size">
           <p>Home</p>
-          <Link to="/home"><FontAwesomeIcon icon={faHome} /></Link>
+          <Link to="/home" aria-label="link to the home page"><FontAwesomeIcon icon={faHome} /></Link>
         </li>
 
         <li className="nav-small-size">
           <p>Profile</p>
-          <Link to="/profile"><FontAwesomeIcon icon={faUserPen} /></Link>
+          <Link to="/profile" aria-label="link to the profile page"><FontAwesomeIcon icon={faUserPen} /></Link>
         </li>
         
         <li className="nav-small-size">
           <p>Logout</p>
-          <Link onClick={sendLogout}><FontAwesomeIcon icon={faArrowRightFromBracket} /></Link>
+          <Link onClick={sendLogout} aria-label="disconnect button"><FontAwesomeIcon icon={faArrowRightFromBracket} /></Link>
         </li>
       </ul>
     </nav>

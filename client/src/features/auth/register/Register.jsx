@@ -73,7 +73,7 @@ const Register = () => {
         </div>
 
         <button type="submit">Submit</button>
-        <p className="login-link">Already have an account ? <Link to="/">Login</Link></p>
+        <p className="login-link">Already have an account ? <Link to="/" aria-label="link to the login page">Login</Link></p>
       </form>
     </section>
   );

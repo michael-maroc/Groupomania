@@ -74,20 +74,16 @@ const Comments = ({ post }) => {
             type="text" 
             placeholder="Add your comment..." 
             {...register("comment", {
-              required: "You must input a comment",
-              minLength: {
-                value: 2,
-                message: "The comment should have at least 2 characters"
-              },
-              pattern: {
-                value: COMMENT_REGEX,
-                message: "You must input valid characters"
-              }
+              required: true,
+              minLength: 2,
+              pattern: COMMENT_REGEX
             })} 
           />
           <button type="submit">Submit</button>
         </form>
-        <p className="danger">{errors?.comment?.message}</p>
+        {errors.comment && 
+          <span className="danger" aria-label="assertive">The comment should have at least 2 characters</span>
+        }
       </section>
     </footer>
   )

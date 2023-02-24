@@ -62,7 +62,7 @@ const Login = () => {
         </div>
 
         <button type="submit" value="Submit">Submit</button>
-        <p className="register-link">Need an account ? <Link to="/register">Sign Up</Link></p>
+        <p className="register-link">Need an account ? <Link to="/register" aria-label="link to the register page">Sign Up</Link></p>
       </form>
     </section>
   );
