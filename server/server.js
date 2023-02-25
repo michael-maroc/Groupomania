@@ -1,47 +1,49 @@
-// Imports
-require("dotenv").config();
-const authMiddleware = require("./middleware/authMiddleware");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-const corsOptions = require("./config/corsOptions");
-const credentials = require("./middleware/credentials");
-const db = require("./models");
-const express = require("express");
-const helmet = require("helmet");
-// const path = require("path");
-const app = express();
+const http = require("http");
+const app = require("./app");
 
-// Routes
-const authRoutes = require("./router/authRoutes");
-const avatarsRoutes = require("./router/avatarsRoutes");
-const commentsRoutes = require("./router/commentsRoutes");
-const { errorHandler } = require("./middleware/errorHandler");
-const likesRoutes = require("./router/likesRoutes");
-const postsRoutes = require("./router/postsRoutes");
-const refreshRoute = require("./router/refreshRoute");
-const usersRoutes = require("./router/usersRoutes");
+const normalizePort = (val) => {
+  const port = parseInt(val, 10);
 
-// Middlewares
-app.use(helmet());
-app.use(credentials);
-app.use(cors(corsOptions));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(cookieParser());
-// app.use("images", express.static(path.join(__dirname, "images")));
-app.use("/api/auth", authRoutes);
-app.use("/api/refresh", refreshRoute);
-app.use(authMiddleware);
-app.use("/api/avatars", avatarsRoutes);
-app.use("/api/comments", commentsRoutes);
-app.use("/api/likes", likesRoutes);
-app.use("/api/posts", postsRoutes);
-app.use("/api/users", usersRoutes);
-app.use(errorHandler);
+  if (isNaN(port)) {
+    return val;
+  }
+  if (port >= 0) {
+    return port;
+  }
+  return false;
+};
 
-// Server Connection
-db.sequelize.sync().then(() => {
-  app.listen(3000, () => {
-    console.log("Server running on port 3000");
-  });
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
+
+const errorHandler = (error) => {
+  if (error.syscall !== "listen") {
+    throw error;
+  }
+  const address = server.address();
+  const bind =
+    typeof address === "string" ? "pipe " + address : "port: " + port;
+  switch (error.code) {
+    case "EACCES":
+      console.error(bind + " requires elevated privileges.");
+      process.exit(1);
+      break;
+    case "EADDRINUSE":
+      console.error(bind + " is already in use.");
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+};
+
+const server = http.createServer(app);
+
+server.on("error", errorHandler);
+server.on("listening", () => {
+  const address = server.address();
+  const bind = typeof address === "string" ? "pipe " + address : "port " + port;
+  console.log("Listening on " + bind);
 });
+
+server.listen(port);

@@ -2,15 +2,38 @@
 # Projet n°7 du parcours de développeur web chez Openclassrooms:
 # Créez un réseau social d'entreprise
 
-Le projet consiste à construire un réseau social interne pour les employés de l'entreprise Groupomania.
+Le projet consiste à créer un réseau social interne pour les employés de l'entreprise Groupomania.
 
 ## Installation
 
-Install my-project with npm
+Installez les packages avec npm, yarn ou pnpm
 
 ```bash
-  npm install my-project
-  cd my-project
+  cd client
+  npm install
+  
+  cd server
+  npm install
+```
+
+ou
+
+```bash
+  cd client
+  yarn install
+  
+  cd server
+  yarn install
+```
+
+ou encore
+
+```bash
+  cd client
+  pnpm install
+
+  cd server
+  pnpm install
 ```
     
 ## 🛠 Outils utilisés
@@ -21,7 +44,7 @@ Install my-project with npm
 * React
 * Redux Toolkit & RTK Query
 
-## Color Reference
+## Identité graphique
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
@@ -32,13 +55,13 @@ Install my-project with npm
 
 ## Variables d'environnement
 
-Pour lancer le projet, vous devrez ajouter ces variables d'nevironnement à votre fichier .env et les completer avec vos informations (Le 1er fichier .env se trouver dans le dossier Client et le 2è dans le dossier Server)
+Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fichiers .sample.env (qu'il faudra renommer en '.env') et les completer avec vos informations (Le 1er fichier .sample.env se trouve dans le dossier client et le 2è dans le dossier server)
 
-### Pour le fichier .env de la partie Client:
+### Pour le fichier .env de la partie client:
 
 * ### PORT
 
-`PORT`=3500 (le Port ne doit être modifié)
+`PORT`=3500 (Le port ne doit pas être modifié)
 
 * ### Firebase Config
 
@@ -55,7 +78,7 @@ Pour lancer le projet, vous devrez ajouter ces variables d'nevironnement à votr
 `VITE_FIREBASE_APP_ID`
 
 
-### Pour le fichier .env de la partie Server:
+### Pour le fichier .env de la partie server:
 
 * #### DB Config (MySQL)
 
@@ -70,7 +93,7 @@ Pour lancer le projet, vous devrez ajouter ces variables d'nevironnement à votr
 `DB_DIALECT`
 
 
-* #### Clés JWT (Peuvent être remplacées selon vos besoins)
+* #### Clés JWT
 
 `ACCESS_TOKEN_SECRET`=cbc418e960cb688aae9f1a3a7f0214b43d42f04e06689cc66131d39a1206cbd4931a21d36f545c2f3c2a005cf12158065a99c4fe7aba517fe6063a9ca5ee16e2
 
@@ -80,5 +103,11 @@ Pour lancer le projet, vous devrez ajouter ces variables d'nevironnement à votr
 
 `REFRESH_TOKEN_EXPIRY`=7d
 
+
+## Documentation
+
+[Description du projet](https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf)
+
+[Cachier des charges](https://course.oc-static.com/projects/DWJ_FR_P7/Cahier+des+charges+Groupomania.pdf)
 
 

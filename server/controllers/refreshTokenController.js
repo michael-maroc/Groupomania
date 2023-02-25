@@ -18,8 +18,8 @@ exports.refreshToken = tryCatch(async (req, res) => {
     process.env.REFRESH_TOKEN_SECRET,
     async (err, decoded) => {
       if (err) return res.json({ err });
-      console.log("----->decoded");
-      console.log(decoded);
+      // console.log("----->decoded");
+      // console.log(decoded);
       const foundUser = await Users.findOne({ where: { id: decoded.id } });
       if (!foundUser) return res.sendStatus(403);
       console.log("Sending refresh token");
