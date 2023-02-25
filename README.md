@@ -55,9 +55,9 @@ ou encore
 
 ## Variables d'environnement
 
-Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fichiers .sample.env (qu'il faudra renommer en '.env') et les completer avec vos informations (Le 1er fichier .sample.env se trouve dans le dossier client et le 2è dans le dossier server)
+Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fichiers .sample.env (qu'il faudra renommer en '.env') et les completer. (Le 1er fichier .sample.env se trouve dans le dossier 'client' et le 2è dans le dossier 'server')
 
-### Pour le fichier .env de la partie client:
+### Pour le fichier .env du dossier client:
 
 * ### PORT
 
@@ -78,7 +78,7 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 `VITE_FIREBASE_APP_ID`
 
 
-### Pour le fichier .env de la partie server:
+### Pour le fichier .env du dossier server:
 
 * #### DB Config (MySQL)
 
