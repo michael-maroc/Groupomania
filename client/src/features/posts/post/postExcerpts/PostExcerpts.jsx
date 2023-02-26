@@ -12,6 +12,7 @@ import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
 import './postExcerpts.scss';
 import { useGetOneAvatarQuery } from "features/profile/profileApiSlice";
+import { useGetOneUserQuery } from "features/users/usersApiSlice";
 
 const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);
@@ -30,6 +31,7 @@ const PostExcerpts = ({ post }) => {
   const [deletePost] = useDeletePostMutation();
 
   const { data: avatar } = useGetOneAvatarQuery(post.UserId);
+  const { data: user } = useGetOneUserQuery(post.UserId);
 
   // Defining posts date variables for date and creation time
   const date = new Date(post.createdAt).toISOString();
@@ -121,7 +123,10 @@ const PostExcerpts = ({ post }) => {
             src={avatar?.avatarUrl} 
             alt="profile" />
           <div>
-            <h1 className="post-author">{post.author}</h1>
+            {user?.isAdmin
+              ? <h1 className="post-author" style={{ color: "#FD2D01"}}>{`[${post.author}]`}</h1>
+              : <h1 className="post-author">{post.author}</h1>
+            }
             <span className="post-timestamp">Published {timePeriod} ago</span>
           </div>
         </div>

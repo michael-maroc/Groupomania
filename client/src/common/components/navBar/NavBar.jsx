@@ -14,7 +14,7 @@ const NavBar = () => {
   return token ? (
     <nav className="nav">
       <div className="logo-container">
-        <NavLogo className="nav-logo" />
+        <Link to="/home" aria-label="link to the home page"><NavLogo className="nav-logo" /></Link>
       </div>
       <ul>
         {/* Pc screen part */}

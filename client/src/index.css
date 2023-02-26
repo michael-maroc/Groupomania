@@ -28,7 +28,6 @@ span{
   display: block;
 }
 
-
 :root{
   --COLOR_PRIMARY: #FD2D01;
   --COLOR_SECONDARY: #FFD7D7;
@@ -36,10 +35,12 @@ span{
   --WHITE: #fff;
   --LIGHT_GRAY: #eaeaea;
   --BLACK: #000;
+  --LIGHT: #eeecec;
 }
 
 .danger{
-  color: var(--COLOR_PRIMARY);
+  color: rgb(255, 0, 0);
   text-align: center;
+  font-weight: bold;
 }
 

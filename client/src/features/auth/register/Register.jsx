@@ -2,7 +2,8 @@ import { useSignUpMutation } from "features/auth/authApiSlice";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
-import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from "common/utils/Regex"; 
+import { EMAIL_REGEX, PASSWORD_REGEX, USERNAME_REGEX } from "common/utils/Regex";
+import Logo from "common/components/HomeLogo";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -23,9 +24,10 @@ const Register = () => {
 
   const content = (
     <section className="register">
+      <Logo className="logo" />
+
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Register</h1>
-
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input 
