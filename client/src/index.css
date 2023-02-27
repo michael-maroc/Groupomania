@@ -42,5 +42,12 @@ span{
   color: rgb(255, 0, 0);
   text-align: center;
   font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+@media screen and (max-width: 572px){
+  .danger{
+    font-weight: 500;
+  }
 }
 

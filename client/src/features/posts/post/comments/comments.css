@@ -1,0 +1,95 @@
+.post-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: gray;
+}
+
+/* Comments part */
+.comments{
+  padding: 15px;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #fff;
+} 
+.actions{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgray;
+}
+.actions div{
+  display: flex;
+}
+.thumbs-up{
+  font-size: 0.7rem;
+  margin: 0 10px 0 0px;
+  color: var(--WHITE);
+  border-radius: 30px;
+  background-color: rgb(99, 183, 235);
+  padding: 0.3rem;
+  cursor: pointer;
+}
+.comments-container{
+  display: flex;
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+.comments-container img{
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  border-radius: 30px;
+}
+.comments-container div{
+  padding: 10px;
+  background-color: #eaeaea;
+  border-radius: 20px;
+}
+.comments-container .author{
+  color: var(--BLACK);
+  font-weight: bold;
+}
+.comments-container .comment{
+  color: var(--BLACK);
+}
+.comment-form{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.comment-form img{
+  border-radius: 30px;
+  width: 40px;
+  margin-right: 10px;
+}
+.comment-form input{
+  padding: 10px;
+  background-color: var(--LIGHT_GRAY);
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  width: 100%;
+}
+.comment-form button{
+  width: 28%;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 20px;
+  border: none;
+  margin-left: 10px;
+}
+.comment-form button:hover{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 572px){
+.comments{
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.comment-form button{
+    width: 50%;
+  }
+}

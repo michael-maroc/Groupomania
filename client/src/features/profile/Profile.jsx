@@ -55,7 +55,7 @@ const Profile = () => {
     <section className="profile">
       <Header />
       <h1>Username: {decoded?.username}</h1>
-      <h2>Member since: {convertedDate}</h2>
+      <h2>Account created the: {convertedDate}</h2>
 
       <div className="avatar-container">
           <img src={oldAvatar.avatarUrl} alt="profile" />

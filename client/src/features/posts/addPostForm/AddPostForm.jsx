@@ -49,11 +49,16 @@ const AddPostForm = () => {
             className="post-form-description"
             placeholder="Express yourself..."
             {...register("description", {
-              required: "The description is required",
-              pattern: { value: DESCRIPTION_REGEX, message: "test message" }
+              required: true,
+              minLength: 2,
+              pattern: DESCRIPTION_REGEX
             })}
           ></textarea>
-          <span className="danger">{errors.description?.message}</span>
+          {errors.description && 
+            <span className="danger" aria-label="assertive">
+              The description should contain 2 chars min from a to z, 0 to 9, spaces and -_.()!$%@?&=+"'
+            </span>
+          }
           <label htmlFor="post-form-image">
             Add an image <FontAwesomeIcon icon={faImage} />
           </label>

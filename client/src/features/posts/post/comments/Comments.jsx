@@ -1,7 +1,7 @@
 import { useAddCommentMutation, useAddLikeMutation, useGetPostCommentsQuery, useGetPostLikesQuery } from "features/posts/post/postApiSlice";
 import { useForm } from "react-hook-form";
 import { COMMENT_REGEX } from "common/utils/Regex";
-import './comments.scss';
+import './comments.css';
 import { useGetAllAvatarsQuery, useGetOneAvatarQuery } from "features/profile/profileApiSlice";
 import jwt_decode from "jwt-decode";
 import { useSelector } from "react-redux";
@@ -82,7 +82,9 @@ const Comments = ({ post }) => {
           <button type="submit">Submit</button>
         </form>
         {errors.comment && 
-          <span className="danger" aria-label="assertive">The comment should have at least 2 characters</span>
+          <span className="danger" aria-label="assertive">
+            The comment should contain 2 chars min from a to z, 0 to 9, spaces and -_.()!$%@?&=+"'
+          </span>
         }
       </section>
     </footer>

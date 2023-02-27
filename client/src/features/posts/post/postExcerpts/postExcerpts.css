@@ -1,0 +1,76 @@
+.post-excerpts{
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  background-color: #fff;
+}
+.post-heading{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.post-heading :first-child {
+  display: flex;
+}
+.post-heading button{
+  border: none;
+  background-color: #fff;
+  margin: 0 0 0 0.4rem;
+} 
+.post-heading img{
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+  border-radius: 80px;
+}
+.post-heading svg{
+  margin-left: 5px;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.post-author{
+  color: blue;
+  font-size: 1.4em;
+}
+.post-timestamp{
+  font-size: 0.9rem;
+}
+.post-edit-btn{
+  display: flex;
+}
+.post-description{
+  margin-top: 10px;
+}
+.post-description div{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem 0 0 0;
+}
+.post-description textarea{
+  min-width: 30%;
+  width: 100%;
+  max-width: 98%;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 1rem;
+}
+.post-description button{
+  width: 30%;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 20px;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 572px){
+  .post-excerpts{
+    padding-right: 5px;
+    padding-left: 5px;
+  }
+}

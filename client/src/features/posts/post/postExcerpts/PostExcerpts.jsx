@@ -10,7 +10,7 @@ import { v4 } from "uuid";
 import { storage } from "config/Firebase";
 import { formatDistanceToNow} from 'date-fns';
 import { utcToZonedTime } from 'date-fns-tz';
-import './postExcerpts.scss';
+import './postExcerpts.css';
 import { useGetOneAvatarQuery } from "features/profile/profileApiSlice";
 import { useGetOneUserQuery } from "features/users/usersApiSlice";
 
@@ -18,7 +18,7 @@ const PostExcerpts = ({ post }) => {
   const token = useSelector(getCurrentToken);
   const decoded = jwt_decode(token);
 
-  // Image References for firebase
+  // Image Reference for firebase
   const imageRef = ref(storage, `images/${post.imageName}`);
 
   // States
@@ -30,10 +30,11 @@ const PostExcerpts = ({ post }) => {
   const [updatePost] = useUpdatePostMutation();
   const [deletePost] = useDeletePostMutation();
 
+  // Queries
   const { data: avatar } = useGetOneAvatarQuery(post.UserId);
   const { data: user } = useGetOneUserQuery(post.UserId);
 
-  // Defining posts date variables for date and creation time
+  // Defining posts date and creation time variables
   const date = new Date(post.createdAt).toISOString();
   const timeZone = 'Europe/Paris';
   const formatedDate = utcToZonedTime(date, timeZone);
@@ -42,8 +43,8 @@ const PostExcerpts = ({ post }) => {
   // Reset states function
   function resetFields(){
     setImage(null);
-    setNewDescription(null);
     setIsEdit(false);
+    setNewDescription(null);
   }
 
   // Post update validation function
@@ -104,6 +105,7 @@ const PostExcerpts = ({ post }) => {
     }
   };
 
+  // Update and Delete buttons
   const PostExcerptsButtons = (
     <div>
       <button onClick={() => setIsEdit((prev) => !prev)}>
@@ -119,9 +121,7 @@ const PostExcerpts = ({ post }) => {
     <header className="post-excerpts">
       <div className="post-heading">
         <div>
-          <img 
-            src={avatar?.avatarUrl} 
-            alt="profile" />
+          <img src={avatar?.avatarUrl} alt="profile" />
           <div>
             {user?.isAdmin
               ? <h1 className="post-author" style={{ color: "#FD2D01"}}>{`[${post.author}]`}</h1>
