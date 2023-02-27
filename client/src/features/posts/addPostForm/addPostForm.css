@@ -9,21 +9,20 @@
   margin: 2rem 0 1rem 0;
   border: solid rgb(196, 196, 196) 1px;
   border-radius: 10px;
-
-  div{
-    display: flex;
-    flex-direction: column;
-    padding: 0 15px;
-  }
-  label{
-    margin: 1rem 0 0.5rem 0;
-    color: var(--BLACK);
-    font-size: 1.4em;
-  }
-  svg{
-    font-size: 1.2rem;
-    color: var(--BLACK);
-  }
+}
+.add-post-form div{
+  display: flex;
+  flex-direction: column;
+  padding: 0 15px;
+}
+.add-post-form label{
+  margin: 1rem 0 0.5rem 0;
+  color: var(--BLACK);
+  font-size: 1.4em;
+}
+.add-post-form svg{
+  font-size: 1.2rem;
+  color: var(--BLACK);
 }
 .post-form-description{
   font-size: 1rem;
@@ -35,10 +34,9 @@
 .post-form-image{
   display: flex;
   align-items: center;
-
-  svg{
-    font-size: 1.2rem;
-  }
+}
+.post-form-image svg{
+  font-size: 1.2rem;
 }
 .post-btn{
   width: 30%;
@@ -48,9 +46,9 @@
   margin: 1rem auto 1.5rem auto;
   font-size: 1rem;
   font-weight: bold;
-  &:hover{
-    cursor: pointer;
-  }
+}
+.post-btn:hover{
+  cursor: pointer;
 }
 
 @media screen and (max-width: 992px){
@@ -58,13 +56,12 @@
     width: 90%;
   }
 }
-
 @media screen and (max-width: 572px){
   .add-post{
     width: 100%;
-    div{
-      padding-right: 5px;
-      padding-left: 5px;
-    }
+  }
+  .add-post div{
+    padding-right: 5px;
+    padding-left: 5px;
   }
 }

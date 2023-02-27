@@ -1,7 +1,7 @@
 import Comments from "./comments/Comments";
 import PostExcerpts from "./postExcerpts/PostExcerpts";
 import PostImage from "./postImage/PostImage";
-import "./post.scss";
+import "./post.css";
 
 const Post = ({ post }) => {
 

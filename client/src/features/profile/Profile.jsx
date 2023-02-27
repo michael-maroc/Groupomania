@@ -6,8 +6,9 @@ import { v4 } from "uuid";
 import { storage } from "config/Firebase";
 import { getCurrentToken } from "features/auth/authSlice";
 import { useGetOneAvatarQuery, useUpdateAvatarMutation } from "./profileApiSlice";
-import './profile.scss';
+import './profile.css';
 import { useGetOneUserQuery } from "../users/usersApiSlice";
+import Header from "common/components/header/Header";
 
 const Profile = () => {
   const token = useSelector(getCurrentToken);
@@ -52,6 +53,7 @@ const Profile = () => {
 
   return (
     <section className="profile">
+      <Header />
       <h1>Username: {decoded?.username}</h1>
       <h2>Member since: {convertedDate}</h2>
 

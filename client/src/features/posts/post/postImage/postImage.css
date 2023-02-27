@@ -1,0 +1,12 @@
+.post-image-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+}
+.post-image{
+  width: 100%;
+  max-width: 650px;
+  object-fit: cover;
+}

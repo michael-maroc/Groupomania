@@ -7,7 +7,7 @@ import { storage } from "config/Firebase";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { DESCRIPTION_REGEX } from "common/utils/Regex";
-import "./addPostForm.scss";
+import "./addPostForm.css";
 
 const AddPostForm = () => {
   const [image, setImage] = useState(null);

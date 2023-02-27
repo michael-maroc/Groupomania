@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "features/auth/authSlice";
 import { Link, useNavigate } from "react-router-dom";
-import "./login.scss";
+import "./login.css";
 import { EMAIL_REGEX, PASSWORD_REGEX } from "common/utils/Regex"; 
 import Logo from "common/components/HomeLogo";
 
@@ -31,7 +31,7 @@ const Login = () => {
       <Logo className="logo" />
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <h1>Login</h1>
+        <h1 className="login-title">Login</h1>
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input 

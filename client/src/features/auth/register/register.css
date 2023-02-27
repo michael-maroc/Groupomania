@@ -1,0 +1,96 @@
+.register {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: var(--LIGHT);
+}
+.register .logo{
+  width: 50%;
+}
+.register form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 70%;
+  max-width: 1000px;
+  border: solid 1px var(--BLACK);
+  padding: 10px 20px 20px 20px;
+  background-color: var(--COLOR_TERTIARY);
+  gap: 1rem;
+}
+.register-title{
+  font-size: 3rem;
+  color: var(--WHITE);
+}
+.form-group{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  gap: 0.5rem;
+}
+.register label{
+  display: block;
+  color: var(--WHITE);
+  font-size: 1.4rem;
+}
+.register input{
+  padding: 0.4rem 0.5rem;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+.register button{
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 0.4rem;
+  width: 30%;
+  margin-top: 10px;
+  background-color: var(--WHITE);
+  border-radius: 30px;
+  cursor: pointer;
+}
+.login-link{
+  color: var(--WHITE);
+  width: 100%;
+}
+.register a{
+  color: var(--WHITE);
+}
+
+@media screen and (min-width: 1440px){
+  .register form{
+    gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 992px){
+  .register form{
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 768px){
+  .register form{
+    width: 90%;
+  }
+  .register .logo{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 572px){
+  .register .logo{
+     display: none;
+   } 
+  .register form{
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .register button{
+    width: 50%;
+  }
+}
