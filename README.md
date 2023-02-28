@@ -54,6 +54,25 @@ ou encore avec pnpm
 | Tertiaire | ![#4E5166](https://via.placeholder.com/10/4E5166?text=+) #4E5166 |
 
 
+## Concernant Firebase
+
+#### Vous avez le choix de créer votre propre bucket sur Firebase ou alors d'utiliser les informations fournies avec les livrables
+
+#### Dans le cas ou vous souhaitez créer votre bucket, il faudra créer 3 dossiers (le compte admin devra être recréé si vous choisissez cette option):
+
+* Un dossier "avatar"
+
+* Un dossier "defaultAvatar"
+
+* Et un dossier "images"
+
+#### Le dossier defaultAvatar devra contenir une image par défaut:
+
+* Le nom de cette image devra être renseigné dans la variable d'environnement du dossier server: "AVATAR_NAME_DEFAULT_VALUE"
+
+* L'url de cette image devra être renseignée dans la variable d'environnement du dossier server: "AVATAR_URL_DEFAULT_VALUE"
+
+
 ## Variables d'environnement
 
 Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fichiers .sample.env (qu'il faudra renommer en '.env') et les completer. (Le 1er fichier .sample.env se trouve dans le dossier 'client' et le 2è dans le dossier 'server')
@@ -93,7 +112,6 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 
 `DB_DIALECT`
 
-
 * #### Clés JWT (Peuvent être remplacées selon vos besoins)
 
 `ACCESS_TOKEN_SECRET`=cbc418e960cb688aae9f1a3a7f0214b43d42f04e06689cc66131d39a1206cbd4931a21d36f545c2f3c2a005cf12158065a99c4fe7aba517fe6063a9ca5ee16e2
@@ -109,25 +127,6 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 `AVATAR_NAME_DEFAULT_VALUE`=XXXX
 
 `AVATAR_URL_DEFAULT_VALUE`=XXXX
-
-
-## Concernant Firebase
-
-## Vous avez la possibilité de créer votre bucket sur Firebase ou alors d'utiliser les informations fournies avec les livrables
-
-### Dans le cas ou vous souhaitez créer votre bucket, il faudra créer un bucket sur Firebase et y créer 3 dossiers (le compte admin devra être recréé pour cette option)
-
-* Un dossier "avatar"
-
-* Un dossier "defaultAvatar"
-
-* Et un dossier "images"
-
-#### Le dossier defaultAvatar devra contenir une image par défaut:
-
-* Le nom de cette image devra être renseigné dans la variable d'environnement du dossier server: "AVATAR_NAME_DEFAULT_VALUE"
-
-* L'url de cette image devra être renseignée dans la variable d'environnement du dossier server: "AVATAR_URL_DEFAULT_VALUE"
 
 
 ## Documentation
