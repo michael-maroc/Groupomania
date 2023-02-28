@@ -16,7 +16,7 @@ Installez les packages avec npm, yarn ou pnpm
   npm install
 ```
 
-ou
+ou avec yarn
 
 ```bash
   cd client
@@ -26,7 +26,7 @@ ou
   yarn install
 ```
 
-ou encore
+ou encore avec pnpm
 
 ```bash
   cd client
@@ -43,6 +43,7 @@ ou encore
 * Node.JS
 * React
 * Redux Toolkit & RTK Query
+* Firebase
 
 ## Identité graphique
 
@@ -103,11 +104,33 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 
 `REFRESH_TOKEN_EXPIRY`=7d
 
+* #### Avatar
+
+`AVATAR_NAME_DEFAULT_VALUE`=XXXX
+
+`AVATAR_URL_DEFAULT_VALUE`=XXXX
+
+
+## Concernant Firebase
+
+#### Ce projet utilise la base de données Firebase pour le stockage d'images. Pour pouvoir l'utiliser il faudra créer un bucket sur Firebase et y créer 3 dossiers:
+
+* Un dossier "avatar"
+
+* Un dossier "defaultAvatar"
+
+* Et un dossier "images"
+
+#### Le dossier defaultAvatar devra contenir une image par défaut:
+
+* Le nom de cette image devra être renseigné dans la variable d'environnement du dossier server: "AVATAR_NAME_DEFAULT_VALUE"
+
+* L'url de cette image devra être renseignée dans la variable d'environnement du dossier server: "AVATAR_URL_DEFAULT_VALUE"
+
 
 ## Documentation
 
 [Description du projet](https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf)
 
 [Cachier des charges](https://course.oc-static.com/projects/DWJ_FR_P7/Cahier+des+charges+Groupomania.pdf)
-
 
