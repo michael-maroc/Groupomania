@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import { useSendLogoutMutation } from "features/auth/authApiSlice";
 import "./header.css";
 import NavLogo from "../NavLogo";
+import { useSelector } from "react-redux";
+import { getCurrentToken } from "features/auth/authSlice";
 
 const Header = () => {
+  const token = useSelector(getCurrentToken);
   const [sendLogout] = useSendLogoutMutation();
 
-  return (
+  return token ? (
     <header className="header">
       <nav className="nav">
         <div className="nav-logo-container">
@@ -38,7 +41,7 @@ const Header = () => {
         </ul>
       </nav>
     </header>
-    );
+    ) : null
 };
 
 export default Header;

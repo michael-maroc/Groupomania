@@ -5,9 +5,13 @@ import instagramIcon from "assets/instagram_icon.png";
 import twitterIcon from "assets/twitter_icon.png";
 import './footer.css';
 import { Link } from "react-router-dom";
+import { getCurrentToken } from "features/auth/authSlice";
+import { useSelector } from "react-redux";
 
 const Footer = () => {
-  return  (
+  const token = useSelector(getCurrentToken);
+
+  return token ? (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-rows-container">
@@ -54,7 +58,7 @@ const Footer = () => {
           <span className="copyrights">© 2023 Groupomania - All Rights Reserved.</span>
       </div>
     </footer>
-  );
+  ) : null
 };
 
 export default Footer;

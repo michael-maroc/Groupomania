@@ -21,7 +21,7 @@ const Profile = () => {
   const date = new Date(currentUser?.createdAt);
   const convertedDate = date.toLocaleDateString();
   
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
     const avatar = data.avatar[0];
