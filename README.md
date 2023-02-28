@@ -94,7 +94,7 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 `DB_DIALECT`
 
 
-* #### Clés JWT
+* #### Clés JWT (Peuvent être remplacées selon vos besoins)
 
 `ACCESS_TOKEN_SECRET`=cbc418e960cb688aae9f1a3a7f0214b43d42f04e06689cc66131d39a1206cbd4931a21d36f545c2f3c2a005cf12158065a99c4fe7aba517fe6063a9ca5ee16e2
 
@@ -113,7 +113,9 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 
 ## Concernant Firebase
 
-#### Ce projet utilise la base de données Firebase pour le stockage d'images. Pour pouvoir l'utiliser il faudra créer un bucket sur Firebase et y créer 3 dossiers:
+## Vous avez la possibilité de créer votre bucket sur Firebase ou alors d'utiliser les informations fournies avec les livrables
+
+### Dans le cas ou vous souhaitez créer votre bucket, il faudra créer un bucket sur Firebase et y créer 3 dossiers (le compte admin devra être recréé pour cette option)
 
 * Un dossier "avatar"
 
