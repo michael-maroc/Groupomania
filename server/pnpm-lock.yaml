@@ -6,7 +6,6 @@ specifiers:
   cors: ^2.8.5
   dotenv: ^16.0.3
   express: ^4.18.2
-  express-rate-limit: ^6.7.0
   helmet: ^6.0.1
   jsonwebtoken: ^8.5.1
   mysql2: ^2.3.3
@@ -20,7 +19,6 @@ dependencies:
   cors: 2.8.5
   dotenv: 16.0.3
   express: 4.18.2
-  express-rate-limit: 6.7.0_express@4.18.2
   helmet: 6.0.1
   jsonwebtoken: 8.5.1
   mysql2: 2.3.3
@@ -480,15 +478,6 @@ packages:
     dependencies:
       d: 1.0.1
       es5-ext: 0.10.62
-    dev: false
-
-  /express-rate-limit/6.7.0_express@4.18.2:
-    resolution: {integrity: sha512-vhwIdRoqcYB/72TK3tRZI+0ttS8Ytrk24GfmsxDXK9o9IhHNO5bXRiXQSExPQ4GbaE5tvIS7j1SGrxsuWs+sGA==}
-    engines: {node: '>= 12.9.0'}
-    peerDependencies:
-      express: ^4 || ^5
-    dependencies:
-      express: 4.18.2
     dev: false
 
   /express/4.18.2:

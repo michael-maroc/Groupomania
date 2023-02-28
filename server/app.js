@@ -19,7 +19,6 @@ const likesRoutes = require("./router/likesRoutes");
 const postsRoutes = require("./router/postsRoutes");
 const refreshRoute = require("./router/refreshRoute");
 const usersRoutes = require("./router/usersRoutes");
-const apiLimiter = require("./middleware/apiLimiter");
 
 // Middlewares
 app.use(helmet());
@@ -28,7 +27,6 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-app.use(apiLimiter);
 app.use("/api/auth", authRoutes);
 app.use("/api/refresh", refreshRoute);
 app.use(authMiddleware);
