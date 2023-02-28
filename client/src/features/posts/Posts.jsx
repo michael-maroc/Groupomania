@@ -2,15 +2,12 @@ import Post from "./post/Post";
 import AddPostForm from "./addPostForm/AddPostForm";
 import "./posts.css";
 import { useGetAllPostsQuery } from "./post/postApiSlice";
-import Footer from "common/components/footer/Footer";
-import Header from "common/components/header/Header";
 
 const Posts = () => {
   const { data: posts, isLoading, isSuccess, error } = useGetAllPostsQuery();
 
   return (
     <section className="posts">
-      <Header />
       <AddPostForm />
       <article className="post">
         {isLoading && <h1>Loading...</h1>}
@@ -24,7 +21,6 @@ const Posts = () => {
           </>
         )}
       </article>
-      <Footer />
     </section>
   );
 };

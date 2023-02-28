@@ -53,7 +53,6 @@ const Profile = () => {
 
   return (
     <section className="profile">
-      <Header />
       <h1>Username: {decoded?.username}</h1>
       <h2>Account created the: {convertedDate}</h2>
 

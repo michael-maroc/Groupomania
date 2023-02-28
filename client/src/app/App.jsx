@@ -6,10 +6,13 @@ import RequireAuth from "common/hooks/RequireAuth";
 import Posts from "features/posts/Posts";
 import "./App.css";
 import Profile from "features/profile/Profile";
+import Header from "common/components/header/Header";
+import Footer from "common/components/footer/Footer";
 
 const App = () => {
   return (
     <main className="App">
+      <Header />
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<Layout />}>
@@ -23,6 +26,7 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
+      <Footer />
     </main>
   );
 };
