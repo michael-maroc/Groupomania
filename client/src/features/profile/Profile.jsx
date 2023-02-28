@@ -8,7 +8,6 @@ import { getCurrentToken } from "features/auth/authSlice";
 import { useGetOneAvatarQuery, useUpdateAvatarMutation } from "./profileApiSlice";
 import './profile.css';
 import { useGetOneUserQuery } from "../users/usersApiSlice";
-import Header from "common/components/header/Header";
 
 const Profile = () => {
   const token = useSelector(getCurrentToken);
@@ -57,7 +56,7 @@ const Profile = () => {
       <h2>Account created the: {convertedDate}</h2>
 
       <div className="avatar-container">
-          <img src={oldAvatar.avatarUrl} alt="profile" />
+          <img src={oldAvatar?.avatarUrl} alt="profile" />
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>

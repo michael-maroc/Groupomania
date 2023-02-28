@@ -26,6 +26,8 @@ const Footer = () => {
             <h1 className="row-top-title">Links</h1>
             <span>About</span>
             <span>Contacts</span>
+            <span>Team</span>
+            <span>Company</span>
           </div>
 
           <div className="social-medias-links-box">
