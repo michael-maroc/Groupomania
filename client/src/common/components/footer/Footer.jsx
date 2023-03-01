@@ -40,13 +40,13 @@ const Footer = () => {
               <Link to="https://facebook.com" aria-label="link to facebook" target="_blank" >
                 <img src={facebookicon} alt="facebook icon" />
               </Link>
-              <Link to="https://facebook.com" aria-label="link to instagram" target="_blank" >
+              <Link to="https://instagram.com" aria-label="link to instagram" target="_blank" >
                 <img src={instagramIcon} alt="facebook icon" />
               </Link>
-              <Link to="https://facebook.com" aria-label="link to twitter" target="_blank" >
+              <Link to="https://twitter.com" aria-label="link to twitter" target="_blank" >
                 <img src={twitterIcon} alt="facebook icon" />
               </Link>
-              <Link to="https://facebook.com" aria-label="link to youtube" target="_blank" >
+              <Link to="https://youtube.com" aria-label="link to youtube" target="_blank" >
                 <img src={youtubeIcon} alt="facebook icon" />
               </Link>
               <Link to="https://github.com" aria-label="link to github" target="_blank" >

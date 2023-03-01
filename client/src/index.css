@@ -44,6 +44,12 @@ span{
   font-weight: bold;
   margin-top: 0.5rem;
 }
+.danger-light{
+  color: var(--COLOR_SECONDARY);
+  text-align: center;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
 
 @media screen and (max-width: 572px){
   .danger{

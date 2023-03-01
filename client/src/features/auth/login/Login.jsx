@@ -42,7 +42,7 @@ const Login = () => {
             autoComplete="off"
           />
           {errors.email && 
-            <span className="danger" aria-label="assertive">Please input a valid email address</span>
+            <span className="danger-light" aria-label="assertive">Please input a valid email address</span>
           }
         </div>
 
@@ -58,7 +58,7 @@ const Login = () => {
             autoComplete="off"
           />
           {errors.password && 
-            <span className="danger" aria-label="assertive">Password should contain between 4 to 15 characters</span>
+            <span className="danger-light" aria-label="assertive">Password should contain between 4 to 15 characters</span>
           }
         </div>
 
