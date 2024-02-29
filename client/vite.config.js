@@ -11,7 +11,7 @@ dns.setDefaultResultOrder("verbatim");
 export default defineConfig({
   plugins: [react(), jsconfigpaths()],
   server: {
-    port: 3500,
+    port: process.env.PORT,
     host: false,
   },
 });
