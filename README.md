@@ -6,34 +6,28 @@ Le projet consiste à créer un réseau social interne pour les employés de l'e
 
 ## Installation
 
-Installez les packages avec npm, yarn ou pnpm
+Pour installer les packages, ouvrez votre terminal et naviguez jusqu'au dossier "client"
 
 ```bash
   cd client
-  npm install
-  
-  cd server
-  npm install
 ```
 
-ou avec yarn
+Puis installez les packages de ce dernier avec npm, yarn ou pnpm
 
 ```bash
-  cd client
-  yarn install
-  
-  cd server
-  yarn install
+  npm install, yarn install ou pnpm install
 ```
 
-ou encore avec pnpm
+Dans un autre terminal naviguez cette fois vers le dossier "server"
 
 ```bash
-  cd client
-  pnpm install
-
   cd server
-  pnpm install
+```
+
+Puis installez les packages de ce dernier avec npm, yarn ou pnpm
+
+```bash
+  npm install, yarn install ou pnpm install
 ```
     
 ## 🛠 Outils utilisés
@@ -56,17 +50,11 @@ ou encore avec pnpm
 
 ## Concernant Firebase
 
-#### Vous avez le choix de créer votre propre bucket sur Firebase ou alors d'utiliser les informations fournies avec les livrables
+* Vous devrez avoir un compte sur Firebase avec un bucket sur celui-ci.
 
-#### Dans le cas ou vous souhaitez créer votre bucket, il faudra créer 3 dossiers (le compte admin devra être recréé si vous choisissez cette option):
+* Dans ce même bucket, il faudra créer 1 dossier nommé defaultAvatar
 
-* Un dossier "avatar"
-
-* Un dossier "defaultAvatar"
-
-* Et un dossier "images"
-
-#### Le dossier defaultAvatar devra contenir une image par défaut:
+### Le dossier defaultAvatar devra contenir une image par défaut:
 
 * Le nom de cette image devra être renseigné dans la variable d'environnement du dossier server: "AVATAR_NAME_DEFAULT_VALUE"
 
@@ -75,7 +63,7 @@ ou encore avec pnpm
 
 ## Variables d'environnement
 
-Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fichiers .sample.env (qu'il faudra renommer en '.env') et les completer. (Le 1er fichier .sample.env se trouve dans le dossier 'client' et le 2è dans le dossier 'server')
+Vous devrez completer les variables d'environnement des fichiers '.sample.env' (qu'il faudra renommer en '.env'). Le 1er fichier .sample.env se trouve dans le dossier 'client' et le 2è dans le dossier 'server'.
 
 ### Pour le fichier .env du dossier client:
 
@@ -128,6 +116,21 @@ Pour lancer le projet, vous devrez ajouter ces variables d'environnement aux fic
 
 `AVATAR_URL_DEFAULT_VALUE`=XXXX
 
+## Lancer le projet
+
+### Une fois l'installation terminée et les variables d'environnement renseignées, vous pourrez lancer le projet:
+
+* Dans le terminal au dossier 'client' entrez la commande
+```bash
+  npm run dev
+```
+
+* De même pour le dossier 'server' lancez la commande
+```bash
+  npm run dev
+```
+
+* Ensuite dans votre navigateur, ouvrez une nouvelle page à l'url: http://localhost:3500/
 
 ## Documentation
 
