@@ -2,7 +2,7 @@
 # Projet n°7 du parcours de développeur web chez Openclassrooms:
 # Créez un réseau social d'entreprise
 
-Le projet consiste à créer un réseau social interne pour les employés de l'entreprise Groupomania.
+Le projet consiste à créer le MVP d'un réseau social interne pour les employés de l'entreprise Groupomania.
 
 ## Installation
 
