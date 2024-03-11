@@ -4,6 +4,9 @@
 
 This project consists of creating the MVP of a social network for the groupomania company
 
+## Back end Prerequisites
+You will need to have Node and npm installed locally on your machine.
+
 ## Installation
 
 To install the dependencies, open your terminal and navigate to the "client" folder
