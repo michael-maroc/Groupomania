@@ -1,37 +1,36 @@
 
-# Projet n°7 du parcours de développeur web chez Openclassrooms:
-# Créez un réseau social d'entreprise
+# Project 7 of the web development course with Openclassrooms:
+# Build an enterprise social network
 
-Le projet consiste à créer le MVP d'un réseau social interne pour les employés de l'entreprise Groupomania.
+This project consists of creating the MVP of a social network for the groupomania company
 
 ## Installation
 
-Pour installer les packages, ouvrez votre terminal et naviguez jusqu'au dossier "client"
+To install the dependencies, open your terminal and navigate to the "client" folder
 
 ```bash
   cd client
 ```
 
-Puis installez les packages de ce dernier avec npm, yarn ou pnpm
+Then install the dependencies with npm, yarn or pnpm
 
 ```bash
-  npm install, yarn install ou pnpm install
+  npm install, yarn install or pnpm install
 ```
 
-Dans un autre terminal naviguez cette fois vers le dossier "server"
+In another terminal, navigate to the "server" folder
 
 ```bash
   cd server
 ```
 
-Puis installez les packages de ce dernier avec npm, yarn ou pnpm
+Then install the dependencies with npm, yarn or pnpm
 
 ```bash
-  npm install, yarn install ou pnpm install
+  npm install, yarn install or pnpm install
 ```
     
-## 🛠 Outils utilisés
-
+## 🛠 Tools used
 * MySQL
 * Express
 * Node.JS
@@ -39,37 +38,37 @@ Puis installez les packages de ce dernier avec npm, yarn ou pnpm
 * Redux Toolkit & RTK Query
 * Firebase
 
-## Identité graphique
+## Graphical identity
 
 | Color             | Hex                                                                |
 | ----------------- | ------------------------------------------------------------------ |
-| Primaire | ![#FD2D01](https://via.placeholder.com/10/FD2D01?text=+) #FD2D01 |
-| Secondaire | ![#FFD7D7](https://via.placeholder.com/10/FFD7D7?text=+) #FFD7D7 |
-| Tertiaire | ![#4E5166](https://via.placeholder.com/10/4E5166?text=+) #4E5166 |
+| Primary | ![#FD2D01](https://via.placeholder.com/10/FD2D01?text=+) #FD2D01 |
+| Secondary | ![#FFD7D7](https://via.placeholder.com/10/FFD7D7?text=+) #FFD7D7 |
+| Tertiary | ![#4E5166](https://via.placeholder.com/10/4E5166?text=+) #4E5166 |
 
 
-## Concernant Firebase
+## About Firebase
 
-* Vous devrez avoir un compte sur Firebase avec un bucket sur celui-ci.
+* You'll need to have an account on Firebase with a bucket on it
 
-* Dans ce même bucket, il faudra créer 1 dossier nommé defaultAvatar
+* In this bucket, you have to create a folder named "defaultAvatar"
 
-### Le dossier defaultAvatar devra contenir une image par défaut:
+### The folder defaultAvatar will have to have an image in it
 
-* Le nom de cette image devra être renseigné dans la variable d'environnement du dossier server: "AVATAR_NAME_DEFAULT_VALUE"
+* The name of this image will have to be entered in the environment variable of the "server" folder: "AVATAR_NAME_DEFAULT_VALUE"
 
-* L'url de cette image devra être renseignée dans la variable d'environnement du dossier server: "AVATAR_URL_DEFAULT_VALUE"
+* Its url will have to be entered in the environment variable of the "server" folder: "AVATAR_NAME_DEFAULT_VALUE"
 
 
-## Variables d'environnement
+## Environment variables
 
-Vous devrez completer les variables d'environnement des fichiers '.sample.env' (qu'il faudra renommer en '.env'). Le 1er fichier .sample.env se trouve dans le dossier 'client' et le 2è dans le dossier 'server'.
+You'll need to complete the environment variables of the '.sample.env' files (which will have to be renamed '.env'). The first is in the 'client' folder and the second one is in the 'server' folder
 
-### Pour le fichier .env du dossier client:
+### For the .env in the 'client' folder:
 
 * ### PORT
 
-`PORT`=3500 (Le port ne doit pas être modifié)
+`PORT`=3500 (The port should not be modified)
 
 * ### Firebase Config
 
@@ -85,8 +84,7 @@ Vous devrez completer les variables d'environnement des fichiers '.sample.env' (
 
 `VITE_FIREBASE_APP_ID`
 
-
-### Pour le fichier .env du dossier server:
+### For the .env in the 'server' folder:
 
 * #### DB Config (MySQL)
 
@@ -100,7 +98,7 @@ Vous devrez completer les variables d'environnement des fichiers '.sample.env' (
 
 `DB_DIALECT`
 
-* #### Clés JWT (Peuvent être remplacées selon vos besoins)
+* #### JWT Keys (These can be modified for your needs)
 
 `ACCESS_TOKEN_SECRET`=cbc418e960cb688aae9f1a3a7f0214b43d42f04e06689cc66131d39a1206cbd4931a21d36f545c2f3c2a005cf12158065a99c4fe7aba517fe6063a9ca5ee16e2
 
@@ -116,25 +114,25 @@ Vous devrez completer les variables d'environnement des fichiers '.sample.env' (
 
 `AVATAR_URL_DEFAULT_VALUE`=XXXX
 
-## Lancer le projet
+## Launch the project:
 
-### Une fois l'installation terminée et les variables d'environnement renseignées, vous pourrez lancer le projet:
+### Once the installation is complete and the environment variables are entered, you can start the project:
 
-* Dans le terminal au dossier 'client' entrez la commande
+* In your terminal at the 'client' folder, enter the command:
 ```bash
   npm run dev
 ```
 
-* De même pour le dossier 'server' lancez la commande
+* And same in the 'server' folder, enter the command:
 ```bash
   npm run dev
 ```
 
-* Ensuite dans votre navigateur, ouvrez une nouvelle page à l'url: http://localhost:3500/
+* Then on your browser, open a new page at with url: http://localhost:3500/
 
 ## Documentation
 
-[Description du projet](https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf)
+[Project description](https://course.oc-static.com/projects/DWJ_FR_P7/DW+P7+28-09-2022+Sce%CC%81nario.pdf)
 
-[Cachier des charges](https://course.oc-static.com/projects/DWJ_FR_P7/Cahier+des+charges+Groupomania.pdf)
+[Specifications](https://course.oc-static.com/projects/DWJ_FR_P7/Cahier+des+charges+Groupomania.pdf)
 
