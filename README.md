@@ -73,7 +73,7 @@ You'll need to complete the environment variables of the '.sample.env' files (wh
 
 `PORT`=3500 (The port should not be modified)
 
-* ### Firebase Config
+* ### Firebase Config (enter your bucket keys)
 
 `VITE_FIREBASE_API_KEY`
 
@@ -89,7 +89,7 @@ You'll need to complete the environment variables of the '.sample.env' files (wh
 
 ### For the .env in the 'server' folder:
 
-* #### DB Config (MySQL)
+* #### DB Config (MySQL) (enter your db config keys)
 
 `DB_USER`
 
@@ -101,7 +101,7 @@ You'll need to complete the environment variables of the '.sample.env' files (wh
 
 `DB_DIALECT`
 
-* #### JWT Keys
+* #### JWT Keys (add a value to the tokens secret keys and expiration times)
 
 `ACCESS_TOKEN_SECRET`
 
@@ -111,11 +111,11 @@ You'll need to complete the environment variables of the '.sample.env' files (wh
 
 `REFRESH_TOKEN_EXPIRY`
 
-* #### Avatar
+* #### Avatar (add a default value for the avatar name and your image url for the avatar url)
 
-`AVATAR_NAME_DEFAULT_VALUE`=XXXX
+`AVATAR_NAME_DEFAULT_VALUE`
 
-`AVATAR_URL_DEFAULT_VALUE`=XXXX
+`AVATAR_URL_DEFAULT_VALUE`
 
 ## Launch the project:
 
